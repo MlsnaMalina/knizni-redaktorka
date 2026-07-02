@@ -139,8 +139,8 @@ export default function OMne() {
           <span
             aria-hidden="true"
             style={{
-              fontFamily: "Syne, sans-serif",
-              fontWeight: 800,
+              fontFamily: "Literata, Georgia, serif",
+              fontWeight: 700,
               fontSize: 64,
               lineHeight: 0.65,
               color: "rgba(122,24,64,0.1)",

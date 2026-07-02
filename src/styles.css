@@ -17,7 +17,8 @@
   --faint: rgba(26, 23, 20, 0.38);
   --faint-30: rgba(26, 23, 20, 0.3);
 
-  --font-display: "Syne", sans-serif;
+  --font-display: "Literata", Georgia, serif;
+  --font-logo: "Syne", sans-serif;
   --font-body: "Space Grotesk", sans-serif;
   --font-mono: "IBM Plex Mono", monospace;
 
@@ -131,9 +132,9 @@ img {
 
 h1, h2, h3, h4 {
   font-family: var(--font-display);
-  font-weight: 800;
-  line-height: 1.1;
-  letter-spacing: -0.02em;
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
 }
 
 .h1 {
@@ -249,7 +250,7 @@ h1, h2, h3, h4 {
 }
 
 .nav-logo {
-  font-family: var(--font-display);
+  font-family: var(--font-logo);
   font-weight: 800;
   font-size: 20px;
   letter-spacing: 0.04em;
@@ -413,7 +414,7 @@ h1, h2, h3, h4 {
 }
 
 .hero-surname {
-  font-family: var(--font-display);
+  font-family: var(--font-logo);
   font-weight: 800;
   font-size: clamp(30px, 10vw, 72px);
   letter-spacing: -0.01em;
@@ -486,7 +487,7 @@ h1, h2, h3, h4 {
 
 .stat-num {
   font-family: var(--font-display);
-  font-weight: 800;
+  font-weight: 700;
   font-size: clamp(36px, 4vw, 52px);
   color: var(--rasp-dark);
   line-height: 1;
@@ -734,7 +735,7 @@ h1, h2, h3, h4 {
   right: -8px;
   bottom: -16px;
   font-family: var(--font-display);
-  font-weight: 800;
+  font-weight: 700;
   font-size: clamp(72px, 9vw, 120px);
   color: rgba(26, 23, 20, 0.04);
   line-height: 1;
@@ -921,7 +922,7 @@ h1, h2, h3, h4 {
 
 .sit-num {
   font-family: var(--font-display);
-  font-weight: 800;
+  font-weight: 700;
   font-size: clamp(40px, 6vw, 76px);
   color: rgba(26, 23, 20, 0.07);
   width: clamp(60px, 8vw, 110px);
@@ -1035,7 +1036,7 @@ h1, h2, h3, h4 {
 
 .quote-mark {
   font-family: var(--font-display);
-  font-weight: 800;
+  font-weight: 700;
   font-size: 64px;
   line-height: 0.65;
   color: rgba(122, 24, 64, 0.1);
@@ -1172,7 +1173,7 @@ h1, h2, h3, h4 {
 
 .faq-q-text {
   font-family: var(--font-display);
-  font-weight: 800;
+  font-weight: 700;
   font-size: clamp(15px, 1.6vw, 18px);
   flex: 1;
   color: var(--ink);
@@ -1784,7 +1785,7 @@ h1, h2, h3, h4 {
 }
 
 .footer-logo-last {
-  font-family: var(--font-display);
+  font-family: var(--font-logo);
   font-weight: 800;
   font-size: 26px;
   color: rgba(247, 244, 238, 0.85);
@@ -1829,7 +1830,7 @@ h1, h2, h3, h4 {
 }
 
 .footer-monogram {
-  font-family: var(--font-display);
+  font-family: var(--font-logo);
   font-weight: 800;
   font-size: 16px;
   color: rgba(247, 244, 238, 0.6);
