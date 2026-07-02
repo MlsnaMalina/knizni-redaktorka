@@ -189,15 +189,15 @@ export default function Sluzby() {
           víte, s čím počítat.
         </p>
         <div className="price-steps">
-          <div className="price-step">
+          <div className="price-step tile">
             <div className="price-step-num">01</div>
             <p>Pošlete mi text nebo jeho část.</p>
           </div>
-          <div className="price-step">
+          <div className="price-step tile">
             <div className="price-step-num">02</div>
             <p>Do 2–3 pracovních dnů dostanete konkrétní nabídku — rozsah práce, termín a cenu.</p>
           </div>
-          <div className="price-step">
+          <div className="price-step tile">
             <div className="price-step-num">03</div>
             <p>
               Posouzení textu i ukázková redakce několika stran jsou zdarma a k ničemu vás

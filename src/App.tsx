@@ -1,5 +1,5 @@
 import { Routes, Route } from "react-router-dom";
-import { Nav, Footer, ScrollToTop } from "./ui";
+import { Nav, Footer, ScrollToTop, RevealManager } from "./ui";
 import Home from "./pages/Home";
 import Sluzby from "./pages/Sluzby";
 import Knihy from "./pages/Knihy";
@@ -21,6 +21,7 @@ export default function App() {
         <Route path="/revize-ai-textu" element={<RevizeAI />} />
         <Route path="*" element={<Home />} />
       </Routes>
+      <RevealManager />
       <Footer />
     </>
   );

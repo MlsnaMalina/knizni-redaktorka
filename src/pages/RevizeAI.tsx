@@ -74,7 +74,7 @@ export default function RevizeAI() {
         <Tag>— Jak revize probíhá</Tag>
         <div className="price-steps">
           {STEPS.map((s, i) => (
-            <div key={s} className="price-step">
+            <div key={s} className="price-step tile">
               <div className="price-step-num">{String(i + 1).padStart(2, "0")}</div>
               <p>{s}</p>
             </div>

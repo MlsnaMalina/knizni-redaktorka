@@ -41,7 +41,7 @@ export default function OMne() {
             jsem mimo jiné komentář k nařízení MiCA nebo monografie o trestní odpovědnosti umělé
             inteligence.
           </p>
-          <div className="about-facts">
+          <div className="about-facts tile">
             <div className="about-facts-title">Stručně řečeno</div>
             <ul>
               <li>
@@ -85,7 +85,7 @@ export default function OMne() {
 
       <section className="section container">
         <div className="info-cards">
-          <div className="info-card">
+          <div className="info-card tile">
             <h3>Proč mi rozumí právníci</h3>
             <p>
               Vím, jak právní text vzniká a co musí vydržet — protože jsem ho léta sama psala.
@@ -93,7 +93,7 @@ export default function OMne() {
               nemusí vysvětlovat, co je komentář nebo proč záleží na jednom slovu v definici.
             </p>
           </div>
-          <div className="info-card">
+          <div className="info-card tile">
             <h3>Co v textu sleduji</h3>
             <ul>
               <li>logiku a členění výkladu,</li>

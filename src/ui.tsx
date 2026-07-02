@@ -20,6 +20,32 @@ export function ScrollToTop(): null {
   return null;
 }
 
+/** Scroll-reveal: prvkům s třídou .reveal přidá .in, jakmile vstoupí do viewportu. */
+export function RevealManager(): null {
+  const { pathname } = useLocation();
+  useEffect(() => {
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("in");
+            io.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.1, rootMargin: "0px 0px -36px 0px" }
+    );
+    const t = window.setTimeout(() => {
+      document.querySelectorAll(".reveal:not(.in)").forEach((el) => io.observe(el));
+    }, 0);
+    return () => {
+      window.clearTimeout(t);
+      io.disconnect();
+    };
+  }, [pathname]);
+  return null;
+}
+
 /* ---------- navigace ---------- */
 
 const NAV_ITEMS = [

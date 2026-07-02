@@ -1,12 +1,38 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { usePageMeta, Tag, WaveDivider, Manuscript, Quote, CtaSection } from "../ui";
 
 const STATS = [
-  { num: "70+", label: "vydaných odborných knih" },
-  { num: "9", label: "let v advokacii" },
-  { num: "9+", label: "let knižní redakce" },
+  { num: 70, suffix: "+", label: "vydaných odborných knih" },
+  { num: 9, suffix: "", label: "let v advokacii" },
+  { num: 9, suffix: "+", label: "let knižní redakce" },
 ];
+
+function CountUp({ target, suffix }: { target: number; suffix: string }) {
+  const [value, setValue] = useState(0);
+  const started = useRef(false);
+  useEffect(() => {
+    if (started.current) return;
+    started.current = true;
+    const duration = 1100;
+    const t0 = performance.now();
+    let raf = 0;
+    const tick = (t: number) => {
+      const p = Math.min((t - t0) / duration, 1);
+      const eased = 1 - Math.pow(1 - p, 3);
+      setValue(Math.round(eased * target));
+      if (p < 1) raf = requestAnimationFrame(tick);
+    };
+    raf = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(raf);
+  }, [target]);
+  return (
+    <>
+      {value}
+      {suffix}
+    </>
+  );
+}
 
 const SERVICES = [
   {
@@ -47,6 +73,7 @@ const PORTFOLIO_GROUPS = [
       "Komentář zákona o podnikání na kapitálovém trhu",
       "Komentář zákona o platebním styku",
     ],
+    more: "+ 24 dalších komentářů",
   },
   {
     name: "Právo IT a kybernetická bezpečnost",
@@ -54,6 +81,7 @@ const PORTFOLIO_GROUPS = [
       "Právo informačních technologií",
       "Kybernetický bezpečnostní incident 3D: IT, právo a compliance",
     ],
+    more: "+ další tituly z práva IT",
   },
   {
     name: "Umělá inteligence",
@@ -62,6 +90,7 @@ const PORTFOLIO_GROUPS = [
       "Umělá inteligence z pohledu antidiskriminačního práva a GDPR",
       "Právní aspekty umělé inteligence",
     ],
+    more: "+ 5 dalších titulů o AI",
   },
 ];
 
@@ -103,6 +132,7 @@ export default function Home() {
   );
 
   const [hlOn, setHlOn] = useState(false);
+  const [edited, setEdited] = useState(false);
   useEffect(() => {
     const t = window.setTimeout(() => setHlOn(true), 100);
     return () => window.clearTimeout(t);
@@ -138,8 +168,10 @@ export default function Home() {
         </div>
         <div className="hero-right">
           {STATS.map((s) => (
-            <div key={s.label} className="stat-card">
-              <div className="stat-num">{s.num}</div>
+            <div key={s.label} className="stat-card tile">
+              <div className="stat-num">
+                <CountUp target={s.num} suffix={s.suffix} />
+              </div>
               <div className="stat-label">{s.label}</div>
             </div>
           ))}
@@ -153,31 +185,41 @@ export default function Home() {
 
       <WaveDivider />
 
-      {/* PORTFOLIO */}
-      <section className="section container">
+      {/* PORTFOLIO — stohy papírů */}
+      <section className="section container reveal">
         <div className="section-head">
           <div>
             <Tag>— Portfolio</Tag>
-            <h2 className="h2">Přes 70 vydaných knih. Tady je několik z nich.</h2>
+            <h2 className="h2">
+              Přes <span className="mark">70 vydaných knih</span>. Tady je několik z nich.
+            </h2>
           </div>
         </div>
         <div className="pf-grid">
           {PORTFOLIO_GROUPS.map((g) => (
-            <div key={g.name}>
-              <div className="pf-group-title">{g.name}</div>
-              {g.items.map((title) => (
-                <div key={title} className="pf-item">
-                  <span className="pilcrow">¶</span>
-                  <span>{title}</span>
+            <div key={g.name} className="stack reveal">
+              <div className="tile" style={{ padding: "clamp(22px,3vw,30px)" }}>
+                <div className="pf-group-title">{g.name}</div>
+                {g.items.map((title) => (
+                  <div key={title} className="pf-item">
+                    <span className="pilcrow">¶</span>
+                    <span>{title}</span>
+                  </div>
+                ))}
+                <div
+                  className="mono-note"
+                  style={{ marginTop: 14, fontSize: 10, color: "rgba(26,23,20,0.35)" }}
+                >
+                  {g.more}
                 </div>
-              ))}
+              </div>
             </div>
           ))}
         </div>
         <div className="pf-footnote">
           <span className="mono-note">
-            + dalších více než 60 titulů redigovaných pro nakladatelství Wolters Kluwer ČR —
-            učebnice, monografie a publikace na klíč.
+            + celkem více než 70 titulů redigovaných pro nakladatelství Wolters Kluwer ČR —
+            komentáře, učebnice, monografie a publikace na klíč.
           </span>
           <Link to="/knihy" className="link-arrow">
             Všech 70+ titulů →
@@ -185,23 +227,19 @@ export default function Home() {
         </div>
       </section>
 
-      <div className="container">
-        <div className="hairline" />
-      </div>
-
       {/* SLUŽBY */}
-      <section className="section container">
+      <section className="section container reveal">
         <div className="section-head">
           <div>
             <Tag>— Služby</Tag>
             <h2 className="h2">
               Každý text potřebuje
               <br />
-              něco trochu jiného.
+              <span className="strike">korekturu</span> <span className="mark">redakci</span>.
             </h2>
             <p className="perex" style={{ marginTop: 20 }}>
-              Nejčastěji se na mě autoři obracejí ve třech situacích: text působí nejednotně nebo
-              nepřehledně · potřebuje kultivovat styl a formulace · má obstát před odborným nebo
+              A každý trochu jinou. Nejčastěji se na mě autoři obracejí, když text působí
+              nejednotně, potřebuje kultivovat styl a formulace — nebo má obstát před odborným a
               náročným čtenářem.
             </p>
           </div>
@@ -211,7 +249,7 @@ export default function Home() {
         </div>
         <div className="svc-grid">
           {SERVICES.map((s) => (
-            <Link key={s.num} to={s.to} className="svc-card">
+            <Link key={s.num} to={s.to} className="svc-card tile reveal">
               <span className="svc-annot">{s.annot}</span>
               <span className="svc-num" aria-hidden="true">
                 {s.num}
@@ -225,73 +263,89 @@ export default function Home() {
         </div>
       </section>
 
-      <WaveDivider flip />
+      {/* REDAKČNÍ STŮL — ukázka před/po */}
+      <section className="section container reveal">
+        <div className="desk">
+          <Tag>— Jak vypadá moje práce</Tag>
+          <h2 className="h2" style={{ maxWidth: 680, marginBottom: "clamp(28px,4vw,44px)" }}>
+            Podívejte se mi přes rameno.
+          </h2>
 
-      {/* UKÁZKA PŘED/PO */}
-      <section className="section container">
-        <Tag>— Jak vypadá moje práce</Tag>
-        <h2 className="h2" style={{ maxWidth: 640, marginBottom: "clamp(32px,5vw,56px)" }}>
-          Stejný obsah. Čitelnější text. A správné číslo předpisu.
-        </h2>
-        <div className="demo-grid">
-          <div className="demo-doc">
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              gap: 14,
+              flexWrap: "wrap",
+              marginBottom: 18,
+            }}
+          >
+            <button className="desk-btn" onClick={() => setEdited(!edited)}>
+              {edited ? "← ZPĚT NA PŮVODNÍ" : "ZOBRAZIT REDAKCI →"}
+            </button>
+            <span className="desk-state">
+              {edited ? "PO · redakce hotova ✓" : "PŘED · rukopis autora"}
+            </span>
+          </div>
+
+          <div className="paper" style={{ maxWidth: 640, transform: "rotate(-0.6deg)" }}>
             <div className="demo-doc-label">
-              <span>PŘED</span>
-              <span>rukopis autora</span>
+              <span>{edited ? "PO" : "PŘED"}</span>
+              <span className={edited ? "ok" : undefined}>
+                {edited ? "redakce ✓" : "rukopis autora"}
+              </span>
             </div>
+            {edited ? (
+              <p className="demo-text">
+                „Dochází-li k rozdílnému zacházení se zaměstnanci, posuzuje se podle
+                antidiskriminačního zákona (č. <span className="fix">198</span>/2009 Sb.)."
+              </p>
+            ) : (
+              <p className="demo-text">
+                „Zaměstnavatel je povinen zajistit, aby{" "}
+                <span className="del">v případě, že dojde k situaci, kdy</span> dochází k
+                rozdílnému zacházení se zaměstnanci, bylo toto zacházení posuzováno v souladu se
+                zákonem č. <span className="err">189/2009 Sb.</span>"
+              </p>
+            )}
+          </div>
+          {edited && (
+            <div className="demo-bubble">
+              <div className="demo-bubble-name">K. Mlsnová</div>
+              <div className="demo-bubble-text">
+                Antidiskriminační zákon je č. 198/2009 Sb., ne 189. Přepis v čísle předpisu je
+                nejčastější chyba, kterou autorům tiše opravuji — drobnost, která umí stát
+                důvěryhodnost.
+              </div>
+            </div>
+          )}
+
+          <div className="demo-mid">{"// někdy opravím tiše — jindy se zeptám"}</div>
+          <div className="paper" style={{ maxWidth: 640, transform: "rotate(0.7deg)" }}>
             <p className="demo-text">
-              „Zaměstnavatel je povinen zajistit, aby{" "}
-              <span className="del">v případě, že dojde k situaci, kdy</span> dochází k rozdílnému
-              zacházení se zaměstnanci, bylo toto zacházení posuzováno v souladu se zákonem č.{" "}
-              <span className="err">189/2009 Sb.</span>"
+              „…postup zadavatele v takovém případě upravuje{" "}
+              <span className="ref">zákon č. 137/2006 Sb., o veřejných zakázkách</span>."
             </p>
           </div>
-          <div className="demo-doc">
-            <div className="demo-doc-label">
-              <span>PO</span>
-              <span className="ok">redakce ✓</span>
+          <div className="demo-bubble">
+            <div className="demo-bubble-name">K. Mlsnová</div>
+            <div className="demo-bubble-text">
+              Skutečně chcete odkazovat na tento zákon? Ke dni 1. 10. 2016 byl zrušen. Přidáme k
+              textu tuto informaci, nebo odkážeme na nahrazující zákon č. 134/2016 Sb., o zadávání
+              veřejných zakázek?
             </div>
-            <p className="demo-text">
-              „Dochází-li k rozdílnému zacházení se zaměstnanci, posuzuje se podle
-              antidiskriminačního zákona (č. <span className="fix">198</span>/2009 Sb.)."
-            </p>
           </div>
-        </div>
-        <div className="demo-bubble">
-          <div className="demo-bubble-name">K. Mlsnová</div>
-          <div className="demo-bubble-text">
-            Antidiskriminační zákon je č. 198/2009 Sb., ne 189. Přepis v čísle předpisu je
-            nejčastější chyba, kterou autorům tiše opravuji — drobnost, která umí stát
-            důvěryhodnost.
-          </div>
-        </div>
 
-        <div className="demo-mid">{"// někdy opravím tiše — jindy se zeptám"}</div>
-        <p className="demo-ref">
-          „…postup zadavatele v takovém případě upravuje{" "}
-          <span className="ref">zákon č. 137/2006 Sb., o veřejných zakázkách</span>."
-        </p>
-        <div className="demo-bubble">
-          <div className="demo-bubble-name">K. Mlsnová</div>
-          <div className="demo-bubble-text">
-            Skutečně chcete odkazovat na tento zákon? Ke dni 1. 10. 2016 byl zrušen. Přidáme k
-            textu tuto informaci, nebo odkážeme na nahrazující zákon č. 134/2016 Sb., o zadávání
-            veřejných zakázek?
-          </div>
+          <p className="demo-after">
+            Takhle vypadá běžná redakční práce: věta se zkrátí o polovinu, přepis v čísle předpisu
+            zmizí dřív, než ho kdokoli uvidí — a tam, kde jde o obsah, se nerozhoduju za vás, ale
+            ptám se. Všechny úpravy navrhuji v režimu sledování změn; poslední slovo máte vždy vy.
+          </p>
         </div>
-        <p className="demo-after">
-          Takhle vypadá běžná redakční práce: věta se zkrátí o polovinu, přepis v čísle předpisu
-          zmizí dřív, než ho kdokoli uvidí — a tam, kde jde o obsah, se nerozhoduju za vás, ale
-          ptám se. Všechny úpravy navrhuji v režimu sledování změn; poslední slovo máte vždy vy.
-        </p>
       </section>
 
-      <div className="container">
-        <div className="hairline" />
-      </div>
-
       {/* PRO KOHO */}
-      <section className="section container">
+      <section className="section container reveal">
         <Tag>— Pro koho je moje práce vhodná</Tag>
         <h2 className="h2" style={{ marginBottom: "clamp(24px,4vw,40px)" }}>
           Spolupracujeme dobře, když —
@@ -311,10 +365,10 @@ export default function Home() {
         ))}
       </section>
 
-      <WaveDivider />
+      <WaveDivider flip />
 
       {/* REFERENCE */}
-      <section className="section container">
+      <section className="section container reveal">
         <Tag>— Co říkají autoři</Tag>
         <div className="quote-grid" style={{ marginTop: "clamp(24px,4vw,40px)" }}>
           <Quote
@@ -333,7 +387,7 @@ export default function Home() {
       </div>
 
       {/* PROCES */}
-      <section className="section container">
+      <section className="section container reveal">
         <Tag>— Jak spolupráce probíhá</Tag>
         <h2 className="h2" style={{ marginBottom: "clamp(32px,5vw,56px)" }}>
           Čtyři kroky od textu k výsledku.

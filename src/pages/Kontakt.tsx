@@ -148,7 +148,7 @@ export default function Kontakt() {
           </div>
 
           <aside className="contact-side">
-            <div className="side-card">
+            <div className="side-card tile">
               <div className="side-card-title">Co mi napsat</div>
               <ul>
                 <li>o jaký text jde,</li>
@@ -157,14 +157,14 @@ export default function Kontakt() {
                 <li>kdy přibližně potřebujete výstup.</li>
               </ul>
             </div>
-            <div className="side-card">
+            <div className="side-card tile">
               <div className="side-card-title">Jak to probíhá</div>
               <p>
                 Do 2 pracovních dnů se ozvu. Domluvíme si posouzení textu nebo rovnou ukázkovou
                 redakci 3–5 stran zdarma — uvidíte, jak pracuji, dřív než se rozhodnete.
               </p>
             </div>
-            <div className="side-card dark">
+            <div className="side-card dark tile" style={{ background: "#0F0E0C" }}>
               <div className="side-card-title">Přímý kontakt</div>
               <p>
                 <a href="mailto:katerina@knizniredaktorka.cz">katerina@knizniredaktorka.cz</a>
