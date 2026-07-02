@@ -1,0 +1,355 @@
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import { usePageMeta, Tag, WaveDivider, Manuscript, Quote, CtaSection } from "../ui";
+
+const STATS = [
+  { num: "70+", label: "vydaných odborných knih" },
+  { num: "9", label: "let v advokacii" },
+  { num: "9+", label: "let knižní redakce" },
+];
+
+const SERVICES = [
+  {
+    num: "01",
+    title: "Redakce odborných publikací",
+    desc: "Rukopisy komentářů, učebnic, monografií a e-booků. Struktura, terminologická jednotnost, citace a redakční dotažení až k vydání.",
+    annot: "⌘ sledování změn: zap.",
+    to: "/sluzby",
+  },
+  {
+    num: "02",
+    title: "Úprava profesních textů",
+    desc: "Odborné články, newslettery, texty na web a materiály, které vás reprezentují navenek.",
+    annot: "✎ formulace zpřesněna",
+    to: "/sluzby",
+  },
+  {
+    num: "03",
+    title: "Revize textů z AI",
+    desc: "AI draft zpřesním, sjednotím a zbavím typických AI chyb, aby obstál při profesionálním použití.",
+    annot: "↺ lidský hlas obnoven",
+    to: "/revize-ai-textu",
+  },
+  {
+    num: "04",
+    title: "Redakční konzultace",
+    desc: "Posouzení textu, pojmenování slabých míst a doporučení, co upravit a v jakém pořadí.",
+    annot: "// poznámka redaktorky",
+    to: "/sluzby",
+  },
+];
+
+const PORTFOLIO_GROUPS = [
+  {
+    name: "Komentáře k zákonům",
+    items: [
+      "Komentář nařízení o kryptoaktivech (MiCA)",
+      "Komentář zákona o podnikání na kapitálovém trhu",
+      "Komentář zákona o platebním styku",
+    ],
+  },
+  {
+    name: "Právo IT a kybernetická bezpečnost",
+    items: [
+      "Právo informačních technologií",
+      "Kybernetický bezpečnostní incident 3D: IT, právo a compliance",
+    ],
+  },
+  {
+    name: "Umělá inteligence",
+    items: [
+      "Trestní odpovědnost umělé inteligence",
+      "Umělá inteligence z pohledu antidiskriminačního práva a GDPR",
+      "Právní aspekty umělé inteligence",
+    ],
+  },
+];
+
+const PRO_YES = [
+  "chcete, aby text působil profesionálně a důvěryhodně,",
+  "chápete, že kvalitní text vzniká postupně,",
+  "stojíte o zkušený redakční pohled, nejen o rychlé projetí,",
+  "jste připraveni na textu dál pracovat a ladit ho.",
+];
+
+const PRO_NO = [
+  "čekáte, že text napíšu nebo dopíšu za vás,",
+  "hledáte jen rychlé formální projetí bez skutečné práce s textem.",
+];
+
+const STEPS = [
+  {
+    title: "Seznámím se s textem",
+    desc: "Ujasníme si, v jakém stavu text je, co od něj očekáváte a jaký typ práce dává smysl.",
+  },
+  {
+    title: "Navrhnu vhodný postup",
+    desc: "Rozliším, co je potřeba řešit přednostně — strukturu, formulaci, jazyk nebo konzistenci.",
+  },
+  {
+    title: "Pracuji přehledně",
+    desc: "Veškeré úpravy provádím v režimu sledování změn — autor má vždy naprostou kontrolu.",
+  },
+  {
+    title: "Text dotáhneme",
+    desc: "Cílem je výstup čitelný, profesionální a připravený k dalšímu použití nebo publikaci.",
+  },
+];
+
+export default function Home() {
+  usePageMeta(
+    "Kateřina Mlsnová — knižní redaktorka odborných a právních textů",
+    "Redakce odborných a právních publikací. Přes 70 vydaných knih — komentáře k zákonům, učebnice i monografie o právu IT a umělé inteligenci. Ukázková redakce zdarma."
+  );
+
+  const [hlOn, setHlOn] = useState(false);
+  useEffect(() => {
+    const t = window.setTimeout(() => setHlOn(true), 100);
+    return () => window.clearTimeout(t);
+  }, []);
+
+  return (
+    <main className="page">
+      {/* HERO */}
+      <section className="hero">
+        <div className="hero-left">
+          <span className="supertag">— redakce odborných a právních textů</span>
+          <div className="hero-firstname">K A T E Ř I N A</div>
+          <h1 className="hero-surname">
+            MLSNOVÁ<span className="cursor">▌</span>
+          </h1>
+          <p className={`hero-value${hlOn ? " hl-on" : ""}`}>
+            <span className="hl">Aby váš odborný text obstál</span> — v knize, v posudku i před
+            odbornou komunitou.
+          </p>
+          <p className="hero-sub">
+            Jsem knižní redaktorka právních a odborných publikací. Za devět let jsem redigovala
+            více než 70 vydaných knih — od komentářů k zákonům po monografie o umělé inteligenci.
+          </p>
+          <div className="hero-actions">
+            <Link to="/kontakt" className="btn-primary">
+              Ukázková redakce zdarma
+            </Link>
+            <Link to="/sluzby" className="btn-ghost">
+              Co dělám
+            </Link>
+          </div>
+          <Manuscript />
+        </div>
+        <div className="hero-right">
+          {STATS.map((s) => (
+            <div key={s.label} className="stat-card">
+              <div className="stat-num">{s.num}</div>
+              <div className="stat-label">{s.label}</div>
+            </div>
+          ))}
+          <div className="mono-note hero-mono">
+            {"// právo · právo IT"}
+            <br />
+            {"// technologie · AI"}
+          </div>
+        </div>
+      </section>
+
+      <WaveDivider />
+
+      {/* PORTFOLIO */}
+      <section className="section container">
+        <div className="section-head">
+          <div>
+            <Tag>— Portfolio</Tag>
+            <h2 className="h2">Přes 70 vydaných knih. Tady je několik z nich.</h2>
+          </div>
+        </div>
+        <div className="pf-grid">
+          {PORTFOLIO_GROUPS.map((g) => (
+            <div key={g.name}>
+              <div className="pf-group-title">{g.name}</div>
+              {g.items.map((title) => (
+                <div key={title} className="pf-item">
+                  <span className="pilcrow">¶</span>
+                  <span>{title}</span>
+                </div>
+              ))}
+            </div>
+          ))}
+        </div>
+        <div className="pf-footnote">
+          <span className="mono-note">
+            + dalších více než 60 titulů redigovaných pro nakladatelství Wolters Kluwer ČR —
+            učebnice, monografie a publikace na klíč.
+          </span>
+          <Link to="/knihy" className="link-arrow">
+            Všech 70+ titulů →
+          </Link>
+        </div>
+      </section>
+
+      <div className="container">
+        <div className="hairline" />
+      </div>
+
+      {/* SLUŽBY */}
+      <section className="section container">
+        <div className="section-head">
+          <div>
+            <Tag>— Služby</Tag>
+            <h2 className="h2">
+              Každý text potřebuje
+              <br />
+              něco trochu jiného.
+            </h2>
+            <p className="perex" style={{ marginTop: 20 }}>
+              Nejčastěji se na mě autoři obracejí ve třech situacích: text působí nejednotně nebo
+              nepřehledně · potřebuje kultivovat styl a formulace · má obstát před odborným nebo
+              náročným čtenářem.
+            </p>
+          </div>
+          <Link to="/sluzby" className="btn-ghost">
+            Všechny služby →
+          </Link>
+        </div>
+        <div className="svc-grid">
+          {SERVICES.map((s) => (
+            <Link key={s.num} to={s.to} className="svc-card">
+              <span className="svc-annot">{s.annot}</span>
+              <span className="svc-num" aria-hidden="true">
+                {s.num}
+              </span>
+              <span className="svc-label">služba {s.num}</span>
+              <h3>{s.title}</h3>
+              <p>{s.desc}</p>
+              <span className="svc-link">Zjistit více →</span>
+            </Link>
+          ))}
+        </div>
+      </section>
+
+      <WaveDivider flip />
+
+      {/* UKÁZKA PŘED/PO */}
+      <section className="section container">
+        <Tag>— Jak vypadá moje práce</Tag>
+        <h2 className="h2" style={{ maxWidth: 640, marginBottom: "clamp(32px,5vw,56px)" }}>
+          Stejný obsah. Čitelnější text. A správné číslo předpisu.
+        </h2>
+        <div className="demo-grid">
+          <div className="demo-doc">
+            <div className="demo-doc-label">
+              <span>PŘED</span>
+              <span>rukopis autora</span>
+            </div>
+            <p className="demo-text">
+              „Zaměstnavatel je povinen zajistit, aby{" "}
+              <span className="del">v případě, že dojde k situaci, kdy</span> dochází k rozdílnému
+              zacházení se zaměstnanci, bylo toto zacházení posuzováno v souladu se zákonem č.{" "}
+              <span className="err">189/2009 Sb.</span>"
+            </p>
+          </div>
+          <div className="demo-doc">
+            <div className="demo-doc-label">
+              <span>PO</span>
+              <span className="ok">redakce ✓</span>
+            </div>
+            <p className="demo-text">
+              „Dochází-li k rozdílnému zacházení se zaměstnanci, posuzuje se podle
+              antidiskriminačního zákona (č. <span className="fix">198</span>/2009 Sb.)."
+            </p>
+          </div>
+        </div>
+        <div className="demo-bubble">
+          <div className="demo-bubble-name">K. Mlsnová</div>
+          <div className="demo-bubble-text">
+            Antidiskriminační zákon je č. 198/2009 Sb., ne 189. Přepis v čísle předpisu je
+            nejčastější chyba, kterou autorům tiše opravuji — drobnost, která umí stát
+            důvěryhodnost.
+          </div>
+        </div>
+
+        <div className="demo-mid">{"// někdy opravím tiše — jindy se zeptám"}</div>
+        <p className="demo-ref">
+          „…postup zadavatele v takovém případě upravuje{" "}
+          <span className="ref">zákon č. 137/2006 Sb., o veřejných zakázkách</span>."
+        </p>
+        <div className="demo-bubble">
+          <div className="demo-bubble-name">K. Mlsnová</div>
+          <div className="demo-bubble-text">
+            Skutečně chcete odkazovat na tento zákon? Ke dni 1. 10. 2016 byl zrušen. Přidáme k
+            textu tuto informaci, nebo odkážeme na nahrazující zákon č. 134/2016 Sb., o zadávání
+            veřejných zakázek?
+          </div>
+        </div>
+        <p className="demo-after">
+          Takhle vypadá běžná redakční práce: věta se zkrátí o polovinu, přepis v čísle předpisu
+          zmizí dřív, než ho kdokoli uvidí — a tam, kde jde o obsah, se nerozhoduju za vás, ale
+          ptám se. Všechny úpravy navrhuji v režimu sledování změn; poslední slovo máte vždy vy.
+        </p>
+      </section>
+
+      <div className="container">
+        <div className="hairline" />
+      </div>
+
+      {/* PRO KOHO */}
+      <section className="section container">
+        <Tag>— Pro koho je moje práce vhodná</Tag>
+        <h2 className="h2" style={{ marginBottom: "clamp(24px,4vw,40px)" }}>
+          Spolupracujeme dobře, když —
+        </h2>
+        {PRO_YES.map((text) => (
+          <div key={text} className="pk-row yes">
+            <span className="pk-box">✓</span>
+            <span className="pk-text">{text}</span>
+          </div>
+        ))}
+        <div className="pk-sep">— ne, pokud:</div>
+        {PRO_NO.map((text) => (
+          <div key={text} className="pk-row no">
+            <span className="pk-box">✗</span>
+            <span className="pk-text">{text}</span>
+          </div>
+        ))}
+      </section>
+
+      <WaveDivider />
+
+      {/* REFERENCE */}
+      <section className="section container">
+        <Tag>— Co říkají autoři</Tag>
+        <div className="quote-grid" style={{ marginTop: "clamp(24px,4vw,40px)" }}>
+          <Quote
+            text="Mimořádná spokojenost s paní Kateřinou, velice lehká spolupráce, odpovídá okamžitě a vždy se snaží hodně pomoct."
+            source="AUTOR ODBORNÉ PUBLIKACE"
+          />
+          <Quote
+            text="V posudcích, ale i při obhajobě mi chválili úpravu a celkovou redakci práce. Umíte to!"
+            source="AUTOR DIZERTAČNÍ PRÁCE"
+          />
+        </div>
+      </section>
+
+      <div className="container">
+        <div className="hairline" />
+      </div>
+
+      {/* PROCES */}
+      <section className="section container">
+        <Tag>— Jak spolupráce probíhá</Tag>
+        <h2 className="h2" style={{ marginBottom: "clamp(32px,5vw,56px)" }}>
+          Čtyři kroky od textu k výsledku.
+        </h2>
+        <div className="steps">
+          {STEPS.map((s, i) => (
+            <div key={s.title} className="step">
+              <div className="step-num">{String(i + 1).padStart(2, "0")}</div>
+              <h4>{s.title}</h4>
+              <p>{s.desc}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <CtaSection />
+    </main>
+  );
+}
