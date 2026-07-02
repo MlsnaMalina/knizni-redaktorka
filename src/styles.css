@@ -845,7 +845,23 @@ h1, h2, h3, h4 {
 
 .demo-text .del {
   text-decoration: line-through;
-  color: rgba(26, 23, 20, 0.3);
+  text-decoration-color: rgba(184, 48, 102, 0.7);
+  color: rgba(26, 23, 20, 0.32);
+}
+
+.demo-text .ins {
+  color: var(--rasp-dark);
+  font-weight: 500;
+  border-bottom: 1.5px solid rgba(184, 48, 102, 0.6);
+}
+
+.desk-legend {
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  letter-spacing: 0.05em;
+  color: rgba(247, 244, 238, 0.35);
+  margin-top: 12px;
+  line-height: 1.7;
 }
 
 .demo-bubble {

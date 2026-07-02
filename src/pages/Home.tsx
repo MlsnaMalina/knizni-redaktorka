@@ -290,34 +290,33 @@ export default function Home() {
 
           <div className="paper" style={{ maxWidth: 640, transform: "rotate(-0.6deg)" }}>
             <div className="demo-doc-label">
-              <span>{edited ? "PO" : "PŘED"}</span>
+              <span>{edited ? "PO · sledování změn" : "PŘED"}</span>
               <span className={edited ? "ok" : undefined}>
                 {edited ? "redakce ✓" : "rukopis autora"}
               </span>
             </div>
             {edited ? (
               <p className="demo-text">
-                „Dochází-li k rozdílnému zacházení se zaměstnanci, posuzuje se podle
-                antidiskriminačního zákona (č. <span className="fix">198</span>/2009 Sb.)."
+                „<span className="del">Zaměstnavatel je povinen zajistit, aby v případě, že dojde
+                k situaci, kdy dochází</span> <span className="ins">Dochází-li</span> k rozdílnému
+                zacházení se zaměstnanci, <span className="del">bylo toto zacházení posuzováno v
+                souladu se zákonem č. 189/2009 Sb.</span>{" "}
+                <span className="ins">posuzuje se podle antidiskriminačního zákona (č. 198/2009
+                Sb.).</span>"
               </p>
             ) : (
               <p className="demo-text">
-                „Zaměstnavatel je povinen zajistit, aby{" "}
-                <span className="del">v případě, že dojde k situaci, kdy</span> dochází k
-                rozdílnému zacházení se zaměstnanci, bylo toto zacházení posuzováno v souladu se
-                zákonem č. <span className="err">189/2009 Sb.</span>"
+                „Zaměstnavatel je povinen zajistit, aby v případě, že dojde k situaci, kdy dochází
+                k rozdílnému zacházení se zaměstnanci, bylo toto zacházení posuzováno v souladu se
+                zákonem č. 189/2009 Sb."
               </p>
             )}
           </div>
           {edited && (
-            <div className="demo-bubble">
-              <div className="demo-bubble-name">K. Mlsnová</div>
-              <div className="demo-bubble-text">
-                Antidiskriminační zákon je č. 198/2009 Sb., ne 189. Přepis v čísle předpisu je
-                nejčastější chyba, kterou autorům tiše opravuji — drobnost, která umí stát
-                důvěryhodnost.
-              </div>
-            </div>
+            <p className="desk-legend">
+              přeškrtnuté = vypuštěno · podtržené = vloženo · a mimochodem: antidiskriminační
+              zákon je 198/2009 Sb., ne 189
+            </p>
           )}
 
           <div className="demo-mid">{"// někdy opravím tiše — jindy se zeptám"}</div>
