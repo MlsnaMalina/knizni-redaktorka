@@ -40,7 +40,10 @@ export default function RevizeAI() {
     <main className="page">
       <section className="section-sm container" style={{ paddingTop: "clamp(56px,7vw,96px)" }}>
         <Tag>— Revize AI textů</Tag>
-        <h1 className="h1">AI napíše draft. Já z něj udělám text, za který se podepíšete.</h1>
+        <h1 className="h1">
+          AI napíše draft. Já z něj udělám text,{" "}
+          <span className="mark">za který se podepíšete</span>.
+        </h1>
         <p className="perex" style={{ marginTop: 24 }}>
           Redigovala jsem odborné knihy o umělé inteligenci — a dnes pomáhám s texty, které s její
           pomocí vznikají. AI výstup umí být skvělý základ. Bez lidské redakce ale zůstává jen

@@ -47,7 +47,9 @@ export default function Kontakt() {
     <main className="page">
       <section className="section-sm container" style={{ paddingTop: "clamp(56px,7vw,96px)" }}>
         <Tag>— Kontakt</Tag>
-        <h1 className="h1">Pošlete mi svůj text. Nebo jen otázku.</h1>
+        <h1 className="h1">
+          Pošlete mi <span className="mark">svůj text</span>. Nebo jen otázku.
+        </h1>
         <p className="perex" style={{ marginTop: 24 }}>
           Napište mi, o jaký text jde a co od spolupráce čekáte. Odpovídám do 2 pracovních dnů a
           první krok — posouzení nebo ukázková redakce — je vždy zdarma.

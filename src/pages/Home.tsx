@@ -215,15 +215,22 @@ export default function Home() {
               </div>
             </div>
           ))}
+          <div className="pf-more reveal">
+            <div>
+              <span className="pf-more-num">70+</span>{" "}
+              <span className="pf-more-label">titulů celkem</span>
+            </div>
+            <p>Tohle byla jen ochutnávka. Kompletní knihovnu si můžete projít — a profiltrovat.</p>
+            <Link to="/knihy" className="btn-primary" style={{ alignSelf: "flex-start" }}>
+              Zobrazit všechny knihy →
+            </Link>
+          </div>
         </div>
         <div className="pf-footnote">
           <span className="mono-note">
-            + celkem více než 70 titulů redigovaných pro nakladatelství Wolters Kluwer ČR —
-            komentáře, učebnice, monografie a publikace na klíč.
+            Vše redigováno pro nakladatelství Wolters Kluwer ČR — komentáře, učebnice, monografie
+            a publikace na klíč.
           </span>
-          <Link to="/knihy" className="link-arrow">
-            Všech 70+ titulů →
-          </Link>
         </div>
       </section>
 
@@ -271,67 +278,75 @@ export default function Home() {
             Podívejte se mi přes rameno.
           </h2>
 
-          <div
-            style={{
-              display: "flex",
-              alignItems: "center",
-              gap: 14,
-              flexWrap: "wrap",
-              marginBottom: 18,
-            }}
-          >
-            <button className="desk-btn" onClick={() => setEdited(!edited)}>
-              {edited ? "← ZPĚT NA PŮVODNÍ" : "ZOBRAZIT REDAKCI →"}
-            </button>
-            <span className="desk-state">
-              {edited ? "PO · redakce hotova ✓" : "PŘED · rukopis autora"}
-            </span>
-          </div>
-
-          <div className="paper" style={{ maxWidth: 640, transform: "rotate(-0.6deg)" }}>
-            <div className="demo-doc-label">
-              <span>{edited ? "PO · sledování změn" : "PŘED"}</span>
-              <span className={edited ? "ok" : undefined}>
-                {edited ? "redakce ✓" : "rukopis autora"}
-              </span>
+          <div className="desk-grid">
+            <div>
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: 14,
+                  flexWrap: "wrap",
+                  marginBottom: 18,
+                }}
+              >
+                <button className="desk-btn" onClick={() => setEdited(!edited)}>
+                  {edited ? "← ZPĚT NA PŮVODNÍ" : "ZOBRAZIT REDAKCI →"}
+                </button>
+                <span className="desk-state">
+                  {edited ? "PO · redakce hotova ✓" : "PŘED · rukopis autora"}
+                </span>
+              </div>
+              <div className="paper" style={{ transform: "rotate(-0.6deg)" }}>
+                <div className="demo-doc-label">
+                  <span>{edited ? "PO · sledování změn" : "PŘED"}</span>
+                  <span className={edited ? "ok" : undefined}>
+                    {edited ? "redakce ✓" : "rukopis autora"}
+                  </span>
+                </div>
+                {edited ? (
+                  <p className="demo-text">
+                    „<span className="del">Zaměstnavatel je povinen zajistit, aby v případě, že
+                    dojde k situaci, kdy dochází</span> <span className="ins">Dochází-li</span> k
+                    rozdílnému zacházení se zaměstnanci,{" "}
+                    <span className="del">bylo toto zacházení posuzováno v souladu se zákonem č.
+                    189/2009 Sb.</span>{" "}
+                    <span className="ins">posuzuje se podle antidiskriminačního zákona (č.
+                    198/2009 Sb.).</span>"
+                  </p>
+                ) : (
+                  <p className="demo-text">
+                    „Zaměstnavatel je povinen zajistit, aby v případě, že dojde k situaci, kdy
+                    dochází k rozdílnému zacházení se zaměstnanci, bylo toto zacházení posuzováno
+                    v souladu se zákonem č. 189/2009 Sb."
+                  </p>
+                )}
+              </div>
+              {edited && (
+                <p className="desk-legend">
+                  přeškrtnuté = vypuštěno · podtržené = vloženo · a mimochodem: antidiskriminační
+                  zákon je 198/2009 Sb., ne 189
+                </p>
+              )}
             </div>
-            {edited ? (
-              <p className="demo-text">
-                „<span className="del">Zaměstnavatel je povinen zajistit, aby v případě, že dojde
-                k situaci, kdy dochází</span> <span className="ins">Dochází-li</span> k rozdílnému
-                zacházení se zaměstnanci, <span className="del">bylo toto zacházení posuzováno v
-                souladu se zákonem č. 189/2009 Sb.</span>{" "}
-                <span className="ins">posuzuje se podle antidiskriminačního zákona (č. 198/2009
-                Sb.).</span>"
-              </p>
-            ) : (
-              <p className="demo-text">
-                „Zaměstnavatel je povinen zajistit, aby v případě, že dojde k situaci, kdy dochází
-                k rozdílnému zacházení se zaměstnanci, bylo toto zacházení posuzováno v souladu se
-                zákonem č. 189/2009 Sb."
-              </p>
-            )}
-          </div>
-          {edited && (
-            <p className="desk-legend">
-              přeškrtnuté = vypuštěno · podtržené = vloženo · a mimochodem: antidiskriminační
-              zákon je 198/2009 Sb., ne 189
-            </p>
-          )}
 
-          <div className="demo-mid">{"// někdy opravím tiše — jindy se zeptám"}</div>
-          <div className="paper" style={{ maxWidth: 640, transform: "rotate(0.7deg)" }}>
-            <p className="demo-text">
-              „…postup zadavatele v takovém případě upravuje{" "}
-              <span className="ref">zákon č. 137/2006 Sb., o veřejných zakázkách</span>."
-            </p>
-          </div>
-          <div className="demo-bubble">
-            <div className="demo-bubble-name">K. Mlsnová</div>
-            <div className="demo-bubble-text">
-              Skutečně chcete odkazovat na tento zákon? Ke dni 1. 10. 2016 byl zrušen. Přidáme k
-              textu tuto informaci, nebo odkážeme na nahrazující zákon č. 134/2016 Sb., o zadávání
-              veřejných zakázek?
+            <div>
+              <div className="demo-mid" style={{ marginBottom: 18 }}>
+                {"// někdy opravím tiše — jindy se zeptám"}
+              </div>
+              <div className="paper" style={{ transform: "rotate(0.7deg)" }}>
+                <p className="demo-text">
+                  „…postup zadavatele v takovém případě upravuje{" "}
+                  <span className="ref">zákon č. 137/2006 Sb., o veřejných zakázkách</span>."
+                </p>
+              </div>
+              <div className="demo-bubble">
+                <div className="demo-bubble-name">K. Mlsnová</div>
+                <div className="demo-bubble-text">
+                  Skutečně chcete odkazovat na tento zákon? Ke dni 1. 10. 2016 byl zrušen. Přidáme
+                  k textu tuto informaci, nebo odkážeme na nahrazující zákon č. 134/2016 Sb., o
+                  zadávání veřejných zakázek?
+                </div>
+              </div>
             </div>
           </div>
 
@@ -349,19 +364,56 @@ export default function Home() {
         <h2 className="h2" style={{ marginBottom: "clamp(24px,4vw,40px)" }}>
           Spolupracujeme dobře, když —
         </h2>
-        {PRO_YES.map((text) => (
-          <div key={text} className="pk-row yes">
-            <span className="pk-box">✓</span>
-            <span className="pk-text">{text}</span>
+        <div className="pk-cols">
+          <div className="tile pk-tile reveal">
+            <div className="pk-tile-head" style={{ color: "#7A1840" }}>
+              ✓ Spolupráce dává smysl, když:
+            </div>
+            {PRO_YES.map((text) => (
+              <div key={text} className="pk-line">
+                <span className="pk-box" style={{ border: "1px solid #7A1840", color: "#7A1840" }}>
+                  ✓
+                </span>
+                <span style={{ color: "rgba(26,23,20,0.75)", paddingTop: 3 }}>{text}</span>
+              </div>
+            ))}
           </div>
-        ))}
-        <div className="pk-sep">— ne, pokud:</div>
-        {PRO_NO.map((text) => (
-          <div key={text} className="pk-row no">
-            <span className="pk-box">✗</span>
-            <span className="pk-text">{text}</span>
+          <div className="tile pk-tile reveal">
+            <div className="pk-tile-head" style={{ color: "rgba(26,23,20,0.35)" }}>
+              ✗ Ne, pokud:
+            </div>
+            {PRO_NO.map((text) => (
+              <div key={text} className="pk-line">
+                <span
+                  className="pk-box"
+                  style={{ border: "1px solid rgba(26,23,20,0.15)", color: "rgba(26,23,20,0.3)" }}
+                >
+                  ✗
+                </span>
+                <span
+                  style={{
+                    color: "rgba(26,23,20,0.3)",
+                    textDecoration: "line-through",
+                    textDecorationColor: "rgba(26,23,20,0.15)",
+                    paddingTop: 3,
+                  }}
+                >
+                  {text}
+                </span>
+              </div>
+            ))}
+            <p
+              style={{
+                marginTop: 18,
+                fontSize: 13.5,
+                color: "rgba(26,23,20,0.5)",
+                fontStyle: "italic",
+              }}
+            >
+              Nepíšu texty za autory — pomáhám jim, aby ten jejich obstál.
+            </p>
           </div>
-        ))}
+        </div>
       </section>
 
       <WaveDivider flip />
@@ -391,11 +443,14 @@ export default function Home() {
         <h2 className="h2" style={{ marginBottom: "clamp(32px,5vw,56px)" }}>
           Čtyři kroky od textu k výsledku.
         </h2>
-        <div className="steps">
+        <div className="svc-grid">
           {STEPS.map((s, i) => (
-            <div key={s.title} className="step">
-              <div className="step-num">{String(i + 1).padStart(2, "0")}</div>
-              <h4>{s.title}</h4>
+            <div key={s.title} className="svc-card tile reveal">
+              <span className="svc-num" aria-hidden="true">
+                {String(i + 1).padStart(2, "0")}
+              </span>
+              <span className="svc-label">krok {String(i + 1).padStart(2, "0")}</span>
+              <h3>{s.title}</h3>
               <p>{s.desc}</p>
             </div>
           ))}

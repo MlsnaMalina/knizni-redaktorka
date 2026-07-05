@@ -31,7 +31,7 @@ export default function OMne() {
         <div className="about-hero-text">
           <Tag>— O mně</Tag>
           <h1 className="h1" style={{ fontSize: "clamp(30px,4vw,54px)" }}>
-            Z advokacie do knižní redakce.
+            Z advokacie do <span className="mark">knižní redakce</span>.
           </h1>
           <p className="perex" style={{ marginTop: 24, maxWidth: 520 }}>
             Devět let jsem pracovala v advokacii. Pak jsem odešla do nakladatelství Wolters Kluwer

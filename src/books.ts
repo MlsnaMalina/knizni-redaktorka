@@ -2,16 +2,32 @@ export interface Book {
   title: string;
   note?: string;
   flagship?: boolean;
+  /** Přesný odkaz na produkt v e-shopu Wolters Kluwer (doplňuje se postupně). */
+  url?: string;
 }
 
 export interface BookCategory {
+  id: string;
   name: string;
+  short: string;
+  /** Barva hřbetu v knihovně. */
+  spine: "raspberry-dark" | "black" | "raspberry" | "white" | "white-band";
   books: Book[];
+}
+
+const WK_SEARCH = "https://obchod.wolterskluwer.cz/cz/vyhledavani?q=";
+
+/** Odkaz do e-shopu WK — přesný produkt, nebo fallback na vyhledávání titulu. */
+export function wkLink(book: Book): string {
+  return book.url ?? `${WK_SEARCH}${encodeURIComponent(book.title)}`;
 }
 
 export const bookCategories: BookCategory[] = [
   {
+    id: "komentare",
     name: "Komentáře k zákonům a nařízením",
+    short: "Komentáře",
+    spine: "raspberry-dark",
     books: [
       { title: "Komentář nařízení o kryptoaktivech (MiCA)", flagship: true },
       { title: "Komentář zákona o podnikání na kapitálovém trhu", flagship: true },
@@ -43,12 +59,23 @@ export const bookCategories: BookCategory[] = [
     ],
   },
   {
+    id: "it-ai",
     name: "Právo IT, technologie a umělá inteligence",
+    short: "Právo IT a AI",
+    spine: "black",
     books: [
       { title: "Právo informačních technologií", note: "2. vyd.", flagship: true },
-      { title: "Kybernetický bezpečnostní incident 3D: IT, právo a compliance", note: "1. + 2. vyd.", flagship: true },
+      {
+        title: "Kybernetický bezpečnostní incident 3D: IT, právo a compliance",
+        note: "1. + 2. vyd.",
+        flagship: true,
+      },
       { title: "Trestní odpovědnost umělé inteligence", flagship: true },
-      { title: "Umělá inteligence z pohledu antidiskriminačního práva a GDPR", note: "1. + 2. vyd.", flagship: true },
+      {
+        title: "Umělá inteligence z pohledu antidiskriminačního práva a GDPR",
+        note: "1. + 2. vyd.",
+        flagship: true,
+      },
       { title: "Právní aspekty umělé inteligence", flagship: true },
       { title: "Umělá inteligence a právo" },
       { title: "Umělá inteligence jako technologická výzva autorskému právu" },
@@ -60,7 +87,10 @@ export const bookCategories: BookCategory[] = [
     ],
   },
   {
+    id: "fintech",
     name: "Finanční trh a fintech",
+    short: "Fintech",
+    spine: "raspberry",
     books: [
       { title: "Fintech v mezinárodním prostředí" },
       { title: "Fintech in the International Environment", note: "anglické vydání" },
@@ -74,11 +104,17 @@ export const bookCategories: BookCategory[] = [
     ],
   },
   {
+    id: "proces",
     name: "Civilní proces, mediace a monografie",
+    short: "Proces a monografie",
+    spine: "white",
     books: [
       { title: "Žaloba v civilním řízení", note: "2. vyd." },
       { title: "Hledání pravdy v civilním procesu" },
-      { title: "Citační analýza judikatury" },
+      {
+        title: "Citační analýza judikatury",
+        url: "https://obchod.wolterskluwer.cz/cz/citacni-analyza-judikatury.p5976.html",
+      },
       { title: "Procesní postavení osoby neznámého pobytu" },
       { title: "Mediace v praxi" },
       { title: "Právní a sociální aspekty mediace" },
@@ -88,7 +124,10 @@ export const bookCategories: BookCategory[] = [
     ],
   },
   {
+    id: "podnikani",
     name: "Podnikání, ekonomie a mezinárodní témata",
+    short: "Podnikání a ekonomie",
+    spine: "white-band",
     books: [
       { title: "Zahájení podnikání", note: "1. + 2. vyd." },
       { title: "Ukončení podnikání" },
@@ -107,3 +146,5 @@ export const bookCategories: BookCategory[] = [
 export const allBookTitles: string[] = bookCategories.flatMap((c) =>
   c.books.map((b) => (b.note ? `${b.title} (${b.note})` : b.title))
 );
+
+export const totalBooks: number = bookCategories.reduce((n, c) => n + c.books.length, 0);

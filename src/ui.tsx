@@ -152,41 +152,28 @@ export function WaveDivider({ flip = false }: { flip?: boolean }) {
   );
 }
 
-/* ---------- manuskript dekorace ---------- */
-
-type MsRowType = "n" | "h" | "d" | "i" | "c";
-
-const MS_ROWS: { type: MsRowType; width: string }[] = [
-  { type: "n", width: "92%" },
-  { type: "n", width: "84%" },
-  { type: "h", width: "68%" },
-  { type: "n", width: "90%" },
-  { type: "d", width: "56%" },
-  { type: "n", width: "88%" },
-  { type: "i", width: "74%" },
-  { type: "n", width: "81%" },
-  { type: "c", width: "48%" },
-];
+/* ---------- manuskript dekorace: skutečný text s revizemi ---------- */
 
 export function Manuscript() {
   return (
     <div className="manuscript-wrap" aria-hidden="true">
       <div className="manuscript">
         <div className="ms-head">
-          <span>RUKOPIS v.3</span>
-          <span>sledo. změn ✓</span>
+          <span>RUKOPIS · KAP. 2</span>
+          <span>sledování změn ✓</span>
         </div>
-        {MS_ROWS.map((row, i) => (
-          <div key={i} className={`ms-row ${row.type}`} style={{ width: row.width }}>
-            {row.type === "i" && <span className="ms-insert-label">+ vložit</span>}
-            {row.type === "c" && <span className="cursor">▌</span>}
-          </div>
-        ))}
+        <p className="ms-text">
+          Smluvní strany se dohodly, že{" "}
+          <span className="del">v případě, že nastane situace, kdy</span>{" "}
+          <span className="ins">nastane-li</span> prodlení s předáním díla, postupuje se podle{" "}
+          <span className="del">§ 1968</span> <span className="ins">§ 1970</span> občanského
+          zákoníku<span className="cursor">▌</span>
+        </p>
         <div className="ms-pageno">— 12 —</div>
       </div>
       <div className="ms-bubble">
         <div className="ms-bubble-name">K. Mlsnová</div>
-        <div className="ms-bubble-text">Zpřesnit formulaci — terminologie nejednotná.</div>
+        <div className="ms-bubble-text">Sjednotit odkazy na o. z. — viz kap. 1.</div>
       </div>
     </div>
   );
