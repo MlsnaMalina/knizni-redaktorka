@@ -1,28 +1,26 @@
-import { Routes, Route } from "react-router-dom";
-import { Nav, Footer, ScrollToTop, RevealManager } from "./ui";
-import Home from "./pages/Home";
-import Sluzby from "./pages/Sluzby";
-import Knihy from "./pages/Knihy";
-import OMne from "./pages/OMne";
-import Kontakt from "./pages/Kontakt";
-import RevizeAI from "./pages/RevizeAI";
+import { Navigate, Route, Routes } from 'react-router-dom';
+import { ScrollToTop } from './components/ScrollToTop';
+import Uvod from './pages/Uvod';
+import Sluzby from './pages/Sluzby';
+import Knihovna from './pages/Knihovna';
+import OMne from './pages/OMne';
+import Kontakt from './pages/Kontakt';
+import RevizeAI from './pages/RevizeAI';
 
 export default function App() {
   return (
     <>
       <ScrollToTop />
-      <Nav />
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<Uvod />} />
         <Route path="/sluzby" element={<Sluzby />} />
-        <Route path="/knihy" element={<Knihy />} />
+        <Route path="/knihovna" element={<Knihovna />} />
         <Route path="/o-mne" element={<OMne />} />
         <Route path="/kontakt" element={<Kontakt />} />
         <Route path="/revize-ai-textu" element={<RevizeAI />} />
-        <Route path="*" element={<Home />} />
+        <Route path="/knihy" element={<Navigate to="/knihovna" replace />} />
+        <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
-      <RevealManager />
-      <Footer />
     </>
   );
 }

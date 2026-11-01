@@ -1,172 +1,219 @@
-import { usePageMeta, Tag, WaveDivider, CtaSection } from "../ui";
+import { useEffect, useRef, type RefObject } from 'react';
+import { Link } from 'react-router-dom';
+import { BOOKS_ROUND, YEARS_EDITING, YEARS_LAW } from '../data/site';
+import type { CSSVars } from '../lib/css';
+import { reducedMotion, usePageMeta } from '../lib/hooks';
+import { SiteHeader } from '../components/SiteHeader';
+import { Checks } from './omne/Checks';
+import './omne.css';
 
-const WORK_STEPS = [
-  {
-    title: "Nejdřív si text přečtu a zorientuji se v něm",
-    desc: "Potřebuji vědět, v jakém stavu text je, co od něj očekáváte a co mu v dané chvíli skutečně pomůže.",
-  },
-  {
-    title: "Navrhnu, co má smysl řešit jako první",
-    desc: "Ne všechno je potřeba opravovat najednou. Důležité je rozeznat, co je podstatné a co už by byla zbytečná práce navíc.",
-  },
-  {
-    title: "Pracuji přehledně a s respektem k autorovi",
-    desc: "Veškeré návrhy dělám tak, aby bylo jasné, co a proč se v textu mění. Text zlepšuji, ale nepřebírám jeho autorství.",
-  },
-  {
-    title: "Cílem je výsledek, který obstojí",
-    desc: "Text má být přesný, srozumitelný, jednotný a profesionální — nejen obsahově, ale i tím, jak působí na čtenáře.",
-  },
+/** Šipka mezi částmi cesty: jak se mezera posouvá nahoru, šipka v ní sjíždí dolů (pohyb řídí useRoadArrows). */
+function Gap() {
+  return (
+    <li className="gap" aria-hidden="true">
+      <svg className="arw" viewBox="0 0 16 26">
+        <rect width="16" height="26" fill="#fff" stroke="none" />
+        <path d="M8 2v20M2 15l6 8 6-8" />
+      </svg>
+    </li>
+  );
+}
+
+const STEPS: { h: string; t: string }[] = [
+  { h: 'Nejdřív si text přečtu a zorientuji se v něm', t: 'Potřebuji vědět, v jakém stavu text je, co od něj očekáváte a co mu v dané chvíli skutečně pomůže.' },
+  { h: 'Navrhnu, co má smysl řešit jako první', t: 'Ne všechno je potřeba opravovat najednou. Důležité je rozeznat, co je podstatné a co už by byla zbytečná práce navíc.' },
+  { h: 'Pracuji přehledně a s respektem k autorovi', t: 'Veškeré návrhy dělám tak, aby bylo jasné, co a proč se v textu mění. Text zlepšuji, ale nepřebírám jeho autorství.' },
+  { h: 'Cílem je výsledek, který obstojí', t: 'Text má být přesný, srozumitelný, jednotný a profesionální — nejen obsahově, ale i tím, jak působí na čtenáře.' },
 ];
+
+/** Šipky v mezerách sjíždějí dolů podle posunu stránky. */
+function useRoadArrows(root: RefObject<HTMLElement | null>) {
+  useEffect(() => {
+    const el = root.current;
+    if (!el) return undefined;
+    const gaps = [...el.querySelectorAll<HTMLElement>('.gap')];
+    const still = reducedMotion();
+    let queued = false;
+    const place = () => {
+      queued = false;
+      gaps.forEach((g) => {
+        const p = still ? 0.5 : Math.max(0, Math.min(1, (window.innerHeight * 0.8 - g.getBoundingClientRect().top) / (window.innerHeight * 0.55)));
+        (g.firstElementChild as SVGElement | null)?.style.setProperty('--ty', `${(p * (g.clientHeight - 26)).toFixed(1)}px`);
+      });
+    };
+    const queue = () => {
+      if (queued) return;
+      queued = true;
+      requestAnimationFrame(place);
+    };
+    window.addEventListener('scroll', queue, { passive: true });
+    window.addEventListener('resize', queue);
+    place();
+    return () => {
+      window.removeEventListener('scroll', queue);
+      window.removeEventListener('resize', queue);
+    };
+  }, [root]);
+}
+
+/** Kniha se při příchodu do záběru rozevře; mimo záběr při načtení nebo bez pohybu stojí hotová. */
+function useBookReveal(ref: RefObject<HTMLElement | null>) {
+  useEffect(() => {
+    const el = ref.current;
+    if (!el || reducedMotion() || !('IntersectionObserver' in window) || el.getBoundingClientRect().top < window.innerHeight * 0.6) return undefined;
+    el.classList.add('pre');
+    const io = new IntersectionObserver(
+      (entries, o) =>
+        entries.forEach((e) => {
+          if (!e.isIntersecting) return;
+          el.classList.remove('pre');
+          o.disconnect();
+        }),
+      { threshold: 0.3 }
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, [ref]);
+}
 
 export default function OMne() {
   usePageMeta(
-    "O mně — z advokacie do knižní redakce | Kateřina Mlsnová",
-    "Právní vzdělání, 9 let advokacie, 9 let knižní redakce a přes 70 vydaných odborných knih. Specializace na právo, právo IT, technologie a umělou inteligenci."
+    'O mně — z advokacie do knižní redakce | Kateřina Mlsnová',
+    `Právní vzdělání, ${YEARS_LAW} let advokacie, ${YEARS_EDITING} let knižní redakce a přes ${BOOKS_ROUND} vydaných odborných knih. Specializace na právo, právo IT, technologie a umělou inteligenci.`
   );
+  const rootRef = useRef<HTMLDivElement>(null);
+  const bookRef = useRef<HTMLDivElement>(null);
+  useRoadArrows(rootRef);
+  useBookReveal(bookRef);
 
   return (
-    <main className="page">
-      <section className="about-hero">
-        <div className="about-hero-text">
-          <Tag>— O mně</Tag>
-          <h1 className="h1" style={{ fontSize: "clamp(30px,4vw,54px)" }}>
-            Z advokacie do <span className="mark">knižní redakce</span>.
-          </h1>
-          <p className="perex" style={{ marginTop: 24, maxWidth: 520 }}>
-            Devět let jsem pracovala v advokacii. Pak jsem odešla do nakladatelství Wolters Kluwer
-            ČR — a zjistila, že mě víc než psaní podání baví dávat tvar odborným textům. Dnes mám
-            za sebou přes 70 vydaných knih: komentáře k zákonům, učebnice, monografie i publikace
-            na klíč. Nejblíž mám k právu, právu IT, technologiím a umělé inteligenci — redigovala
-            jsem mimo jiné komentář k nařízení MiCA nebo monografie o trestní odpovědnosti umělé
-            inteligence.
-          </p>
-          <div className="about-facts tile">
-            <div className="about-facts-title">Stručně řečeno</div>
-            <ul>
-              <li>
-                <span className="pilcrow">¶</span>více než 70 vydaných odborných knih,
-              </li>
-              <li>
-                <span className="pilcrow">¶</span>9 let advokacie + 9 let knižní redakce,
-              </li>
-              <li>
-                <span className="pilcrow">¶</span>specializace: právo, právo IT, technologie, AI.
-              </li>
-            </ul>
-          </div>
-        </div>
-        <div className="about-hero-photo">
-          {/* Až bude portrét: <img src="/portret.jpg" alt="Kateřina Mlsnová" /> */}
-          <div className="photo-placeholder" aria-hidden="true">
-            <span
-              style={{
-                fontFamily: "Syne, sans-serif",
-                fontWeight: 800,
-                fontSize: "clamp(48px,6vw,84px)",
-                color: "rgba(26,23,20,0.08)",
-              }}
-            >
-              KM<span className="cursor" style={{ fontSize: "0.8em" }}>▌</span>
-            </span>
-          </div>
-          <div className="photo-annot">
-            <div className="photo-annot-name">K. Mlsnová</div>
-            <div className="photo-annot-role">
-              knižní redaktorka
-              <br />
-              odborných textů
+    <div className="omne" ref={rootRef}>
+      <SiteHeader over />
+      <main>
+        <section className="scene mdl" aria-label="O mně">
+          <div className="copy">
+            <div className="photo" style={{ '--pw': '150px' } as CSSVars}>
+              <b>K. Mlsnová</b>knižní redaktorka
             </div>
-          </div>
-        </div>
-      </section>
-
-      <WaveDivider />
-
-      <section className="section container">
-        <div className="info-cards">
-          <div className="info-card tile">
-            <h3>Proč mi rozumí právníci</h3>
-            <p>
-              Vím, jak právní text vzniká a co musí vydržet — protože jsem ho léta sama psala.
-              Rozumím terminologii, citacím, judikatuře i tomu, jak přemýšlí oponent. Autor mi
-              nemusí vysvětlovat, co je komentář nebo proč záleží na jednom slovu v definici.
+            <p className="eyebrow" style={{ marginTop: 30 }}>
+              O mně
             </p>
-          </div>
-          <div className="info-card tile">
-            <h3>Co v textu sleduji</h3>
-            <ul>
-              <li>logiku a členění výkladu,</li>
-              <li>terminologickou a formální jednotnost,</li>
-              <li>typografii a citace,</li>
-              <li>celkový dojem, jakým text působí na odborného čtenáře.</li>
+            <h1>Z&nbsp;advokacie do knižní redakce.</h1>
+            <ul className="facts three" aria-label="Stručně řečeno">
+              <li>
+                <b>{YEARS_EDITING}</b>
+                <span>let knižní redakce</span>
+              </li>
+              <li>
+                <b>
+                  {BOOKS_ROUND}
+                  <i>+</i>
+                </b>
+                <span>vydaných knih</span>
+              </li>
+              <li>
+                <b>{YEARS_LAW}</b>
+                <span>let advokacie</span>
+              </li>
             </ul>
           </div>
-        </div>
-      </section>
+        </section>
 
-      <div className="container">
-        <div className="hairline" />
-      </div>
+        <section className="path" aria-label="Moje cesta a práce">
+          <ol className="line">
+            <li className="stn">
+              <p className="lab">Změna</p>
+              <h2>Wolters Kluwer ČR</h2>
+              <p className="t">
+                Odešla jsem do nakladatelství Wolters Kluwer ČR — a&nbsp;zjistila, že mě víc než psaní podání baví dávat tvar odborným textům.
+              </p>
+            </li>
+            <Gap />
+            <li className="stn">
+              <p className="lab">
+                {YEARS_EDITING}&nbsp;let · {BOOKS_ROUND}+&nbsp;knih
+              </p>
+              <h2>Dnes</h2>
+              <p className="t">
+                Dnes mám za sebou přes {BOOKS_ROUND} vydaných knih: komentáře k&nbsp;zákonům, učebnice, monografie i&nbsp;publikace na klíč. Nejblíž mám
+                k&nbsp;právu, právu IT, technologiím a&nbsp;umělé inteligenci — redigovala jsem mimo jiné komentář k&nbsp;nařízení MiCA nebo monografie
+                o&nbsp;trestní odpovědnosti umělé inteligence.
+              </p>
+            </li>
+            <Gap />
+            <li className="stn">
+              <p className="lab">{YEARS_LAW}&nbsp;let</p>
+              <h2>Advokacie</h2>
+              <p className="t">Devět let jsem pracovala v&nbsp;advokacii — rozumím terminologii, citacím i&nbsp;judikatuře.</p>
+            </li>
 
-      <section className="section container">
-        <Tag>— Jak pracuji</Tag>
-        <h2 className="h2" style={{ marginBottom: "clamp(32px,5vw,56px)" }}>
-          Systematicky, přehledně a po vrstvách.
-        </h2>
-        <div className="vsteps">
-          {WORK_STEPS.map((s, i) => (
-            <div key={s.title} className="vstep">
-              <div className="vstep-rail">
-                <div className="step-num">{String(i + 1).padStart(2, "0")}</div>
-                {i < WORK_STEPS.length - 1 && <div className="vstep-line" />}
+            <li className="blk far" id="sleduji">
+              <h2>Co v&nbsp;textu sleduji</h2>
+              <p className="t">Kromě čtení rukopisu hlídám i&nbsp;to, co se při čtení snadno přehlédne.</p>
+              <Checks />
+            </li>
+
+            <li className="blk head far">
+              <p className="lab">Jak pracuji</p>
+              <h2>Systematicky, přehledně a&nbsp;po vrstvách.</h2>
+            </li>
+            <Gap />
+            {STEPS.map((s, i) => (
+              <StepItem key={s.h} h={s.h} t={s.t} last={i === STEPS.length - 1} />
+            ))}
+
+            <li className="blk far">
+              <blockquote className="quote">
+                Baví mě chvíle, kdy se z&nbsp;dobrého základu stane opravdu dobrý výsledek. Když text začne držet pohromadě, je přesnější, klidnější a&nbsp;působí
+                jistěji než na&nbsp;začátku.<cite>Kateřina Mlsnová</cite>
+              </blockquote>
+            </li>
+
+            <li className="blk far">
+              <p className="lab">Co říkají autoři</p>
+              <div className="obook" ref={bookRef}>
+                <div className="pg l">
+                  <p className="vq">„Mimořádná spokojenost s&nbsp;paní Kateřinou, velice lehká spolupráce, odpovídá okamžitě a&nbsp;vždy se snaží hodně pomoct.“</p>
+                  <cite>Autor odborné publikace</cite>
+                  <span className="fo">114</span>
+                </div>
+                <div className="pg r">
+                  <p className="vq">„V&nbsp;posudcích, ale i&nbsp;při obhajobě mi chválili úpravu a&nbsp;celkovou redakci práce. Umíte to!“</p>
+                  <cite>Autor dizertační práce</cite>
+                  <span className="fo">115</span>
+                </div>
+                <i className="rib" aria-hidden="true" />
               </div>
-              <div className="vstep-body">
-                <h4>{s.title}</h4>
-                <p>{s.desc}</p>
-              </div>
+            </li>
+          </ol>
+        </section>
+
+        <section className="scene" id="zaver" aria-labelledby="t-zaver">
+          <div className="copy">
+            <p className="eyebrow">Ukázka zdarma</p>
+            <h2 id="t-zaver">Pošlete mi kapitolu. Uvidíte, co s&nbsp;textem udělám.</h2>
+            <p className="lead">U&nbsp;nových klientů začínám ukázkovou redakcí několika stran zdarma. Vy uvidíte můj styl práce, já stav vašeho textu.</p>
+            <div className="actions">
+              <Link className="btn btn--fill" to="/kontakt">
+                Chci ukázkovou redakci
+              </Link>
             </div>
-          ))}
-        </div>
-      </section>
+          </div>
+        </section>
+      </main>
+    </div>
+  );
+}
 
-      <div className="container">
-        <div className="hairline" />
-      </div>
-
-      <section className="section container">
-        <div className="personal-quote">
-          <span
-            aria-hidden="true"
-            style={{
-              fontFamily: "Literata, Georgia, serif",
-              fontWeight: 700,
-              fontSize: 64,
-              lineHeight: 0.65,
-              color: "rgba(122,24,64,0.1)",
-              display: "block",
-              marginBottom: 18,
-            }}
-          >
-            „
-          </span>
-          <p
-            style={{
-              fontStyle: "italic",
-              fontSize: "clamp(16px,1.8vw,21px)",
-              lineHeight: 1.68,
-              color: "rgba(26,23,20,0.65)",
-              marginBottom: 16,
-            }}
-          >
-            Baví mě chvíle, kdy se z dobrého základu stane opravdu dobrý výsledek. Když text začne
-            držet pohromadě, je přesnější, klidnější a působí jistěji než na začátku.
-          </p>
-          <span className="quote-src">— Kateřina Mlsnová</span>
-        </div>
-      </section>
-
-      <CtaSection />
-    </main>
+/** Krok práce; šipka za ním je jen mezi kroky, za posledním ne. */
+function StepItem({ h, t, last }: { h: string; t: string; last: boolean }) {
+  return (
+    <>
+      <li className="stn stp">
+        <h2>{h}</h2>
+        <p className="t">{t}</p>
+      </li>
+      {!last && <Gap />}
+    </>
   );
 }

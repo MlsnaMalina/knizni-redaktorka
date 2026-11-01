@@ -1,0 +1,90 @@
+/* Služby ve stylu Obsah knihy (31. 10. 2026, model A): obsah s tečkovým vodítkem, kapitoly a živé záhlaví v horní liště.
+   Do kapitol přibyly listy rukopisu (Kateřina: výmluvné a rozbíjí hutnost textu). Na počítači stojí list vedle textu a střídá strany,
+   na telefonu stojí mezi nadpisem a výkladem. Poslední kapitoly jsou cena, hranice spolupráce a otázky, výzva je příloha. */
+.sluzby {
+  .scene { grid-template-columns: minmax(0, 1fr); }
+  .mdl .copy { width: min(100%, 760px); }
+  .mdl h1 { margin-top: 22px; font-size: clamp(34px, 4.8vw, 68px); line-height: 1.02; max-width: 16ch; }
+  .mdl .lead { max-width: 50ch; }
+  #top { min-height: 86svh; padding-top: calc(var(--hd) + clamp(16px, 5vh, 56px)); }
+
+  /* společné: číslo v kolečku, štítek, nadpis, výklad, seznamy */
+  .cno b, .toc b, .sl b { flex: none; display: grid; place-items: center; width: 24px; height: 24px; border: 1.5px solid var(--blue); border-radius: 50%; font: 500 12.5px/1 var(--display); letter-spacing: 0; color: var(--blue); }
+  .pl::before, .pl::after { content: ''; grid-area: 1 / 1; width: 9px; height: 1.5px; background: var(--blue); }
+  .pl::after { rotate: 90deg; }
+  .cno { display: flex; align-items: center; justify-content: center; gap: 12px; font-size: 11.5px; letter-spacing: .28em; text-transform: uppercase; color: var(--grey); }
+  .copy .ct { margin-top: 20px; font: 400 clamp(28px, 3.4vw, 46px)/1.06 var(--display); letter-spacing: -.02em; max-width: 20ch; text-wrap: balance; }
+  .big .copy .ct { font-size: clamp(34px, 4.4vw, 60px); }
+  .cdesc { margin-top: 20px; max-width: 46ch; font-size: clamp(16px, 1.25vw, 18px); color: var(--graphite); text-wrap: pretty; }
+  .cdesc.sm { margin-top: 22px; font-size: 15px; }
+  .wh { margin-top: 30px; font-size: 11.5px; letter-spacing: .24em; text-transform: uppercase; color: var(--grey); }
+  .wl { list-style: none; width: min(100%, 520px); margin-top: 10px; border-top: 1px solid var(--line); }
+  .wl li { padding: 11px 0 12px; border-bottom: 1px solid var(--line); font-size: 15.5px; line-height: 1.5; color: var(--graphite); }
+  .lk { margin-top: 28px; }
+  .sl { list-style: none; width: min(100%, 520px); margin-top: 26px; text-align: left; border-bottom: 1px solid var(--line); }
+  .sl li { display: grid; grid-template-columns: 24px 1fr; gap: 14px; padding: 13px 0 14px; border-top: 1px solid var(--line); font-size: 15.5px; line-height: 1.5; color: var(--graphite); }
+  .sl .xm { width: 24px; height: 24px; fill: none; stroke: var(--blue); stroke-width: 1.5; stroke-linecap: round; }
+  .chap { min-height: 90svh; }
+
+  /* obsah */
+  .toc { width: min(100%, 560px); margin-top: 22px; text-align: left; }
+  .toc-g { display: flex; align-items: center; gap: 14px; margin-top: 26px; font-size: 11px; letter-spacing: .32em; text-transform: uppercase; color: var(--grey); }
+  .toc-g:first-child { margin-top: 0; }
+  .toc-g::after { content: ''; flex: 1; height: 1px; background: var(--line); }
+  .toc ol { list-style: none; }
+  .toc a { display: flex; align-items: flex-end; gap: 8px; padding: 15px 0 13px; text-decoration: none; color: var(--ink); }
+  .toc b { align-self: center; transition: background .3s, color .3s; }
+  .toc .tt { min-width: 0; font-size: clamp(14px, 3.7vw, 18px); line-height: 1.3; transition: color .3s; }
+  .toc .dots { flex: 1 1 14px; min-width: 14px; margin-bottom: .34em; border-bottom: 2px dotted #bdbdbd; transition: border-color .3s; }
+  .toc .pg { flex: none; font-size: 15px; line-height: 1.3; color: var(--grey); }
+  @media (hover: hover) { .toc a:hover .tt { color: var(--mint-ink); } .toc a:hover .dots { border-color: var(--blue); } .toc a:hover b { background: var(--blue); color: #fff; } }
+
+  /* živé záhlaví: kde ve knize se čtenář právě nachází */
+  .runhead { position: fixed; z-index: 7; inset: 0 0 auto; display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; gap: 14px; height: 40px; padding-inline: var(--gut); background: #fff; border-bottom: 1px solid var(--line); font-size: 11px; letter-spacing: .18em; text-transform: uppercase; color: var(--grey); opacity: 0; visibility: hidden; transition: opacity .35s, visibility .35s; }
+  .runhead.on { opacity: 1; visibility: visible; }
+  .runhead::after { content: ''; position: absolute; left: 0; bottom: -1px; height: 2px; width: calc(var(--p, 0) * 100%); background: var(--blue); }
+  .runhead a { color: var(--mint-ink); text-decoration: none; }
+  .rt { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; text-align: center; font: 400 13.5px/1 var(--text); letter-spacing: 0; text-transform: none; color: var(--ink); }
+  @media (max-width: 520px) { .runhead a span { display: none; } }
+
+  /* listy rukopisu v kapitolách: na počítači po straně obrazovky, na telefonu mezi nadpisem a výkladem */
+  .scn .ms { --sw: var(--art-w); }
+  .scn[data-side="left"] .ms { rotate: -1.4deg; }
+  .scn[data-side="right"] .ms { rotate: 1.2deg; }
+  .scn .sheet b { font: 500 1.05em var(--display); color: var(--blue); }
+  .scn .sheet .row { display: flex; align-items: flex-end; gap: .5em; margin-top: 1.1em; text-indent: 0; text-align: left; }
+  .scn .sheet .row i { flex: 1; margin-bottom: .32em; border-bottom: 1.5px dotted #b3b3b3; }
+  .scn .ms.note-right .note { top: auto; bottom: 7%; left: 30%; width: 70%; }
+  .scn .ms.note-left .note { top: auto; bottom: 7%; left: auto; right: 30%; width: 70%; }
+  @media (min-width: 1080px) {
+    .scn .copy { position: static; }
+    .scn .art { top: 50%; translate: 0 -50%; }
+  }
+  @media (max-width: 1079px) {
+    .scene.scn[data-side] .art { position: relative; order: 0; left: auto; right: auto; justify-self: center; width: min(78vw, 300px); margin: 28px 0 2px; }
+    .scn .ms { --sw: min(78vw, 300px); }
+  }
+  /* na telefonu je list ořezaný náhled stránky a kapitoly stojí blíž k sobě, aby stránka nebyla zbytečně dlouhá */
+  @media (max-width: 720px) {
+    .scn .sheet { aspect-ratio: 1 / 1.02; }
+    #top { min-height: 0; }
+    #obsah { min-height: 0; padding-block: 40px 64px; }
+    .chap { min-height: 0; padding-block: 52px; }
+    .chap + .chap { background: linear-gradient(var(--line), var(--line)) top center / calc(100% - 2 * var(--gut)) 1px no-repeat; }
+  }
+
+  /* časté otázky: plynulé rozbalení */
+  .faq { width: min(100%, 620px); margin-top: 26px; text-align: left; border-bottom: 1px solid var(--line); }
+  .fq { border-top: 1px solid var(--line); }
+  .fq button { display: flex; align-items: center; justify-content: space-between; gap: 18px; width: 100%; padding: 16px 0; text-align: left; font-size: clamp(16px, 1.3vw, 18px); line-height: 1.35; color: var(--ink); transition: color .3s; }
+  .fq i { position: relative; flex: none; width: 14px; height: 14px; }
+  .fq i::before, .fq i::after { content: ''; position: absolute; left: 0; right: 0; top: 50%; height: 1.5px; margin-top: -.75px; background: var(--blue); transition: rotate .35s var(--ease); }
+  .fq i::after { rotate: 90deg; }
+  .fq button[aria-expanded="true"] i::after { rotate: 0deg; }
+  .fa { display: grid; grid-template-rows: 0fr; transition: grid-template-rows .4s var(--ease); }
+  .fa > div { overflow: hidden; visibility: hidden; transition: visibility .4s; }
+  .fq.open .fa { grid-template-rows: 1fr; }
+  .fq.open .fa > div { visibility: visible; }
+  .fa p { max-width: 54ch; padding: 0 0 18px; font-size: 15.5px; line-height: 1.65; color: var(--graphite); }
+  @media (hover: hover) { .fq button:hover { color: var(--mint-ink); } }
+}

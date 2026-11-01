@@ -1,0 +1,58 @@
+/* Části stránky (31. 10. 2026): každá vyplní obrazovku, hlavní text stojí uprostřed, grafika se střídá vlevo a vpravo.
+   Společné pro Úvod, Služby, O mně a Kontakt. */
+.scene { position: relative; z-index: 1; min-height: 100svh; display: grid; justify-items: center; align-content: center; padding: clamp(64px, 10vh, 128px) var(--gut); }
+.scene.hero { padding-top: calc(var(--hd) + clamp(16px, 5vh, 56px)); }
+.copy { position: relative; z-index: 2; width: min(100%, 760px); display: grid; justify-items: center; text-align: center; }
+.copy .eyebrow { justify-content: center; }
+.copy .eyebrow::after { content: ''; flex: none; width: 28px; height: 2px; background: var(--blue); }
+.copy h1 { margin-top: 26px; font-size: clamp(44px, 6.4vw, 96px); line-height: .98; max-width: 11ch; }
+.copy h2 { margin-top: 20px; font-size: clamp(34px, 4.4vw, 62px); line-height: 1.05; max-width: 17ch; }
+.copy .lead { margin-top: 24px; max-width: 42ch; font-size: clamp(16px, 1.2vw, 18px); color: var(--graphite); text-wrap: balance; }
+.copy .actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-top: 34px; }
+.copy > .textlink { margin-top: 34px; }
+
+/* čísla v hero: dva až tři údaje oddělené tenkou linkou */
+.facts { list-style: none; display: flex; justify-content: center; margin-top: 30px; }
+.facts li { display: grid; justify-items: center; align-content: start; gap: 8px; padding-inline: clamp(20px, 4vw, 48px); }
+.facts li + li { border-left: 1px solid var(--line); }
+.facts b { font: 500 clamp(38px, 4.4vw, 56px)/1 var(--display); letter-spacing: -.02em; }
+.facts b i { font: 400 .5em/1 var(--text); font-style: normal; vertical-align: .62em; margin-left: .06em; letter-spacing: 0; }
+.facts span { max-width: 14ch; font-size: 12px; line-height: 1.5; letter-spacing: .18em; text-transform: uppercase; color: var(--graphite); text-wrap: balance; }
+
+/* grafika: knihy a listy rukopisu */
+.art { position: absolute; z-index: 1; width: var(--art-w); }
+.scene[data-side="left"] .art { left: var(--side); }
+.scene[data-side="right"] .art { right: var(--side); }
+.still { position: relative; width: 100%; }
+.still .b3 { --b3-font: var(--display); }
+.still .b3::after { content: ''; position: absolute; left: -8%; right: -16%; bottom: -8px; height: 16px; background: radial-gradient(closest-side, rgba(0, 0, 0, .32), transparent); pointer-events: none; }
+@media (hover: hover) { .still .mute:hover { filter: none; } }
+
+/* list rukopisu se sledováním změn a komentářem redaktorky (ozdoba) */
+.ms { position: relative; width: var(--sw, 200px); }
+.sheet { position: relative; aspect-ratio: 1 / 1.414; overflow: hidden; padding: 13% 11% 0; background: #fff; color: #3a3a3a; text-align: justify; hyphens: auto;
+  font: 400 calc(var(--sw, 200px) * .041)/1.62 var(--text); box-shadow: 0 0 0 1px rgba(0, 0, 0, .05), 0 2px 3px rgba(0, 0, 0, .1), 0 16px 30px -12px rgba(0, 0, 0, .38); }
+.sheet::after { content: ''; position: absolute; inset: 0; pointer-events: none; background: linear-gradient(100deg, rgba(0, 0, 0, .05), rgba(0, 0, 0, 0) 16%, rgba(0, 0, 0, 0) 80%, rgba(0, 0, 0, .05)), linear-gradient(180deg, rgba(0, 0, 0, 0) 70%, rgba(0, 0, 0, .045)); }
+.sheet .run { margin-bottom: 1.3em; font: 400 1.3em/1.2 var(--display); text-align: center; color: var(--ink); }
+.sheet p + p { margin-top: .45em; text-indent: 1.4em; }
+.sheet del { color: #8d8d8d; text-decoration: line-through; text-decoration-color: var(--blue); }
+.sheet ins { color: var(--blue); text-decoration: underline; text-underline-offset: 1.5px; }
+.note { position: absolute; z-index: 2; top: 21%; width: 66%; padding: .7em .8em; background: #fff; border-left: 2px solid var(--blue); text-align: left; color: var(--graphite);
+  font: 400 calc(var(--sw, 200px) * .047)/1.45 var(--text); box-shadow: 0 1px 2px rgba(0, 0, 0, .14), 0 12px 22px -12px rgba(0, 0, 0, .4); }
+.note b { display: block; margin-bottom: .3em; font-size: .8em; font-weight: 400; letter-spacing: .16em; text-transform: uppercase; color: var(--blue); }
+.ms.note-right .note { left: 72%; }
+.ms.note-left .note { right: 72%; }
+
+@media (min-width: 1080px) {
+  .copy { width: min(100%, 760px, calc(100vw - 2 * (var(--art-w) + var(--side) + 28px))); }
+  /* na širokých obrazovkách stojí čísla vpravo ve volném místě, jako protiváha grafiky vlevo */
+  .scene.hero .copy { position: static; }
+  .scene.hero .facts { position: absolute; z-index: 2; right: var(--side); top: 50%; translate: 0 -50%; flex-direction: column; align-items: center; width: var(--art-w); margin-top: 0; }
+  .scene.hero .facts li { padding: 26px 0; }
+  .scene.hero .facts li + li { border-left: 0; border-top: 1px solid var(--line); }
+}
+@media (max-width: 1079px) {
+  .art { position: relative; order: 2; width: min(66vw, 280px); margin-top: 52px; }
+  .scene[data-side="left"] .art { left: auto; justify-self: start; margin-left: calc(-1 * var(--gut) - 8px); }
+  .scene[data-side="right"] .art { right: auto; justify-self: end; margin-right: calc(-1 * var(--gut) - 8px); }
+}

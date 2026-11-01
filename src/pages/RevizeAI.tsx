@@ -1,111 +1,108 @@
-import { Link } from "react-router-dom";
-import { usePageMeta, Tag, WaveDivider } from "../ui";
+import { Link } from 'react-router-dom';
+import { nb } from '../lib/format';
+import { usePageMeta } from '../lib/hooks';
+import { SiteHeader } from '../components/SiteHeader';
+import './revize.css';
 
-const PROBLEMS = [
-  {
-    num: "01",
-    title: "Přesnost",
-    desc: "AI si vymýšlí zdroje, citace i paragrafy. V odborném textu je to diskvalifikace; každý odkaz proto prověřuji.",
-  },
-  {
-    num: "02",
-    title: "Jednotnost",
-    desc: "Terminologie a styl se mění odstavec od odstavce. Sjednotím pojmy, tón i strukturu.",
-  },
-  {
-    num: "03",
-    title: "Lidský hlas",
-    desc: "Strojový rytmus, prázdné fráze a „AI vata“. Text zkrátím a vrátím mu přirozenost.",
-  },
-  {
-    num: "04",
-    title: "Odpovědnost",
-    desc: "AI za text neručí. Po redakci víte, co v textu je, proč to tam je a že to obstojí.",
-  },
+/* Podstránka Revize AI textů (SEO landing, texty z 04_wireframe-copy_v2.md, oddíl 5). V hlavní navigaci není,
+   vede na ni kapitola 3 ve Službách. Nemá vlastní koncept: skládá se ze stejných prvků jako ostatní stránky. */
+
+const PROBLEMS: { title: string; desc: string }[] = [
+  { title: 'Přesnost', desc: 'AI si vymýšlí zdroje, citace i paragrafy. V odborném textu je to diskvalifikace; každý odkaz proto prověřuji.' },
+  { title: 'Jednotnost', desc: 'Terminologie a styl se mění odstavec od odstavce. Sjednotím pojmy, tón i strukturu.' },
+  { title: 'Lidský hlas', desc: 'Strojový rytmus, prázdné fráze a „AI vata“. Text zkrátím a vrátím mu přirozenost.' },
+  { title: 'Odpovědnost', desc: 'AI za text neručí. Po redakci víte, co v textu je, proč to tam je a že to obstojí.' },
 ];
 
 const STEPS = [
-  "Pošlete draft a řeknete, kde má text fungovat.",
-  "Zreviduji ho v režimu sledování změn, sporná místa označím a fakta k ověření vyznačím.",
-  "Dostanete text připravený k publikaci, s přehledem všech zásahů.",
+  'Pošlete draft a řeknete, kde má text fungovat.',
+  'Zreviduji ho v režimu sledování změn, sporná místa označím a fakta k ověření vyznačím.',
+  'Dostanete text připravený k publikaci, s přehledem všech zásahů.',
 ];
 
 export default function RevizeAI() {
   usePageMeta(
-    "Revize AI textů — redakce textů vytvořených s pomocí AI | Kateřina Mlsnová",
-    "AI napíše draft — já z něj udělám text, za který se podepíšete. Kontrola faktů a citací, sjednocení terminologie, lidský tón. Ukázková revize zdarma."
+    'Revize AI textů — redakce textů vytvořených s pomocí AI | Kateřina Mlsnová',
+    'AI napíše draft — já z něj udělám text, za který se podepíšete. Kontrola faktů a citací, sjednocení terminologie, lidský tón. Ukázková revize zdarma.'
   );
 
   return (
-    <main className="page">
-      <section className="section-sm container" style={{ paddingTop: "clamp(56px,7vw,96px)" }}>
-        <Tag>— Revize AI textů</Tag>
-        <h1 className="h1">
-          AI napíše draft. Já z něj udělám text,{" "}
-          <span className="mark">za který se podepíšete</span>.
-        </h1>
-        <p className="perex" style={{ marginTop: 24 }}>
-          Redigovala jsem odborné knihy o umělé inteligenci — a dnes pomáhám s texty, které s její
-          pomocí vznikají. AI výstup umí být skvělý základ. Bez lidské redakce ale zůstává jen
-          základem.
-        </p>
-      </section>
+    <div className="revize">
+      <SiteHeader over />
+      <main>
+        <section className="scene hero" aria-labelledby="t-h">
+          <div className="copy">
+            <p className="eyebrow">Revize AI textů</p>
+            <h1 id="t-h">AI napíše draft. Já z&nbsp;něj udělám text, za který se podepíšete.</h1>
+            <p className="lead">
+              Redigovala jsem odborné knihy o&nbsp;umělé inteligenci — a&nbsp;dnes pomáhám s&nbsp;texty, které s&nbsp;její pomocí vznikají. AI výstup umí být
+              skvělý základ. Bez lidské redakce ale zůstává jen základem.
+            </p>
+          </div>
+        </section>
 
-      <div className="container">
-        <div className="hairline" />
-      </div>
+        <section className="scene" aria-labelledby="t-chybi">
+          <div className="copy">
+            <p className="eyebrow" id="t-chybi">
+              Co AI textům typicky chybí
+            </p>
+            <ol className="rv">
+              {PROBLEMS.map((p, i) => (
+                <li key={p.title}>
+                  <b>{i + 1}</b>
+                  <div>
+                    <h3>{p.title}</h3>
+                    <p>{nb(p.desc)}</p>
+                  </div>
+                </li>
+              ))}
+            </ol>
+          </div>
+        </section>
 
-      <section className="section container">
-        <Tag>— Co AI textům typicky chybí</Tag>
-        <div style={{ marginTop: 16 }}>
-          {PROBLEMS.map((p) => (
-            <div key={p.num} className="sit-row">
-              <span className="sit-num">{p.num}</span>
-              <span className="sit-text">
-                <strong style={{ color: "#1A1714", fontWeight: 600 }}>{p.title}</strong> —{" "}
-                {p.desc}
-              </span>
-              <span className="sit-arrow">→</span>
+        <section className="scene" aria-labelledby="t-jak">
+          <div className="copy">
+            <p className="eyebrow" id="t-jak">
+              Jak revize probíhá
+            </p>
+            <ol className="rv steps">
+              {STEPS.map((s, i) => (
+                <li key={s}>
+                  <b>{i + 1}</b>
+                  <div>
+                    <p>{nb(s)}</p>
+                  </div>
+                </li>
+              ))}
+            </ol>
+          </div>
+        </section>
+
+        <section className="scene" aria-labelledby="t-koho">
+          <div className="copy">
+            <p className="eyebrow" id="t-koho">
+              Pro koho
+            </p>
+            <p className="lead">
+              Pro právníky, konzultanty, marketéry a&nbsp;firmy, které AI používají na první verze článků, newsletterů, dokumentací nebo e-booků — a&nbsp;potřebují,
+              aby finální výstup byl přesný a&nbsp;důvěryhodný.
+            </p>
+          </div>
+        </section>
+
+        <section className="scene" id="zaver" aria-labelledby="t-zaver">
+          <div className="copy">
+            <p className="eyebrow">Ukázka zdarma</p>
+            <h2 id="t-zaver">Máte AI draft? Pošlete mi ho.</h2>
+            <p className="lead">Ukázková revize několika stran zdarma — uvidíte rozdíl dřív, než se rozhodnete.</p>
+            <div className="actions">
+              <Link className="btn btn--fill" to="/kontakt">
+                Chci ukázkovou revizi
+              </Link>
             </div>
-          ))}
-        </div>
-      </section>
-
-      <WaveDivider />
-
-      <section className="section container">
-        <Tag>— Jak revize probíhá</Tag>
-        <div className="price-steps">
-          {STEPS.map((s, i) => (
-            <div key={s} className="price-step tile">
-              <div className="price-step-num">{String(i + 1).padStart(2, "0")}</div>
-              <p>{s}</p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      <div className="container">
-        <div className="hairline" />
-      </div>
-
-      <section className="section container">
-        <Tag>— Pro koho</Tag>
-        <p className="perex" style={{ maxWidth: 680 }}>
-          Pro právníky, konzultanty, marketéry a firmy, které AI používají na první verze článků,
-          newsletterů, dokumentací nebo e-booků — a potřebují, aby finální výstup byl přesný a
-          důvěryhodný.
-        </p>
-      </section>
-
-      <section className="cta">
-        <div className="cta-label">UKÁZKA ZDARMA</div>
-        <h2>Máte AI draft? Pošlete mi ho.</h2>
-        <p>Ukázková revize několika stran zdarma — uvidíte rozdíl dřív, než se rozhodnete.</p>
-        <Link to="/kontakt" className="btn-primary">
-          Chci ukázkovou revizi →
-        </Link>
-      </section>
-    </main>
+          </div>
+        </section>
+      </main>
+    </div>
   );
 }

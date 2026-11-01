@@ -1,0 +1,112 @@
+/* Úvod (3. kolo, 31. 10. 2026): čistě bílá stránka. Vzor jen tam, kde má být kontrast pro pozornost:
+   ohnisko kolem vybrané knihy v knihkupectví a prošívání za výzvou na konci.
+   Sekce Jak vypadá moje práce (Přes rameno, 1. 11. 2026) leží mezi službami a výzvou. */
+.uvod {
+  .net { position: absolute; z-index: 0; left: 0; top: 0; width: 100%; pointer-events: none; overflow: hidden; }
+  .net .ln { fill: none; stroke: var(--ink); stroke-width: 1; }
+
+  /* předměty leží na ploše; světlo shora zleva, stín doprava dolů */
+  .lay { position: relative; height: var(--lh); }
+  .still.lay > * { position: absolute; }
+  .lay .b3::after { display: none; }
+  .lay .b3.flat .b3-floor { inset: 0; transform: translate3d(10px, 16px, calc(var(--t) / -2 - 2px)); background: rgba(0, 0, 0, .3); filter: blur(11px); }
+  @media (min-width: 1080px) { .art { top: 50%; translate: 0 -50%; } }
+
+  /* ohnisko: 12 míst na ciferníku = 12 nejnovějších knih; modrá značka ukazuje knihu uprostřed */
+  .net .ring { stroke-opacity: var(--a); }
+  .net .tick { stroke-opacity: .2; }
+  .net .tick.h { stroke-opacity: .42; }
+  .net .mark { stroke: var(--blue); stroke-width: 2; stroke-opacity: .9; stroke-linecap: round; }
+  .net .focus { opacity: 0; transform: scale(.95); transform-origin: var(--o); transition: opacity 1.6s var(--ease), transform 2.2s var(--ease); }
+  .net g.on .focus { opacity: 1; transform: none; }
+  /* výběr knihy: značka po směru hodin, ciferník proti směru */
+  .net .dial, .net .hand { transform-origin: var(--o); transition: transform 2.6s cubic-bezier(.37, 0, .63, 1); }
+
+  /* prošívání jen za výzvou na konci; pod textem ustoupí */
+  #zaver .copy > * { background: var(--paper); box-shadow: 0 0 24px 18px var(--paper); }
+  .net .quilt { opacity: 0; transition: opacity 1.8s var(--ease); }
+  .net g.on .quilt { opacity: 1; }
+  .net .stitch { fill: none; stroke: var(--ink); stroke-opacity: .17; stroke-width: .8; stroke-dasharray: 3.5 3; }
+  @media (prefers-reduced-motion: reduce) { .net .focus, .net .quilt { opacity: 1; transform: none; } .net .dial, .net .hand { transition: none; } }
+
+  /* služby: čtyři položky, mezi nimi jemný kříž */
+  .services { position: relative; list-style: none; display: grid; grid-template-columns: 1fr 1fr; grid-auto-rows: 1fr; width: min(100%, 680px); margin-top: clamp(28px, 5vh, 52px); }
+  .services::before, .services::after { content: ''; position: absolute; pointer-events: none; }
+  .services::before { left: 50%; top: 0; bottom: 0; width: 1px; background: linear-gradient(transparent, var(--line) 20%, var(--line) 80%, transparent); }
+  .services::after { top: 50%; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, var(--line) 20%, var(--line) 80%, transparent); }
+  .services li { display: grid; gap: 8px; align-content: center; justify-items: center; padding: 26px clamp(14px, 2.4vw, 30px); }
+  .services h3 { font: 400 clamp(20px, 1.8vw, 25px)/1.15 var(--display); letter-spacing: -.01em; text-wrap: balance; }
+  .services p { max-width: 30ch; font-size: 15px; line-height: 1.6; color: var(--graphite); text-wrap: balance; }
+
+  /* knihkupectví: 12 nejnovějších knih, vybraná stojí uprostřed */
+  .shop-scene .copy .lead { max-width: 46ch; }
+  .shop { position: relative; z-index: 2; width: min(100%, 1240px); margin-top: clamp(28px, 5vh, 56px); display: grid; grid-template-columns: minmax(0, 1fr) minmax(260px, 330px) minmax(0, 1fr); align-items: end; }
+  .side { grid-row: 1; display: flex; align-items: flex-end; gap: 4px; min-height: 230px; padding: 0 12px; border-bottom: 8px solid var(--ink); box-shadow: 0 16px 16px -18px rgba(0, 0, 0, .7); }
+  .side.left { grid-column: 1; justify-content: flex-end; }
+  .side.right { grid-column: 3; justify-content: flex-start; }
+  .shop-book { grid-column: 2; grid-row: 1; min-height: 330px; padding-bottom: 6px; border-bottom: 8px solid var(--ink); }
+  .shop-info { grid-column: 2; grid-row: 2; margin-top: 22px; }
+  .spine { position: relative; flex: none; width: var(--w); height: var(--h); border-radius: 2px 2px 0 0; overflow: hidden;
+    background: linear-gradient(90deg, rgba(0, 0, 0, .38), rgba(255, 255, 255, .1) 46%, rgba(0, 0, 0, .3)), var(--c); box-shadow: 2px 0 4px -2px rgba(0, 0, 0, .45); }
+  .spine.komentar { --c: #4a1830; } .spine.monografie { --c: #1b2945; } .spine.ostatni { --c: #2e5e57; }
+  .spine, .face > span { filter: grayscale(1) contrast(.94) brightness(1.05); transition: filter .6s var(--ease), transform .45s var(--ease), opacity .45s; }
+  .spine::before { content: ''; position: absolute; left: 0; right: 0; top: 12px; height: 3px; border-block: 1px solid rgba(255, 255, 255, .35); }
+  .spine span { position: absolute; top: 24px; bottom: 14px; left: 50%; translate: -50% 0; writing-mode: vertical-rl; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font: 400 9.5px/1 var(--text); letter-spacing: .04em; color: rgba(255, 255, 255, .85); }
+  .face { position: relative; flex: none; width: 92px; aspect-ratio: 7 / 10; box-shadow: 0 2px 3px rgba(0, 0, 0, .18), 6px 10px 18px -8px rgba(0, 0, 0, .4); transition: transform .45s var(--ease), opacity .45s; }
+  .face > span { position: absolute; inset: 0; overflow: hidden; display: block; }
+  .face:nth-child(odd) { rotate: -1.2deg; }
+  @media (hover: hover) { .spine:hover, .face:hover > span { filter: none; } .spine:hover, .face:hover { transform: translateY(-8px); } }
+  .out { opacity: .12; }
+  .more { position: relative; z-index: 2; margin-top: 44px; }
+
+  /* Jak vypadá moje práce: list rukopisu stojí na místě a podle posunu stránky přechází Rukopis, Sledování změn, Čistopis */
+  .pr { position: relative; z-index: 1; }
+  .pr .copy { width: min(100%, 760px); }
+  .pr-pin { position: relative; height: 280svh; }
+  .pr-stick { position: sticky; top: 0; height: 100svh; display: grid; justify-items: center; align-content: center; padding: 76px var(--gut) 64px; }
+  .pr-stick h2 { font-size: clamp(26px, 4.6svh, 56px); max-width: 20ch; }
+  .pr-stick .paper { font-size: clamp(13px, 1.9svh, 18px); }
+  /* list ve všech stavech leží nad neviditelnou kopií nejdelšího stavu: nadpis ani nic pod listem se nehýbe */
+  .pr-stage { display: grid; justify-items: center; align-items: start; align-content: start; width: 100%; margin-top: 24px; }
+  .pr-live { grid-area: 1 / 1; display: grid; justify-items: center; align-content: start; gap: 14px; width: 100%; }
+  .pr-ghost { visibility: hidden; pointer-events: none; }
+  .pr-legend { max-width: min(100%, 520px); font-size: 12.5px; line-height: 1.6; letter-spacing: .06em; color: var(--grey); text-wrap: balance; opacity: 0; transition: opacity .7s; }
+  .pr-legend.on { opacity: 1; }
+  .pr-steps { display: flex; flex-wrap: wrap; justify-content: center; gap: 4px clamp(14px, 3vw, 28px); list-style: none; margin-top: 18px; font-size: 11.5px; letter-spacing: .14em; text-transform: uppercase; color: var(--grey); }
+  .pr-steps li { padding-bottom: 4px; border-bottom: 2px solid transparent; transition: color .4s, border-color .4s; }
+  .pr-steps li.on { color: var(--ink); border-color: var(--blue); }
+  .pr-hint { margin-top: 12px; font-size: 11.5px; letter-spacing: .16em; text-transform: uppercase; color: var(--grey); }
+  @media (max-height: 860px) { .pr-stick .paper p + p { display: none; } }
+  @media (max-height: 700px) { .pr-stick .eyebrow, .pr-hint { display: none; } }
+
+  .pr-two { display: grid; justify-items: center; padding: clamp(64px, 10vh, 128px) var(--gut); }
+  .pr-two .ex2 { margin-top: 0; }
+  .pr-two .cmt { max-width: 520px; }
+  .pr-after { margin-top: clamp(30px, 5vh, 52px); max-width: 52ch; font-size: clamp(15px, 1.15vw, 17px); color: var(--graphite); text-wrap: balance; }
+
+  /* tablet na výšku (721 až 990 px): police se vedle stojanu nevejdou, stojí pod ním (rozměry zůstávají jako na počítači) */
+  @media (min-width: 721px) and (max-width: 990px) {
+    .shop { grid-template-columns: minmax(0, 1fr); }
+    .shop-book { grid-column: 1; grid-row: 1; }
+    .shop-info { grid-column: 1; grid-row: 2; }
+    .side.left, .side.right { grid-column: 1; justify-content: center; }
+    .side.left { grid-row: 3; margin-top: 40px; }
+    .side.right { grid-row: 4; margin-top: 22px; }
+  }
+  @media (max-width: 720px) {
+    .shop { grid-template-columns: minmax(0, 1fr); }
+    .shop-book { grid-column: 1; grid-row: 1; min-height: 250px; }
+    .shop-info { grid-column: 1; grid-row: 2; }
+    .side.left, .side.right { grid-column: 1; justify-content: center; min-height: 160px; padding: 0 6px; gap: 3px; }
+    .side.left { grid-row: 3; margin-top: 40px; }
+    .side.right { grid-row: 4; margin-top: 22px; }
+    .face { width: 56px; }
+    .spine span { font-size: 8.5px; }
+  }
+  @media (max-width: 640px) {
+    .services { grid-template-columns: 1fr; grid-auto-rows: auto; }
+    .services::before, .services::after { display: none; }
+    .services li { padding: 20px 4px; }
+    .services li + li { border-top: 1px solid var(--line); }
+  }
+}

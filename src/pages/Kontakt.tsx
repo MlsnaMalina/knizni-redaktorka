@@ -1,197 +1,348 @@
-import { useState, type FormEvent } from "react";
-import { usePageMeta, Tag } from "../ui";
+import { useEffect, useRef, useState, type ChangeEvent, type KeyboardEvent } from 'react';
+import { ICO, LINKEDIN, MAIL } from '../data/site';
+import { cx, nb } from '../lib/format';
+import { reducedMotion, usePageMeta } from '../lib/hooks';
+import { SiteHeader } from '../components/SiteHeader';
+import './kontakt.css';
 
 /* Formulář odesílá přes FormSubmit (AJAX endpoint). Po zřízení domény
    přepnout adresu na katerina@knizniredaktorka.cz a aktivovat potvrzovacím
    e-mailem (FormSubmit pošle aktivační zprávu při prvním odeslání). */
-const FORM_ENDPOINT = "https://formsubmit.co/ajax/k.mlsnova@seznam.cz";
+const FORM_ENDPOINT = 'https://formsubmit.co/ajax/k.mlsnova@seznam.cz';
 
-const INTENTS = [
-  "Ukázkovou redakci zdarma",
-  "Nacenit text",
-  "Redakční konzultaci",
-  "Jen se zeptat",
+const GDPR = 'Odesláním souhlasíte se zpracováním údajů pro účely odpovědi na poptávku. S textem i údaji nakládám důvěrně.';
+const CLOSING =
+  'Pokud si nejste jistí, jestli je váš text pro tento typ spolupráce vhodný, klidně se ozvěte i tak. Společně ujasníme, co dává smysl řešit a co už ne.';
+const SEND_ERROR = 'Zprávu se nepodařilo odeslat. Zkuste to prosím znovu, nebo mi napište přímo na e-mail.';
+// ukázková redakce zdarma je až poslední možnost (přání Kateřiny)
+const INTENTS = ['Nacenit text', 'Redakční konzultaci', 'Jen se zeptat', 'Ukázkovou redakci zdarma'];
+
+type Kind = 'choice' | 'text' | 'area' | 'who' | 'sum';
+
+interface Step {
+  kind: Kind;
+  q: string;
+  hint?: string;
+  msg?: string;
+}
+
+/** Průvodce: jedna otázka na obrazovku, průběh v pěti kolečkách, na konci shrnutí. */
+const STEPS: Step[] = [
+  { kind: 'choice', q: 'Co potřebujete?', msg: 'Vyberte prosím, co potřebujete.' },
+  { kind: 'text', q: 'O jaký text jde?', hint: 'např. komentář, monografie, článek, AI draft, dizertace…', msg: 'Doplňte prosím, o jaký text jde.' },
+  { kind: 'area', q: 'Co od spolupráce očekáváte?', hint: 'V jaké je text fázi? Kdy přibližně potřebujete výstup?', msg: 'Napište prosím, co od spolupráce čekáte.' },
+  { kind: 'who', q: 'Jak vás mám oslovit a kam odpovědět?' },
+  { kind: 'sum', q: 'Zkontrolujte a odešlete' },
 ];
 
-type FormState = "idle" | "sending" | "done" | "error";
+interface Answers {
+  intent: string;
+  text: string;
+  msg: string;
+  name: string;
+  mail: string;
+}
+
+const EMPTY: Answers = { intent: '', text: '', msg: '', name: '', mail: '' };
+
+type Status = 'idle' | 'sending' | 'done';
 
 export default function Kontakt() {
   usePageMeta(
-    "Kontakt — pošlete mi svůj text | Kateřina Mlsnová",
-    "Napište mi, o jaký text jde a co od spolupráce čekáte. Odpovídám do 2 pracovních dnů. Posouzení textu i ukázková redakce zdarma."
+    'Kontakt — pošlete mi svůj text | Kateřina Mlsnová',
+    'Napište mi, o jaký text jde a co od spolupráce čekáte. Odpovídám do 2 pracovních dnů. Posouzení textu i ukázková redakce zdarma.'
   );
 
-  const [state, setState] = useState<FormState>("idle");
-  const [intent, setIntent] = useState(INTENTS[0]);
+  const [at, setAt] = useState(0);
+  const [out, setOut] = useState(false);
+  const [ans, setAns] = useState<Answers>(EMPTY);
+  const [err, setErr] = useState('');
+  const [status, setStatus] = useState<Status>('idle');
+  const [copied, setCopied] = useState(false);
 
-  async function handleSubmit(e: FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    const form = e.currentTarget;
-    const data = new FormData(form);
-    if ((data.get("_honey") as string)?.length) return; // spam past
-    setState("sending");
-    try {
-      const res = await fetch(FORM_ENDPOINT, {
-        method: "POST",
-        headers: { Accept: "application/json" },
-        body: data,
-      });
-      if (!res.ok) throw new Error(`HTTP ${res.status}`);
-      setState("done");
-    } catch {
-      setState("error");
+  // poslední hodnoty pro zpožděné obsluhy (klepnutí na volbu rovnou pokračuje)
+  const ansRef = useRef(ans);
+  const atRef = useRef(at);
+  const pointer = useRef(false);
+  const focusNext = useRef(false);
+  const stageRef = useRef<HTMLDivElement>(null);
+  const honeyRef = useRef<HTMLInputElement>(null);
+  const mailRef = useRef<HTMLAnchorElement>(null);
+
+  const setAnswer = (key: keyof Answers, value: string) => {
+    ansRef.current = { ...ansRef.current, [key]: value };
+    setAns(ansRef.current);
+  };
+
+  // po přepnutí otázky se fokus přesune na první pole
+  useEffect(() => {
+    if (!focusNext.current) return;
+    focusNext.current = false;
+    stageRef.current?.querySelector<HTMLElement>('input.wi, textarea.wi')?.focus();
+  }, [at]);
+
+  const show = (to: number, focus = true) => {
+    const draw = () => {
+      atRef.current = to;
+      focusNext.current = focus;
+      setAt(to);
+      setErr('');
+      setOut(false);
+    };
+    if (reducedMotion()) {
+      draw();
+      return;
     }
-  }
+    setOut(true);
+    window.setTimeout(draw, 220);
+  };
+
+  const fail = (msg: string, selector: string) => {
+    setErr(msg);
+    stageRef.current?.querySelector<HTMLElement>(selector)?.focus();
+  };
+
+  const send = async () => {
+    if (honeyRef.current?.value) return; // past na spam
+    const a = ansRef.current;
+    setStatus('sending');
+    setErr('');
+    const data = new FormData();
+    data.set('Co potřebujete', a.intent);
+    data.set('Jméno', a.name);
+    data.set('E-mail', a.mail);
+    data.set('O jaký text jde', a.text);
+    data.set('Zpráva', a.msg);
+    data.set('_subject', 'Nová poptávka z knizniredaktorka.cz');
+    data.set('_template', 'table');
+    try {
+      const res = await fetch(FORM_ENDPOINT, { method: 'POST', headers: { Accept: 'application/json' }, body: data });
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      setStatus('done');
+    } catch {
+      setStatus('idle');
+      setErr(SEND_ERROR);
+    }
+  };
+
+  const next = () => {
+    if (status !== 'idle') return;
+    const step = STEPS[atRef.current];
+    const a = ansRef.current;
+    if (step.kind === 'choice' && !a.intent) return fail(step.msg ?? '', 'input[name="intent"]');
+    if (step.kind === 'text' && !a.text.trim()) return fail(step.msg ?? '', '#w-text');
+    if (step.kind === 'area' && !a.msg.trim()) return fail(step.msg ?? '', '#w-msg');
+    if (step.kind === 'who') {
+      if (!a.name.trim()) return fail('Doplňte prosím jméno.', '#w-name');
+      if (!/^\S+@\S+\.\S+$/.test(a.mail.trim())) return fail('Zadejte prosím platný e-mail.', '#w-mail');
+    }
+    if (step.kind === 'sum') return void send();
+    return show(atRef.current + 1);
+  };
+
+  const onIntent = (e: ChangeEvent<HTMLInputElement>) => {
+    setAnswer('intent', e.target.value);
+    setErr('');
+    if (pointer.current) {
+      pointer.current = false;
+      window.setTimeout(next, 260); // klepnutí rovnou pokračuje, šipky na klávesnici ne
+    }
+  };
+
+  const onEnter = (e: KeyboardEvent<HTMLElement>) => {
+    if (e.key === 'Enter' && e.target instanceof HTMLInputElement && e.target.classList.contains('wi')) {
+      e.preventDefault();
+      next();
+    }
+  };
+
+  const copyMail = () => {
+    const fallback = () => {
+      const el = mailRef.current;
+      if (!el) return;
+      const r = document.createRange();
+      r.selectNodeContents(el);
+      window.getSelection()?.removeAllRanges();
+      window.getSelection()?.addRange(r);
+    };
+    const ok = () => {
+      setCopied(true);
+      window.setTimeout(() => setCopied(false), 2000);
+    };
+    (navigator.clipboard ? navigator.clipboard.writeText(MAIL) : Promise.reject(new Error('bez schránky'))).then(ok, fallback);
+  };
+
+  const step = STEPS[at];
+  const done = status === 'done';
 
   return (
-    <main className="page">
-      <section className="section-sm container" style={{ paddingTop: "clamp(56px,7vw,96px)" }}>
-        <Tag>— Kontakt</Tag>
-        <h1 className="h1">
-          Pošlete mi <span className="mark">svůj text</span>. Nebo jen otázku.
-        </h1>
-        <p className="perex" style={{ marginTop: 24 }}>
-          Napište mi, o jaký text jde a co od spolupráce čekáte. Odpovídám do 2 pracovních dnů a
-          první krok — posouzení nebo ukázková redakce — je vždy zdarma.
-        </p>
-      </section>
-
-      <div className="container">
-        <div className="hairline" />
-      </div>
-
-      <section className="section container" style={{ paddingTop: "clamp(48px,6vw,80px)" }}>
-        <div className="contact-grid">
-          <div className="contact-form">
-            {state === "done" ? (
-              <div className="form-success">
-                <span className="check">✓</span>
-                <h3 style={{ marginBottom: 10 }}>Zpráva odeslána.</h3>
-                <p style={{ color: "rgba(26,23,20,0.55)", fontSize: 14.5 }}>
-                  Děkuji. Ozvu se vám do 2 pracovních dnů.
-                </p>
-              </div>
-            ) : (
-              <form onSubmit={handleSubmit}>
-                <span className="form-label" style={{ marginBottom: 14 }}>
-                  CO POTŘEBUJETE?
-                </span>
-                <div className="intent-group" role="radiogroup" aria-label="Co potřebujete?">
-                  {INTENTS.map((opt) => (
-                    <label key={opt} className="intent-option">
-                      <input
-                        type="radio"
-                        name="Co potřebujete"
-                        value={opt}
-                        checked={intent === opt}
-                        onChange={() => setIntent(opt)}
-                      />
-                      <span>{opt}</span>
-                    </label>
-                  ))}
-                </div>
-
-                <input type="text" name="_honey" style={{ display: "none" }} tabIndex={-1} autoComplete="off" />
-                <input type="hidden" name="_subject" value="Nová poptávka z knizniredaktorka.cz" />
-                <input type="hidden" name="_template" value="table" />
-
-                <div className="field" style={{ marginTop: 24 }}>
-                  <label className="form-label" htmlFor="f-name">
-                    JMÉNO
-                  </label>
-                  <input id="f-name" name="Jméno" type="text" required autoComplete="name" />
-                </div>
-                <div className="field">
-                  <label className="form-label" htmlFor="f-email">
-                    E-MAIL
-                  </label>
-                  <input id="f-email" name="E-mail" type="email" required autoComplete="email" />
-                </div>
-                <div className="field">
-                  <label className="form-label" htmlFor="f-text">
-                    O JAKÝ TEXT JDE
-                  </label>
-                  <input id="f-text" name="O jaký text jde" type="text" required />
-                  <div className="field-hint">
-                    např. komentář, monografie, článek, AI draft, dizertace…
-                  </div>
-                </div>
-                <div className="field">
-                  <label className="form-label" htmlFor="f-msg">
-                    CO OD SPOLUPRÁCE OČEKÁVÁTE
-                  </label>
-                  <textarea id="f-msg" name="Zpráva" required />
-                  <div className="field-hint">
-                    V jaké je text fázi? Kdy přibližně potřebujete výstup?
-                  </div>
-                </div>
-
-                <p className="gdpr-note">
-                  Odesláním souhlasíte se zpracováním údajů pro účely odpovědi na poptávku.
-                  S textem i údaji nakládám důvěrně.
-                </p>
-
-                <button
-                  type="submit"
-                  className="btn-primary"
-                  disabled={state === "sending"}
-                  style={{ width: "100%" }}
-                >
-                  {state === "sending" ? "Odesílám…" : "Odeslat zprávu →"}
-                </button>
-                {state === "error" && (
-                  <p style={{ marginTop: 14, fontSize: 13.5, color: "#7A1840" }}>
-                    Zprávu se nepodařilo odeslat. Zkuste to prosím znovu, nebo mi napište přímo na
-                    e-mail.
-                  </p>
-                )}
-              </form>
-            )}
+    <div className="kontakt">
+      <SiteHeader over />
+      <main>
+        <section className="scene mdl" id="top" aria-labelledby="t-h">
+          <div className="copy">
+            <p className="eyebrow">Kontakt</p>
+            <h1 id="t-h">Pošlete mi svůj text. Nebo jen otázku.</h1>
+            <p className="lead">
+              Napište mi, o&nbsp;jaký text jde a&nbsp;co od spolupráce čekáte. Odpovídám do 2&nbsp;pracovních dnů a&nbsp;první krok — posouzení nebo
+              ukázková redakce — je vždy zdarma.
+            </p>
           </div>
+        </section>
 
-          <aside className="contact-side">
-            <div className="side-card tile">
-              <div className="side-card-title">Co mi napsat</div>
-              <ul>
-                <li>o jaký text jde,</li>
-                <li>v jaké je fázi,</li>
-                <li>co od spolupráce očekáváte,</li>
-                <li>kdy přibližně potřebujete výstup.</li>
-              </ul>
-            </div>
-            <div className="side-card tile">
-              <div className="side-card-title">Jak to probíhá</div>
-              <p>
-                Do 2 pracovních dnů se ozvu. Domluvíme si posouzení textu nebo rovnou ukázkovou
-                redakci 3–5 stran zdarma — uvidíte, jak pracuji, dřív než se rozhodnete.
+        <section className="scene mdl" id="pruvodce" aria-label="Napište mi">
+          <div className="copy">
+            <form className="wiz" noValidate onSubmit={(e) => e.preventDefault()}>
+              <ol className="prog" aria-hidden="true">
+                {STEPS.map((s, i) => (
+                  <li key={s.q} className={cx(done || i < at ? 'done' : i === at && 'cur')}>
+                    {i + 1}
+                  </li>
+                ))}
+              </ol>
+              <div className={cx('stage', out && 'out')} ref={stageRef} aria-live="polite" onKeyDown={onEnter}>
+                {done ? (
+                  <div className="wst">
+                    <svg className="ok" viewBox="0 0 64 64" aria-hidden="true">
+                      <circle cx="32" cy="32" r="29" />
+                      <path d="M19 33l9 9 17-20" />
+                    </svg>
+                    <h2 className="wq">Zpráva odeslána.</h2>
+                    <p className="wh2">{nb('Děkuji, ozvu se vám do 2 pracovních dnů. Domluvíme si posouzení textu nebo ukázkovou redakci 3–5 stran zdarma.')}</p>
+                  </div>
+                ) : (
+                  <div className="wst" role="group" aria-labelledby="wq">
+                    <h2 className="wq" id="wq">
+                      {nb(step.q)}
+                    </h2>
+                    {step.kind === 'choice' && (
+                      <div className="opts one" onPointerDown={(e) => (pointer.current = !!(e.target as HTMLElement).closest('label'))}>
+                        {INTENTS.map((t) => (
+                          <label key={t}>
+                            <input type="radio" name="intent" value={t} checked={ans.intent === t} onChange={onIntent} />
+                            <i />
+                            <span>{nb(t)}</span>
+                          </label>
+                        ))}
+                      </div>
+                    )}
+                    {step.kind === 'text' && (
+                      <>
+                        <input
+                          className="wi"
+                          id="w-text"
+                          type="text"
+                          maxLength={200}
+                          value={ans.text}
+                          aria-describedby="w-h"
+                          onChange={(e) => setAnswer('text', e.target.value)}
+                        />
+                        <p className="wh2" id="w-h">
+                          {step.hint}
+                        </p>
+                      </>
+                    )}
+                    {step.kind === 'area' && (
+                      <>
+                        <textarea className="wi" id="w-msg" maxLength={5000} value={ans.msg} aria-describedby="w-h" onChange={(e) => setAnswer('msg', e.target.value)} />
+                        <p className="wh2" id="w-h">
+                          {step.hint}
+                        </p>
+                      </>
+                    )}
+                    {step.kind === 'who' && (
+                      <>
+                        <input
+                          className="wi"
+                          id="w-name"
+                          type="text"
+                          maxLength={120}
+                          value={ans.name}
+                          placeholder="jméno a příjmení"
+                          autoComplete="name"
+                          aria-label="Jméno"
+                          onChange={(e) => setAnswer('name', e.target.value)}
+                        />
+                        <input
+                          className="wi"
+                          id="w-mail"
+                          type="email"
+                          maxLength={254}
+                          value={ans.mail}
+                          placeholder="e-mail"
+                          autoComplete="email"
+                          aria-label="E-mail"
+                          onChange={(e) => setAnswer('mail', e.target.value)}
+                        />
+                      </>
+                    )}
+                    {step.kind === 'sum' && (
+                      <>
+                        <dl className="sum">
+                          {(
+                            [
+                              ['Co potřebujete', ans.intent, 0],
+                              ['O jaký text jde', ans.text, 1],
+                              ['Co od spolupráce očekáváte', ans.msg, 2],
+                              ['Jméno', ans.name, 3],
+                              ['E-mail', ans.mail, 3],
+                            ] as const
+                          ).map(([k, v, g]) => (
+                            <div key={k}>
+                              <dt>{k}</dt>
+                              <dd>{v}</dd>
+                              <button type="button" onClick={() => show(g)}>
+                                změnit
+                              </button>
+                            </div>
+                          ))}
+                        </dl>
+                        <p className="gd">{nb(GDPR)}</p>
+                      </>
+                    )}
+                  </div>
+                )}
+              </div>
+              <input ref={honeyRef} className="hp" type="text" name="_honey" tabIndex={-1} autoComplete="off" aria-hidden="true" />
+              <p className="err" role="alert">
+                {err}
               </p>
-            </div>
-            <div className="side-card dark tile" style={{ background: "#0F0E0C" }}>
-              <div className="side-card-title">Přímý kontakt</div>
-              <p>
-                <a href="mailto:katerina@knizniredaktorka.cz">katerina@knizniredaktorka.cz</a>
-                <br />
-                <a
-                  href="https://www.linkedin.com/in/katerinamlsnova"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
+              <div className="wnav" hidden={done}>
+                <button type="button" className="textlink" hidden={at === 0} onClick={() => show(at - 1)}>
+                  Zpět
+                </button>
+                <button type="button" className="btn btn--fill" disabled={status === 'sending'} onClick={next}>
+                  {status === 'sending' ? 'Odesílám…' : step.kind === 'sum' ? 'Odeslat zprávu' : 'Další'}
+                </button>
+              </div>
+            </form>
+            <p className="alt">
+              {nb('Raději e-mail?')} <a href={`mailto:${MAIL}`}>{MAIL}</a>
+            </p>
+          </div>
+        </section>
+
+        <section className="scene mdl" id="primy" aria-label="Přímý kontakt">
+          <div className="copy">
+            <div className="direct">
+              <p className="dl">Přímý kontakt</p>
+              <a className="mail" ref={mailRef} href={`mailto:${MAIL}`}>
+                {MAIL}
+              </a>
+              <p className="dm">
+                <button type="button" className="textlink cp" onClick={copyMail}>
+                  {copied ? 'Zkopírováno' : 'Zkopírovat adresu'}
+                </button>
+                <a className="textlink" href={LINKEDIN} target="_blank" rel="noopener noreferrer">
                   LinkedIn
                 </a>
-                <br />
-                IČO 22031383
-                <br />
-                Pracuji online.
               </p>
+              <p className="di">IČO {ICO} · Pracuji online</p>
             </div>
-          </aside>
-        </div>
-
-        <p className="contact-closing">
-          Pokud si nejste jistí, jestli je váš text pro tento typ spolupráce vhodný, klidně se
-          ozvěte i tak. Společně ujasníme, co dává smysl řešit a co už ne.
-        </p>
-      </section>
-    </main>
+            <p className="closing">{nb(CLOSING)}</p>
+          </div>
+        </section>
+      </main>
+    </div>
   );
 }

@@ -1,0 +1,53 @@
+/* Knihy: obálka (z e-shopu, nebo typografická náhrada), 3D kniha a stojan s údaji. */
+
+/* obálka bez obrázku: barva podle druhu */
+.tcover { position: absolute; inset: 0; display: flex; flex-direction: column; gap: 5px; padding: 12% 10% 9%; color: #fff; background: #1b2945; }
+.tcover--komentar { background: #4a1830; }
+.tcover--ostatni { background: #2e5e57; }
+.tcover-type { font-size: 7px; line-height: 1.2; letter-spacing: .2em; text-transform: uppercase; opacity: .8; }
+.tcover-title { font: 400 12px/1.15 var(--display); margin-top: 4px; }
+.tcover-meta { font-size: 8px; opacity: .75; }
+.tcover-pub { margin-top: auto; font-size: 6.5px; letter-spacing: .2em; text-transform: uppercase; opacity: .75; }
+.cover-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
+/* ztlumené knihy: nevybrané jsou šedé, vybrané a knihy pod myší mají barvu */
+.mute { filter: grayscale(1) contrast(.94) brightness(1.05); transition: filter .6s var(--ease), opacity .5s var(--ease); }
+
+/* 3D kniha: skutečná obálka, hřbet, ořízka, světlo a stín */
+.b3 { position: relative; width: var(--w); height: var(--h); margin: 0; perspective: 1500px; flex: none; }
+.b3-in { position: absolute; inset: 0; transform-style: preserve-3d; transform: rotateX(var(--rx)) rotateY(var(--ry)) rotateZ(var(--rz)); transition: transform 1.2s cubic-bezier(.2, .8, .2, 1); }
+.b3-in.enter { animation: b3-enter 1.1s cubic-bezier(.2, .8, .2, 1) backwards; }
+@keyframes b3-enter { from { transform: rotateX(-4deg) rotateY(82deg); } }
+.b3-f { position: absolute; backface-visibility: hidden; }
+.b3-front { inset: 0; transform: translateZ(calc(var(--t) / 2)); overflow: hidden; border-radius: 1px 3px 3px 1px; background: var(--sp); }
+.b3-front::after { content: ''; position: absolute; inset: 0; pointer-events: none;
+  background: linear-gradient(90deg, rgba(0,0,0,.32) 0, rgba(0,0,0,0) 3.5%, rgba(255,255,255,.10) 5%, rgba(255,255,255,0) 22%),
+              linear-gradient(155deg, rgba(255,255,255,.16), rgba(255,255,255,0) 42%); }
+.b3-back { inset: 0; transform: rotateY(180deg) translateZ(calc(var(--t) / 2)); background: var(--sp); }
+.b3-spine { top: 0; height: 100%; left: calc(50% - var(--t) / 2); width: var(--t); transform: rotateY(-90deg) translateZ(calc(var(--w) / 2)); background: linear-gradient(90deg, rgba(0,0,0,.38), rgba(255,255,255,.10) 46%, rgba(0,0,0,.28)), var(--sp); display: grid; place-items: center; overflow: hidden; }
+.b3-spine span { writing-mode: vertical-rl; max-height: 78%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font: 500 clamp(6px, calc(var(--t) * .3), 11px)/1 var(--b3-font, Georgia, serif); letter-spacing: .06em; color: rgba(255,255,255,.82); }
+.b3-pages { top: 3px; height: calc(100% - 6px); left: calc(50% - var(--t) / 2 + 1px); width: calc(var(--t) - 2px); transform: rotateY(90deg) translateZ(calc(var(--w) / 2 - 3px)); background: repeating-linear-gradient(90deg, #fdfdfd 0 1px, #e4e4e4 1px 2px); }
+.b3-top, .b3-bottom { left: 3px; width: calc(100% - 6px); height: calc(var(--t) - 2px); top: calc(50% - var(--t) / 2 + 1px); background: repeating-linear-gradient(180deg, #fdfdfd 0 1px, #e2e2e2 1px 2px); }
+.b3-top { transform: rotateX(90deg) translateZ(calc(var(--h) / 2 - 3px)); }
+.b3-bottom { transform: rotateX(-90deg) translateZ(calc(var(--h) / 2 - 3px)); }
+.b3-floor { display: none; inset: -3%; transform: translateZ(calc(var(--t) / -2 - 2px)); background: rgba(13, 27, 46, .34); filter: blur(12px); border-radius: 4px; }
+.b3.flat .b3-floor { display: block; }
+.b3 .tcover { position: absolute; inset: 0; display: flex; flex-direction: column; gap: 6px; padding: 12% 10% 9%; color: #fff; background: var(--sp); }
+.b3 .tcover-type { font: 500 7px/1.2 var(--b3-font, Georgia, serif); letter-spacing: .2em; text-transform: uppercase; opacity: .75; }
+.b3 .tcover-title { font: 500 15px/1.15 var(--b3-font, Georgia, serif); margin-top: 6px; }
+.b3 .tcover-meta { font: 400 9px var(--b3-font, Georgia, serif); opacity: .7; }
+.b3 .tcover-pub { margin-top: auto; font: 500 7px var(--b3-font, Georgia, serif); letter-spacing: .2em; text-transform: uppercase; opacity: .7; }
+@media (prefers-reduced-motion: reduce) { .b3-in { transition: none; } }
+
+/* stojan s vybranou knihou */
+.stand-book { display: grid; place-items: end center; position: relative; }
+.stand-book .b3 { --b3-font: var(--display); }
+.stand-book .b3::after { content: ''; position: absolute; left: -12%; right: -22%; bottom: -10px; height: 18px; background: radial-gradient(closest-side, rgba(0, 0, 0, .28), transparent); }
+.stand-info { display: grid; gap: 8px; justify-items: center; text-align: center; }
+.stand-card { display: grid; gap: 8px; justify-items: center; text-align: center; grid-area: 1 / 1; }
+.stand-card:not(.on) { visibility: hidden; }
+.stand-meta { font-size: 11px; letter-spacing: .18em; text-transform: uppercase; color: var(--grey); }
+.stand-info h2, .stand-card h2 { font-size: clamp(21px, 2.2vw, 28px); line-height: 1.18; max-width: 22ch; }
+.stand-authors { font-size: 15px; color: var(--graphite); }
+.stand-new { font-size: 11px; letter-spacing: .18em; text-transform: uppercase; color: var(--blue); }
+.stand-nav { display: flex; gap: 26px; justify-content: center; margin-top: 6px; font-size: 11.5px; letter-spacing: .2em; text-transform: uppercase; color: var(--grey); }
+.stand-nav button:hover { color: var(--mint-ink); }

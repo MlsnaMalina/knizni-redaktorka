@@ -1,0 +1,49 @@
+/* Styl Galerie: černá, bílá, šedé + Kleinova modř a sytá máta. Nadpisy Bodoni Moda, text Libre Caslon.
+   Máta = akce (tlačítka, odkazy, aktivní filtr, focus), modrá = drobné značky (menu, linky, výběr, novinky). */
+:root {
+  --paper: #ffffff; --ink: #0b0b0b; --graphite: #3b3b3b; --grey: #6e6e6e; --mist: #f3f3f3; --line: #e2e2e2;
+  --blue: #002fa7; --mint: #18a383; --mint-ink: #0e7c63;
+  --display: 'Bodoni Moda Variable', 'Bodoni Moda', Didot, Georgia, serif;
+  --text: 'Libre Caslon Text', Georgia, serif;
+  --ease: cubic-bezier(.2, .8, .2, 1);
+  --gut: max(16px, 5vw);
+  --hd: 84px; /* výška hlavičky nad první částí */
+  --mh: 68px; /* výška pevné hlavičky na telefonu */
+  --art-w: clamp(180px, 22vw, 360px);
+  --side: max(16px, 4.5vw);
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { -webkit-text-size-adjust: 100%; }
+@media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+body { background: var(--paper); color: var(--ink); font: 400 16px/1.7 var(--text); -webkit-font-smoothing: antialiased; overflow-x: clip; }
+a { color: inherit; }
+button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; }
+:focus-visible { outline: 2px solid var(--mint); outline-offset: 4px; }
+[hidden] { display: none !important; }
+
+.wrap { max-width: 1280px; margin: 0 auto; padding-inline: var(--gut); }
+main { position: relative; overflow-x: clip; }
+
+/* hlavička; .over = leží přes první část stránky */
+header.top { display: flex; align-items: center; justify-content: space-between; gap: 20px; padding-block: 24px; border-bottom: 1px solid var(--line); }
+header.top.over { position: absolute; z-index: 6; inset: 0 0 auto; padding-inline: var(--gut); border-bottom: 0; }
+.mark { display: grid; gap: 6px; text-decoration: none; }
+.mark b { font: 500 15px/1 var(--display); letter-spacing: .24em; }
+.mark span { font: 400 9.5px/1 var(--text); letter-spacing: .42em; color: var(--grey); }
+nav.main { display: flex; gap: clamp(14px, 3vw, 30px); font-size: 11.5px; letter-spacing: .2em; text-transform: uppercase; }
+nav.main a { white-space: nowrap; text-decoration: none; padding-bottom: 3px; border-bottom: 1px solid transparent; }
+nav.main a[aria-current] { border-bottom: 2px solid var(--blue); }
+nav.main a:hover { color: var(--mint-ink); }
+
+.eyebrow { display: flex; align-items: center; gap: 12px; font-size: 11px; letter-spacing: .32em; text-transform: uppercase; color: var(--grey); }
+.eyebrow::before { content: ''; flex: none; width: 28px; height: 2px; background: var(--blue); }
+h1, h2 { font-family: var(--display); font-weight: 400; letter-spacing: -.02em; text-wrap: balance; }
+.btn { display: inline-flex; align-items: center; justify-content: center; min-height: 50px; padding: 0 26px; border: 1px solid var(--ink); font-size: 11.5px; letter-spacing: .2em; text-transform: uppercase; text-decoration: none; transition: background .4s var(--ease), color .4s var(--ease); }
+.btn--fill { background: var(--mint); border-color: var(--mint); color: var(--ink); }
+.btn--fill:hover { background: var(--ink); border-color: var(--ink); color: #fff; }
+.btn--line:hover { background: var(--mint); border-color: var(--mint); color: var(--ink); }
+.btn:disabled { opacity: .55; cursor: default; }
+.textlink { font-size: 11.5px; letter-spacing: .2em; text-transform: uppercase; text-decoration: none; padding-bottom: 4px; color: var(--mint-ink); border-bottom: 1px solid var(--mint); transition: border-color .3s; }
+.textlink:hover { border-color: var(--blue); }
+
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }

@@ -1,0 +1,31 @@
+import { BOOKS } from './books';
+
+/** Kontaktní údaje; schránka na doméně se zřizuje před spuštěním (plán E2). */
+export const MAIL = 'katerina@knizniredaktorka.cz';
+export const LINKEDIN = 'https://www.linkedin.com/in/katerinamlsnova';
+export const ICO = '22031383';
+
+/** Roky praxe; před spuštěním v roce 2027 aktualizovat (plán E4). */
+export const YEARS_EDITING = 10;
+export const YEARS_LAW = 9;
+
+/** Počet knih: z dat, na desítky dolů (71 → „70+“). */
+export const BOOKS_TOTAL = BOOKS.length;
+export const BOOKS_ROUND = Math.floor(BOOKS_TOTAL / 10) * 10;
+
+/** Rozmezí let vydání (bez odhadnutých). */
+const YEARS = BOOKS.filter((b) => !b.estYear).map((b) => b.year);
+export const YEAR_FROM = Math.min(...YEARS);
+export const YEAR_TO = Math.max(...YEARS);
+
+/** Obsah webu: pět stránek, z nich se staví hlavička i mobilní menu. */
+export const NAV = [
+  { to: '/', label: 'Úvod' },
+  { to: '/sluzby', label: 'Služby' },
+  { to: '/knihovna', label: 'Knihovna' },
+  { to: '/o-mne', label: 'O mně' },
+  { to: '/kontakt', label: 'Kontakt' },
+] as const;
+
+/** Ozdobná čísla stran v mobilním obsahu. */
+export const PAGE_NUMBERS = [1, 5, 17, 31, 45] as const;
