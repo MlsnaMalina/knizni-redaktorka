@@ -9,11 +9,14 @@
   .intro h1 { margin-top: 18px; font-size: clamp(38px, 5.6vw, 80px); line-height: 1; }
   .intro p.lead { margin-top: 18px; max-width: 48ch; color: var(--graphite); font-size: 17px; text-wrap: balance; }
   .filters { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; max-width: 920px; margin-top: 30px; }
-  .filters button { padding: 9px 14px; border: 1px solid var(--line); background: var(--paper); font-size: 13.5px; transition: background .3s, color .3s, border-color .3s; }
+  .filters button { position: relative; padding: 9px 18px; border: 1.5px solid rgba(11, 11, 11, .22); border-radius: 999px; background: var(--paper); font-size: 14px; transition: border-color .28s var(--ease), box-shadow .28s var(--ease); }
   .filters button span { margin-left: 7px; font-size: 12px; color: var(--grey); }
-  .filters button:hover { border-color: var(--mint); color: var(--mint-ink); }
-  .filters button[aria-pressed="true"] { background: var(--mint); border-color: var(--mint); color: var(--ink); }
-  .filters button[aria-pressed="true"] span { color: rgba(11, 11, 11, .62); }
+  .filters button:focus-visible { outline-color: var(--blue); }
+  @media (hover: hover) { .filters button:not([aria-pressed="true"]):hover { border-color: var(--ink); } }
+  /* vybraný filtr jako hlavní tlačítko (5. 11. 2026): mátový obrys s druhou linkou uvnitř a stín */
+  .filters button[aria-pressed="true"] { border-color: var(--mint); box-shadow: 1px 2px 2px rgba(11, 11, 11, .1), 4px 8px 14px -9px rgba(11, 11, 11, .4); }
+  .filters button[aria-pressed="true"]::before { content: ''; position: absolute; inset: 3px; border: 1px solid rgba(24, 163, 131, .5); border-radius: 999px; pointer-events: none; }
+  @media (max-width: 520px) { .filters { gap: 6px; } .filters button { padding: 8px 13px; } }
   .count { margin-top: 14px; min-height: 1.6em; font-size: 13px; color: var(--grey); }
 
   /* výloha: mřížka obálek, uprostřed stojan s vybranou knihou */

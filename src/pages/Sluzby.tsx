@@ -138,7 +138,7 @@ interface Running {
 
 export default function Sluzby() {
   usePageMeta(
-    'Služby – redakce odborných textů | Kateřina Mlsnová',
+    'Služby – redakce textů | Kateřina Mlsnová',
     'Redakce odborných publikací, úprava profesních textů, revize AI textů a redakční konzultace. Ukázková redakce zdarma, cena předem za celý projekt.'
   );
   const rootRef = useRef<HTMLDivElement>(null);
