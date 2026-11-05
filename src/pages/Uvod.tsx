@@ -38,8 +38,7 @@ export default function Uvod() {
         <section className="scene hero" data-side="left" aria-labelledby="t-hero">
           <HeroArt aw={aw} />
           <div className="copy" data-focus>
-            <p className="eyebrow">Odborná knižní redakce</p>
-            <h1 id="t-hero">Aby váš odborný text obstál.</h1>
+            <h1 id="t-hero">Aby váš (odborný) text obstál.</h1>
             <p className="lead">Redakce komentářů k&nbsp;zákonům, právních monografií a&nbsp;odborných publikací.</p>
             <ul className="facts" aria-label="Zkušenosti v číslech">
               <li>
