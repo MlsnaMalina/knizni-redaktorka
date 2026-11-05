@@ -192,9 +192,9 @@ export default function OMne() {
 
         <section className="scene" id="zaver" aria-labelledby="t-zaver">
           <div className="copy">
-            <p className="eyebrow">Ukázka zdarma</p>
-            <h2 id="t-zaver">Pošlete mi kapitolu. Uvidíte, co s&nbsp;textem udělám.</h2>
-            <p className="lead">U&nbsp;nových klientů začínám ukázkovou redakcí několika stran zdarma. Vy uvidíte můj styl práce, já stav vašeho textu.</p>
+            <p className="eyebrow">Ukázková redakce</p>
+            <h2 id="t-zaver">Pošlete mi svůj text. Společně zjistíme, kam ho lze posunout.</h2>
+            <p className="lead">U&nbsp;nových klientů většinou začínám ukázkovou redakcí několika stran zdarma. Vy uvidíte můj styl práce, já stav vašeho textu.</p>
             <div className="actions">
               <Link className="btn btn--fill" to={SAMPLE_LINK}>
                 Chci ukázkovou redakci

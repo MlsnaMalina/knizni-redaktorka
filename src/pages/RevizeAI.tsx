@@ -24,7 +24,7 @@ const STEPS = [
 export default function RevizeAI() {
   usePageMeta(
     'Revize AI textů – redakce textů vytvořených s pomocí AI | Kateřina Mlsnová',
-    'AI napíše draft – já z něj udělám text, za který se podepíšete. Kontrola faktů a citací, sjednocení terminologie, lidský tón. Ukázková revize zdarma.'
+    'AI napíše draft – já z něj udělám text, za který se podepíšete. Kontrola faktů a citací, sjednocení terminologie, lidský tón. Ukázková revize po dohodě zdarma.'
   );
 
   return (
@@ -94,9 +94,9 @@ export default function RevizeAI() {
 
         <section className="scene" id="zaver" aria-labelledby="t-zaver">
           <div className="copy">
-            <p className="eyebrow">Ukázka zdarma</p>
+            <p className="eyebrow">Ukázková revize</p>
             <h2 id="t-zaver">Máte AI draft? Pošlete mi ho.</h2>
-            <p className="lead">Ukázková revize několika stran zdarma – uvidíte rozdíl dřív, než se rozhodnete.</p>
+            <p className="lead">Ukázkovou revizi několika stran většinou dělám zdarma – uvidíte rozdíl dřív, než se rozhodnete.</p>
             <div className="actions">
               <Link className="btn btn--fill" to={SAMPLE_LINK}>
                 Chci ukázkovou revizi

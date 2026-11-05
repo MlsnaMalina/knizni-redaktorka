@@ -160,7 +160,7 @@ interface Running {
 export default function Sluzby() {
   usePageMeta(
     'Služby – redakce textů | Kateřina Mlsnová',
-    'Redakce odborných publikací, úprava profesních textů, revize AI textů a redakční konzultace. Ukázková redakce zdarma, cena předem za celý projekt.'
+    'Redakce odborných publikací, úprava profesních textů, revize AI textů a redakční konzultace. Ukázková redakce po dohodě zdarma, cena předem za celý projekt.'
   );
   const rootRef = useRef<HTMLDivElement>(null);
   const barRef = useRef<HTMLDivElement>(null);
@@ -247,7 +247,7 @@ export default function Sluzby() {
                 {CHAPTERS.slice(4).map((c) => (
                   <TocRow key={c.k} k={c.k} title={c.toc} href={`#k${c.k}`} />
                 ))}
-                <TocRow k="+" title="Ukázková redakce zdarma" href="#zaver" />
+                <TocRow k="+" title="Ukázková redakce" href="#zaver" />
               </ol>
             </nav>
           </div>
@@ -286,7 +286,7 @@ export default function Sluzby() {
           );
         })}
 
-        <section className="scene chap" id="zaver" data-k="" data-toc="Ukázková redakce zdarma" aria-labelledby="t-zaver">
+        <section className="scene chap" id="zaver" data-k="" data-toc="Ukázková redakce" aria-labelledby="t-zaver">
           <div className="copy">
             <p className="cno">
               <b className="pl" />

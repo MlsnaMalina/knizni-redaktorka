@@ -13,7 +13,7 @@ import './uvod/uvod.css';
 export default function Uvod() {
   usePageMeta(
     'Kateřina Mlsnová – knižní redaktorka',
-    `Knižní redaktorka: redakce knih a dalších textů, revize textů s pomocí AI, redakční konzultace. Přes ${BOOKS_ROUND} vydaných knih, ukázková redakce zdarma.`
+    `Knižní redaktorka: redakce knih a dalších textů, revize textů s pomocí AI, redakční konzultace. Přes ${BOOKS_ROUND} vydaných knih, ukázková redakce po dohodě zdarma.`
   );
   const mainRef = useRef<HTMLElement>(null);
   const svgRef = useRef<SVGSVGElement>(null);
@@ -56,7 +56,7 @@ export default function Uvod() {
             </ul>
             <div className="actions">
               <a className="btn btn--fill" href="#zaver">
-                Ukázková redakce zdarma
+                Ukázková redakce
               </a>
               <Link className="btn btn--line" to="/knihovna">
                 Knihovna
@@ -103,10 +103,10 @@ export default function Uvod() {
         <section className="scene" id="zaver" data-side="left" aria-labelledby="t-zaver">
           <ZaverArt aw={aw} />
           <div className="copy" data-focus>
-            <p className="eyebrow">Ukázka zdarma</p>
-            <h2 id="t-zaver">Pošlete mi kapitolu. Uvidíte, co s&nbsp;textem udělám.</h2>
+            <p className="eyebrow">Ukázková redakce</p>
+            <h2 id="t-zaver">Pošlete mi svůj text. Společně zjistíme, kam ho lze posunout.</h2>
             <p className="lead">
-              U&nbsp;nových klientů začínám ukázkovou redakcí několika stran zdarma. Vy uvidíte můj styl práce, já stav vašeho textu.
+              U&nbsp;nových klientů většinou začínám ukázkovou redakcí několika stran zdarma. Vy uvidíte můj styl práce, já stav vašeho textu.
             </p>
             <div className="actions">
               <Link className="btn btn--fill" to={SAMPLE_LINK}>

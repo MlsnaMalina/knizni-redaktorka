@@ -15,8 +15,8 @@ const GDPR = 'Odesláním souhlasíte se zpracováním údajů pro účely odpov
 const CLOSING =
   'Pokud si nejste jistí, jestli je váš text pro tento typ spolupráce vhodný, klidně se ozvěte i tak. Společně ujasníme, co dává smysl řešit a co už ne.';
 const SEND_ERROR = 'Zprávu se nepodařilo odeslat. Zkuste to prosím znovu, nebo mi napište přímo na e-mail.';
-const SAMPLE = 'Ukázkovou redakci zdarma';
-// ukázková redakce zdarma je až poslední možnost (přání Kateřiny)
+const SAMPLE = 'Ukázkovou redakci';
+// ukázková redakce je až poslední možnost (přání Kateřiny); slovo zdarma tu být nemá, ukázka je po dohodě (5. 11. 2026)
 const INTENTS = ['Nacenit text', 'Redakční konzultaci', 'Jen se zeptat', SAMPLE];
 
 type Kind = 'choice' | 'text' | 'area' | 'who' | 'sum';
@@ -52,7 +52,7 @@ type Status = 'idle' | 'sending' | 'done';
 export default function Kontakt() {
   usePageMeta(
     'Kontakt – pošlete mi svůj text | Kateřina Mlsnová',
-    'Napište mi, o jaký text jde a co od spolupráce čekáte. Odpovídám do 2 pracovních dnů. Posouzení textu i ukázková redakce zdarma.'
+    'Napište mi, o jaký text jde a co od spolupráce čekáte. Odpovídám do 2 pracovních dnů. Posouzení textu zdarma, ukázková redakce po dohodě.'
   );
 
   const [params] = useSearchParams();
@@ -187,7 +187,7 @@ export default function Kontakt() {
         <section className="scene mdl" id="top" aria-labelledby="t-h">
           <div className="copy">
             <h1 id="t-h">Pošlete mi svůj text. Nebo jen otázku.</h1>
-            <p className="lead">Odpovídám do 2&nbsp;pracovních dnů, první krok je vždy zdarma.</p>
+            <p className="lead">Odpovídám do 2&nbsp;pracovních dnů, první krok je zdarma.</p>
             <div className="actions">
               <a className="btn btn--fill" href="#pruvodce">
                 Napsat zprávu
@@ -214,7 +214,7 @@ export default function Kontakt() {
                       <path d="M19 33l9 9 17-20" />
                     </svg>
                     <h2 className="wq">Zpráva odeslána.</h2>
-                    <p className="wh2">{nb('Děkuji, ozvu se vám do 2 pracovních dnů. Domluvíme si posouzení textu nebo ukázkovou redakci 3–5 stran zdarma.')}</p>
+                    <p className="wh2">{nb('Děkuji, ozvu se vám do 2 pracovních dnů. Domluvíme si posouzení textu a případně i ukázkovou redakci 3–5 stran zdarma.')}</p>
                   </div>
                 ) : (
                   <div className="wst" role="group" aria-labelledby="wq">
