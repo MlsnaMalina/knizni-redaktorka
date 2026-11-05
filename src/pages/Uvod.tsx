@@ -11,8 +11,8 @@ import './uvod/uvod.css';
 
 export default function Uvod() {
   usePageMeta(
-    'Kateřina Mlsnová — knižní redaktorka odborných a právních textů',
-    'Redakce odborných a právních publikací. Přes 70 vydaných knih — komentáře k zákonům, učebnice i monografie o právu IT a umělé inteligenci. Ukázková redakce zdarma.'
+    'Kateřina Mlsnová – knižní redaktorka odborných a právních textů',
+    'Redakce odborných a právních publikací. Přes 70 vydaných knih – komentáře k zákonům, učebnice i monografie o právu IT a umělé inteligenci. Ukázková redakce zdarma.'
   );
   const mainRef = useRef<HTMLElement>(null);
   const svgRef = useRef<SVGSVGElement>(null);

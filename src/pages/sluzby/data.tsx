@@ -122,33 +122,33 @@ export const SERVICES: Service[] = [
   {
     k: 1,
     toc: 'Redakce odborných publikací',
-    d: 'Kompletní redakce rukopisu: struktura a logika výkladu, terminologická a formální jednotnost, jazyková a stylistická kultivace, typografie, kontrola citací a odkazů, připomínky autorovi. Pracuji v režimu sledování změn — autor má nad každou úpravou kontrolu.',
+    d: 'Kompletní redakce rukopisu: struktura a logika výkladu, terminologická a formální jednotnost, jazyková a stylistická kultivace, typografie, kontrola citací a odkazů, připomínky autorovi. Pracuji v režimu sledování změn – autor má nad každou úpravou kontrolu.',
     w: ['připravujete komentář, učebnici, monografii nebo odborný e-book', 'rukopis vzniká od většího autorského kolektivu a potřebuje sjednotit', 'text má projít nakladatelstvím, recenzním řízením nebo odbornou oponenturou'],
   },
   {
     k: 2,
     toc: 'Úprava profesních a odborných textů',
-    d: 'Odborné články, newslettery, texty na web, profesní medailonky a doprovodné materiály. Cílem je text, který reprezentuje — přesný, kultivovaný a přirozený. Právě u kratších textů rozhoduje každá věta o tom, jak budete působit na čtenáře, klienta nebo odbornou komunitu.',
+    d: 'Odborné články, newslettery, texty na web, profesní medailonky a doprovodné materiály. Cílem je text, který reprezentuje – přesný, kultivovaný a přirozený. Právě u kratších textů rozhoduje každá věta o tom, jak budete působit na čtenáře, klienta nebo odbornou komunitu.',
     w: ['odborné sdělení potřebuje jasnější formulaci', 'text má obstát i před náročným čtenářem', 'výstup reprezentuje vás nebo vaši instituci navenek'],
   },
   {
     k: 3,
     toc: 'Revize textů vytvořených s pomocí AI',
-    d: 'AI umí připravit základ. Neumí ale ručit za přesnost, jednotnou terminologii ani za to, jak text působí na odborného čtenáře. Draft zpřesním, sjednotím a dotáhnu do podoby, za kterou se podepíšete — včetně kontroly faktů, citací a odkazů na předpisy.',
+    d: 'AI umí připravit základ. Neumí ale ručit za přesnost, jednotnou terminologii ani za to, jak text působí na odborného čtenáře. Draft zpřesním, sjednotím a dotáhnu do podoby, za kterou se podepíšete – včetně kontroly faktů, citací a odkazů na předpisy.',
     w: ['máte AI draft, který nechcete pustit ven v surové podobě', 'text zní obecně, strojově nebo si nejste jistí fakty a citacemi', 'potřebujete profesionální výstup, nejen rychlý základ'],
     link: 'Více o revizích AI textů',
   },
   {
     k: 4,
     toc: 'Redakční konzultace k textu',
-    d: 'Posouzení rukopisu nebo textu: silná a slabá místa, nejasnosti, strukturální problémy — a doporučení, co upravit jako první a co už řešit nemusíte. Dostanete jasný plán práce místo vágního pocitu, že „by to chtělo ještě projít“.',
+    d: 'Posouzení rukopisu nebo textu: silná a slabá místa, nejasnosti, strukturální problémy – a doporučení, co upravit jako první a co už řešit nemusíte. Dostanete jasný plán práce místo vágního pocitu, že „by to chtělo ještě projít“.',
     w: ['si nejste jistí, v jakém stavu text vlastně je', 'chcete nezávislé posouzení před odevzdáním nebo publikací', 'část práce si uděláte sami a potřebujete jen jasný směr'],
   },
 ];
 
 export const PRICE_STEPS = [
   'Pošlete mi text nebo jeho část.',
-  'Do 2–3 pracovních dnů dostanete konkrétní nabídku — rozsah práce, termín a cenu.',
+  'Do 2–3 pracovních dnů dostanete konkrétní nabídku – rozsah práce, termín a cenu.',
   'Posouzení textu i ukázková redakce několika stran jsou zdarma a k ničemu vás nezavazují.',
 ];
 
@@ -159,14 +159,14 @@ export const LIMITS = [
 ];
 
 export const FAQ: [string, string][] = [
-  ['Jak je to s důvěrností?', 'S každým textem nakládám jako s důvěrným — bez výjimky. Rukopis nikomu neukazuji, nepoužívám ho jako referenci bez vašeho svolení a na přání podepíšu smlouvu o mlčenlivosti (NDA). U právních a firemních textů to považuji za samozřejmost.'],
-  ['Jak probíhá ukázková redakce zdarma?', 'Pošlete mi 3–5 stran textu. Zrediguji je v režimu sledování změn, přidám okrajové komentáře a pošlu zpět — uvidíte přesně, jak pracuji a co s textem dělám. Je to zdarma a k ničemu vás to nezavazuje.'],
-  ['V jakém formátu pracujeme?', 'Standardně ve Wordu s režimem sledování změn. Každá úprava je viditelná a můžete ji přijmout, nebo odmítnout. Komentáře a dotazy píšu na okraj — nic se neděje bez vašeho vědomí.'],
-  ['Co když s navrženou úpravou nesouhlasím?', 'Pak platí vaše verze. Jsem redaktorka, ne spoluautorka — návrhy zdůvodňuji, ale rozhodnutí je vždy na vás.'],
-  ['Jak dlouho redakce trvá?', 'Podle rozsahu a stavu textu — kratší text dny, rozsáhlý rukopis týdny. Termín je vždy součástí nabídky a platí.'],
-  ['Kolik to stojí?', 'Cenu stanovuji předem za celý projekt podle rozsahu a stavu textu. První krok — posouzení i ukázková redakce — je zdarma, takže nabídku dostanete dřív, než se k čemukoli zavážete.'],
+  ['Jak je to s důvěrností?', 'S každým textem nakládám jako s důvěrným – bez výjimky. Rukopis nikomu neukazuji, nepoužívám ho jako referenci bez vašeho svolení a na přání podepíšu smlouvu o mlčenlivosti (NDA). U právních a firemních textů to považuji za samozřejmost.'],
+  ['Jak probíhá ukázková redakce zdarma?', 'Pošlete mi 3–5 stran textu. Zrediguji je v režimu sledování změn, přidám okrajové komentáře a pošlu zpět – uvidíte přesně, jak pracuji a co s textem dělám. Je to zdarma a k ničemu vás to nezavazuje.'],
+  ['V jakém formátu pracujeme?', 'Standardně ve Wordu s režimem sledování změn. Každá úprava je viditelná a můžete ji přijmout, nebo odmítnout. Komentáře a dotazy píšu na okraj – nic se neděje bez vašeho vědomí.'],
+  ['Co když s navrženou úpravou nesouhlasím?', 'Pak platí vaše verze. Jsem redaktorka, ne spoluautorka – návrhy zdůvodňuji, ale rozhodnutí je vždy na vás.'],
+  ['Jak dlouho redakce trvá?', 'Podle rozsahu a stavu textu – kratší text dny, rozsáhlý rukopis týdny. Termín je vždy součástí nabídky a platí.'],
+  ['Kolik to stojí?', 'Cenu stanovuji předem za celý projekt podle rozsahu a stavu textu. První krok – posouzení i ukázková redakce – je zdarma, takže nabídku dostanete dřív, než se k čemukoli zavážete.'],
   ['Spolupracujete i s nakladatelstvími a institucemi?', 'Ano. Devět let rediguji knihy pro nakladatelství Wolters Kluwer ČR a externí redakce nabízím i dalším nakladatelstvím, profesním organizacím a odborným institucím.'],
-  ['Upravujete i dizertační a jiné kvalifikační práce?', 'Nabízím jazykovou a redakční kultivaci textu v mezích pravidel dané univerzity — strukturu, jednotnost, formulace, citace. Obsah, odborné závěry a autorství zůstávají vždy plně na autorovi.'],
+  ['Upravujete i dizertační a jiné kvalifikační práce?', 'Nabízím jazykovou a redakční kultivaci textu v mezích pravidel dané univerzity – strukturu, jednotnost, formulace, citace. Obsah, odborné závěry a autorství zůstávají vždy plně na autorovi.'],
 ];
 
 /** Ozdobná čísla stran v obsahu (strany nejsou skutečné). */

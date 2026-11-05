@@ -23,7 +23,7 @@ const STEPS: { h: string; t: string }[] = [
   { h: 'Nejdřív si text přečtu a zorientuji se v něm', t: 'Potřebuji vědět, v jakém stavu text je, co od něj očekáváte a co mu v dané chvíli skutečně pomůže.' },
   { h: 'Navrhnu, co má smysl řešit jako první', t: 'Ne všechno je potřeba opravovat najednou. Důležité je rozeznat, co je podstatné a co už by byla zbytečná práce navíc.' },
   { h: 'Pracuji přehledně a s respektem k autorovi', t: 'Veškeré návrhy dělám tak, aby bylo jasné, co a proč se v textu mění. Text zlepšuji, ale nepřebírám jeho autorství.' },
-  { h: 'Cílem je výsledek, který obstojí', t: 'Text má být přesný, srozumitelný, jednotný a profesionální — nejen obsahově, ale i tím, jak působí na čtenáře.' },
+  { h: 'Cílem je výsledek, který obstojí', t: 'Text má být přesný, srozumitelný, jednotný a profesionální – nejen obsahově, ale i tím, jak působí na čtenáře.' },
 ];
 
 /** Šipky v mezerách sjíždějí dolů podle posunu stránky. */
@@ -78,7 +78,7 @@ function useBookReveal(ref: RefObject<HTMLElement | null>) {
 
 export default function OMne() {
   usePageMeta(
-    'O mně — z advokacie do knižní redakce | Kateřina Mlsnová',
+    'O mně – z advokacie do knižní redakce | Kateřina Mlsnová',
     `Právní vzdělání, ${YEARS_LAW} let advokacie, ${YEARS_EDITING} let knižní redakce a přes ${BOOKS_ROUND} vydaných odborných knih. Specializace na právo, právo IT, technologie a umělou inteligenci.`
   );
   const rootRef = useRef<HTMLDivElement>(null);
@@ -95,9 +95,6 @@ export default function OMne() {
             <div className="photo" style={{ '--pw': '150px' } as CSSVars}>
               <b>K. Mlsnová</b>knižní redaktorka
             </div>
-            <p className="eyebrow" style={{ marginTop: 30 }}>
-              O mně
-            </p>
             <h1>Z&nbsp;advokacie do knižní redakce.</h1>
             <ul className="facts three" aria-label="Stručně řečeno">
               <li>
@@ -116,6 +113,11 @@ export default function OMne() {
                 <span>let advokacie</span>
               </li>
             </ul>
+            <div className="actions">
+              <Link className="btn btn--fill" to="/kontakt">
+                Chci ukázkovou redakci
+              </Link>
+            </div>
           </div>
         </section>
 
@@ -125,7 +127,7 @@ export default function OMne() {
               <p className="lab">Změna</p>
               <h2>Wolters Kluwer ČR</h2>
               <p className="t">
-                Odešla jsem do nakladatelství Wolters Kluwer ČR — a&nbsp;zjistila, že mě víc než psaní podání baví dávat tvar odborným textům.
+                Odešla jsem do nakladatelství Wolters Kluwer ČR – a&nbsp;zjistila, že mě víc než psaní podání baví dávat tvar odborným textům.
               </p>
             </li>
             <Gap />
@@ -136,7 +138,7 @@ export default function OMne() {
               <h2>Dnes</h2>
               <p className="t">
                 Dnes mám za sebou přes {BOOKS_ROUND} vydaných knih: komentáře k&nbsp;zákonům, učebnice, monografie i&nbsp;publikace na klíč. Nejblíž mám
-                k&nbsp;právu, právu IT, technologiím a&nbsp;umělé inteligenci — redigovala jsem mimo jiné komentář k&nbsp;nařízení MiCA nebo monografie
+                k&nbsp;právu, právu IT, technologiím a&nbsp;umělé inteligenci – redigovala jsem mimo jiné komentář k&nbsp;nařízení MiCA nebo monografie
                 o&nbsp;trestní odpovědnosti umělé inteligence.
               </p>
             </li>
@@ -144,7 +146,7 @@ export default function OMne() {
             <li className="stn">
               <p className="lab">{YEARS_LAW}&nbsp;let</p>
               <h2>Advokacie</h2>
-              <p className="t">Devět let jsem pracovala v&nbsp;advokacii — rozumím terminologii, citacím i&nbsp;judikatuře.</p>
+              <p className="t">Devět let jsem pracovala v&nbsp;advokacii – rozumím terminologii, citacím i&nbsp;judikatuře.</p>
             </li>
 
             <li className="blk far" id="sleduji">

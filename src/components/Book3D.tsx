@@ -41,7 +41,7 @@ export function Book3D({ book, w = 180, ry = 28, rx = -5, rz = 0, flat, muted, e
     ...style,
   };
   return (
-    <figure className={cx('b3', flat && 'flat', muted && 'mute')} style={vars} aria-label={`${book.title} — ${pagesText(book.pages)}`}>
+    <figure className={cx('b3', flat && 'flat', muted && 'mute')} style={vars} aria-label={`${book.title} – ${pagesText(book.pages)}`}>
       <div className={cx('b3-in', enter && 'enter')}>
         <div className="b3-f b3-floor" />
         <div className="b3-f b3-front">

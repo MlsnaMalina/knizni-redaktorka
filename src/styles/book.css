@@ -45,9 +45,9 @@
 .stand-info { display: grid; gap: 8px; justify-items: center; text-align: center; }
 .stand-card { display: grid; gap: 8px; justify-items: center; text-align: center; grid-area: 1 / 1; }
 .stand-card:not(.on) { visibility: hidden; }
-.stand-meta { font-size: 11px; letter-spacing: .18em; text-transform: uppercase; color: var(--grey); }
+.stand-meta { font-size: 13px; letter-spacing: .01em; color: var(--grey); }
 .stand-info h2, .stand-card h2 { font-size: clamp(21px, 2.2vw, 28px); line-height: 1.18; max-width: 22ch; }
 .stand-authors { font-size: 15px; color: var(--graphite); }
-.stand-new { font-size: 11px; letter-spacing: .18em; text-transform: uppercase; color: var(--blue); }
-.stand-nav { display: flex; gap: 26px; justify-content: center; margin-top: 6px; font-size: 11.5px; letter-spacing: .2em; text-transform: uppercase; color: var(--grey); }
+.stand-new { font-size: 13px; letter-spacing: .01em; color: var(--blue); }
+.stand-nav { display: flex; gap: 26px; justify-content: center; margin-top: 6px; font-size: 13px; letter-spacing: .01em; color: var(--grey); }
 .stand-nav button:hover { color: var(--mint-ink); }

@@ -7,6 +7,7 @@
 .copy .eyebrow::after { content: ''; flex: none; width: 28px; height: 2px; background: var(--blue); }
 .copy h1 { margin-top: 26px; font-size: clamp(44px, 6.4vw, 96px); line-height: .98; max-width: 11ch; }
 .copy h2 { margin-top: 20px; font-size: clamp(34px, 4.4vw, 62px); line-height: 1.05; max-width: 17ch; }
+.copy h2.eyebrow { margin-top: 0; max-width: none; font-size: 13px; line-height: 1.7; }
 .copy .lead { margin-top: 24px; max-width: 42ch; font-size: clamp(16px, 1.2vw, 18px); color: var(--graphite); text-wrap: balance; }
 .copy .actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-top: 34px; }
 .copy > .textlink { margin-top: 34px; }
@@ -17,7 +18,7 @@
 .facts li + li { border-left: 1px solid var(--line); }
 .facts b { font: 500 clamp(38px, 4.4vw, 56px)/1 var(--display); letter-spacing: -.02em; }
 .facts b i { font: 400 .5em/1 var(--text); font-style: normal; vertical-align: .62em; margin-left: .06em; letter-spacing: 0; }
-.facts span { max-width: 14ch; font-size: 12px; line-height: 1.5; letter-spacing: .18em; text-transform: uppercase; color: var(--graphite); text-wrap: balance; }
+.facts span { max-width: 14ch; font-size: 13px; line-height: 1.5; letter-spacing: .01em; color: var(--graphite); text-wrap: balance; }
 
 /* grafika: knihy a listy rukopisu */
 .art { position: absolute; z-index: 1; width: var(--art-w); }
@@ -39,7 +40,7 @@
 .sheet ins { color: var(--blue); text-decoration: underline; text-underline-offset: 1.5px; }
 .note { position: absolute; z-index: 2; top: 21%; width: 66%; padding: .7em .8em; background: #fff; border-left: 2px solid var(--blue); text-align: left; color: var(--graphite);
   font: 400 calc(var(--sw, 200px) * .047)/1.45 var(--text); box-shadow: 0 1px 2px rgba(0, 0, 0, .14), 0 12px 22px -12px rgba(0, 0, 0, .4); }
-.note b { display: block; margin-bottom: .3em; font-size: .8em; font-weight: 400; letter-spacing: .16em; text-transform: uppercase; color: var(--blue); }
+.note b { display: block; margin-bottom: .3em; font-size: .95em; font-weight: 400; letter-spacing: .01em; color: var(--blue); }
 .ms.note-right .note { left: 72%; }
 .ms.note-left .note { right: 72%; }
 

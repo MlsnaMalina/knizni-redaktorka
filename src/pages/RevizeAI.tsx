@@ -22,8 +22,8 @@ const STEPS = [
 
 export default function RevizeAI() {
   usePageMeta(
-    'Revize AI textů — redakce textů vytvořených s pomocí AI | Kateřina Mlsnová',
-    'AI napíše draft — já z něj udělám text, za který se podepíšete. Kontrola faktů a citací, sjednocení terminologie, lidský tón. Ukázková revize zdarma.'
+    'Revize AI textů – redakce textů vytvořených s pomocí AI | Kateřina Mlsnová',
+    'AI napíše draft – já z něj udělám text, za který se podepíšete. Kontrola faktů a citací, sjednocení terminologie, lidský tón. Ukázková revize zdarma.'
   );
 
   return (
@@ -32,20 +32,21 @@ export default function RevizeAI() {
       <main>
         <section className="scene hero" aria-labelledby="t-h">
           <div className="copy">
-            <p className="eyebrow">Revize AI textů</p>
             <h1 id="t-h">AI napíše draft. Já z&nbsp;něj udělám text, za který se podepíšete.</h1>
-            <p className="lead">
-              Redigovala jsem odborné knihy o&nbsp;umělé inteligenci — a&nbsp;dnes pomáhám s&nbsp;texty, které s&nbsp;její pomocí vznikají. AI výstup umí být
-              skvělý základ. Bez lidské redakce ale zůstává jen základem.
-            </p>
+            <p className="lead">Bez lidské redakce zůstává AI výstup jen základem.</p>
+            <div className="actions">
+              <Link className="btn btn--fill" to="/kontakt">
+                Chci ukázkovou revizi
+              </Link>
+            </div>
           </div>
         </section>
 
         <section className="scene" aria-labelledby="t-chybi">
           <div className="copy">
-            <p className="eyebrow" id="t-chybi">
+            <h2 className="eyebrow" id="t-chybi">
               Co AI textům typicky chybí
-            </p>
+            </h2>
             <ol className="rv">
               {PROBLEMS.map((p, i) => (
                 <li key={p.title}>
@@ -62,9 +63,9 @@ export default function RevizeAI() {
 
         <section className="scene" aria-labelledby="t-jak">
           <div className="copy">
-            <p className="eyebrow" id="t-jak">
+            <h2 className="eyebrow" id="t-jak">
               Jak revize probíhá
-            </p>
+            </h2>
             <ol className="rv steps">
               {STEPS.map((s, i) => (
                 <li key={s}>
@@ -80,11 +81,11 @@ export default function RevizeAI() {
 
         <section className="scene" aria-labelledby="t-koho">
           <div className="copy">
-            <p className="eyebrow" id="t-koho">
+            <h2 className="eyebrow" id="t-koho">
               Pro koho
-            </p>
+            </h2>
             <p className="lead">
-              Pro právníky, konzultanty, marketéry a&nbsp;firmy, které AI používají na první verze článků, newsletterů, dokumentací nebo e-booků — a&nbsp;potřebují,
+              Pro právníky, konzultanty, marketéry a&nbsp;firmy, které AI používají na první verze článků, newsletterů, dokumentací nebo e-booků – a&nbsp;potřebují,
               aby finální výstup byl přesný a&nbsp;důvěryhodný.
             </p>
           </div>
@@ -94,7 +95,7 @@ export default function RevizeAI() {
           <div className="copy">
             <p className="eyebrow">Ukázka zdarma</p>
             <h2 id="t-zaver">Máte AI draft? Pošlete mi ho.</h2>
-            <p className="lead">Ukázková revize několika stran zdarma — uvidíte rozdíl dřív, než se rozhodnete.</p>
+            <p className="lead">Ukázková revize několika stran zdarma – uvidíte rozdíl dřív, než se rozhodnete.</p>
             <div className="actions">
               <Link className="btn btn--fill" to="/kontakt">
                 Chci ukázkovou revizi

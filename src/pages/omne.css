@@ -16,7 +16,7 @@
   .line { list-style: none; display: grid; width: min(100%, 560px); }
   .stn, .blk { display: grid; justify-items: center; gap: 12px; text-align: center; }
   .far { margin-top: clamp(84px, 14vh, 130px); }
-  .lab { font-size: 11.5px; letter-spacing: .24em; text-transform: uppercase; color: var(--grey); }
+  .lab { font-size: 13px; letter-spacing: .01em; color: var(--grey); }
   .stn h2 { font: 400 clamp(28px, 3.2vw, 42px)/1.05 var(--display); letter-spacing: -.01em; text-wrap: balance; }
   .stp h2 { font-size: clamp(24px, 2.7vw, 34px); line-height: 1.12; }
   .blk h2 { font: 400 clamp(28px, 3.4vw, 46px)/1.06 var(--display); letter-spacing: -.02em; max-width: 20ch; text-wrap: balance; }
@@ -40,7 +40,7 @@
   .lt .ring { position: absolute; left: 0; top: 0; width: calc(var(--r) * 2); height: calc(var(--r) * 2); translate: calc(var(--x, 120px) - var(--r)) calc(var(--y, 30px) - var(--r)); border: 1.5px solid var(--blue); border-radius: 50%; box-shadow: 0 0 0 4px rgba(255, 255, 255, .6), 0 12px 24px -10px rgba(0, 0, 0, .45); cursor: grab; touch-action: none; }
   .lt .ring:focus-visible { outline: 2px solid var(--mint); outline-offset: 5px; }
   @media (max-width: 480px) { .lt { --r: 50px; } }
-  .hint2 { margin-top: 2px; font-size: 11.5px; letter-spacing: .16em; text-transform: uppercase; color: var(--grey); }
+  .hint2 { margin-top: 2px; font-size: 13px; letter-spacing: .01em; color: var(--grey); }
   .leg { list-style: none; display: grid; width: min(100%, 560px); margin-top: 26px; text-align: left; border-bottom: 1px solid var(--line); }
   .leg li { display: grid; grid-template-columns: 24px 1fr; gap: 0 14px; padding: 14px 0 15px; border-top: 1px solid var(--line); }
   .leg b { display: grid; place-items: center; width: 24px; height: 24px; border: 1.5px solid var(--blue); border-radius: 50%; font: 500 12.5px/1 var(--display); color: var(--blue); transition: background .35s, color .35s; }
@@ -55,7 +55,7 @@
   .pg.l { border-radius: 3px 0 0 3px; background: linear-gradient(90deg, #fff 0, #fff 78%, #ededed 93%, #cfcfcf 100%); box-shadow: -1px 0 0 #e4e4e4, -2px 0 0 #fff, -3px 0 0 #d9d9d9, 0 1px 0 #e4e4e4, 0 2px 0 #fff, 0 3px 0 #d9d9d9; }
   .pg.r { transform-origin: left center; border-radius: 0 3px 3px 0; background: linear-gradient(270deg, #fff 0, #fff 78%, #ededed 93%, #cfcfcf 100%); box-shadow: 1px 0 0 #e4e4e4, 2px 0 0 #fff, 3px 0 0 #d9d9d9, 0 1px 0 #e4e4e4, 0 2px 0 #fff, 0 3px 0 #d9d9d9; transition: transform 1.5s var(--ease); }
   .vq { max-width: 30ch; color: var(--graphite); font: 400 clamp(13.5px, 2.5vw, 21px)/1.55 var(--text); text-wrap: balance; }
-  .pg cite { font: 400 clamp(9.5px, 1.5vw, 11.5px)/1.45 var(--text); font-style: normal; letter-spacing: .14em; text-transform: uppercase; text-align: center; color: var(--grey); }
+  .pg cite { font: 400 13px/1.45 var(--text); font-style: normal; letter-spacing: .01em; text-align: center; color: var(--grey); }
   .fo { position: absolute; left: 0; right: 0; bottom: clamp(10px, 2.4vw, 20px); text-align: center; font: 400 clamp(10px, 1.5vw, 12px)/1 var(--text); letter-spacing: .08em; color: var(--grey); }
   .rib { position: absolute; top: calc(100% - 8px); left: 50%; width: 8px; height: clamp(34px, 6vw, 50px); margin-left: 12px; background: var(--blue); clip-path: polygon(0 0, 100% 0, 100% 100%, 50% 82%, 0 100%); }
   .obook.pre .pg.r { transform: rotateY(-78deg); transition: none; }
@@ -63,5 +63,5 @@
 
   /* osobní citát */
   .quote { max-width: 30ch; font: 400 clamp(24px, 2.8vw, 36px)/1.25 var(--display); text-wrap: balance; }
-  .quote cite { display: block; margin-top: 14px; font: 400 11.5px/1 var(--text); font-style: normal; letter-spacing: .18em; text-transform: uppercase; color: var(--grey); }
+  .quote cite { display: block; margin-top: 14px; font: 400 13px/1 var(--text); font-style: normal; letter-spacing: .01em; color: var(--grey); }
 }

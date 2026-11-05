@@ -49,7 +49,7 @@ type Status = 'idle' | 'sending' | 'done';
 
 export default function Kontakt() {
   usePageMeta(
-    'Kontakt — pošlete mi svůj text | Kateřina Mlsnová',
+    'Kontakt – pošlete mi svůj text | Kateřina Mlsnová',
     'Napište mi, o jaký text jde a co od spolupráce čekáte. Odpovídám do 2 pracovních dnů. Posouzení textu i ukázková redakce zdarma.'
   );
 
@@ -181,12 +181,13 @@ export default function Kontakt() {
       <main>
         <section className="scene mdl" id="top" aria-labelledby="t-h">
           <div className="copy">
-            <p className="eyebrow">Kontakt</p>
             <h1 id="t-h">Pošlete mi svůj text. Nebo jen otázku.</h1>
-            <p className="lead">
-              Napište mi, o&nbsp;jaký text jde a&nbsp;co od spolupráce čekáte. Odpovídám do 2&nbsp;pracovních dnů a&nbsp;první krok — posouzení nebo
-              ukázková redakce — je vždy zdarma.
-            </p>
+            <p className="lead">Odpovídám do 2&nbsp;pracovních dnů, první krok je vždy zdarma.</p>
+            <div className="actions">
+              <a className="btn btn--fill" href="#pruvodce">
+                Napsat zprávu
+              </a>
+            </div>
           </div>
         </section>
 

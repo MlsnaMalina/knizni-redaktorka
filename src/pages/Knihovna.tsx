@@ -33,7 +33,7 @@ interface Last {
 
 export default function Knihovna() {
   usePageMeta(
-    'Knihovna — vydané knihy | Kateřina Mlsnová',
+    'Knihovna – vydané knihy | Kateřina Mlsnová',
     'Komentáře k zákonům, monografie a učebnice, které jsem redigovala pro nakladatelství Wolters Kluwer ČR. Filtrujte podle druhu a oblasti práva.'
   );
   const order = useMemo(libraryOrder, []);
@@ -139,12 +139,8 @@ export default function Knihovna() {
       <SiteHeader />
       <main>
         <section className="intro">
-          <p className="eyebrow">Knihovna</p>
           <h1>{booksText(BOOKS_TOTAL)} pro Wolters Kluwer</h1>
-          <p className="lead">
-            Komentáře k&nbsp;zákonům, monografie a&nbsp;učebnice z&nbsp;let {YEAR_FROM} až {YEAR_TO}. Všechny knihy spojuje jedna síť. Zvolte druh nebo oblast:
-            vybrané knihy se zvětší a&nbsp;síť je zvýrazní.
-          </p>
+          <p className="lead">Komentáře k&nbsp;zákonům, monografie a&nbsp;učebnice z&nbsp;let {YEAR_FROM} až {YEAR_TO}.</p>
           <div className="filters" role="group" aria-label="Filtr knihovny">
             {FILTERS.map((f) => (
               <button key={f.id} type="button" aria-pressed={f.id === filter} onClick={() => onFilter(f.id)}>

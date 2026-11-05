@@ -77,7 +77,7 @@ const CHAPTERS: Chapter[] = [
       <>
         <p className="cdesc">
           {nb(
-            'Každý rukopis potřebuje jinak hluboký zásah — proto nemám jednotný ceník za stranu. Cenu stanovuji podle rozsahu, stavu textu a typu práce, vždy předem a za celý projekt, ať víte, s čím počítat.'
+            'Každý rukopis potřebuje jinak hluboký zásah – proto nemám jednotný ceník za stranu. Cenu stanovuji podle rozsahu, stavu textu a typu práce, vždy předem a za celý projekt, ať víte, s čím počítat.'
           )}
         </p>
         <ol className="sl">
@@ -138,7 +138,7 @@ interface Running {
 
 export default function Sluzby() {
   usePageMeta(
-    'Služby — redakce odborných textů | Kateřina Mlsnová',
+    'Služby – redakce odborných textů | Kateřina Mlsnová',
     'Redakce odborných publikací, úprava profesních textů, revize AI textů a redakční konzultace. Ukázková redakce zdarma, cena předem za celý projekt.'
   );
   const rootRef = useRef<HTMLDivElement>(null);
@@ -198,12 +198,13 @@ export default function Sluzby() {
       <main>
         <section className="scene mdl" id="top" aria-labelledby="t-h">
           <div className="copy">
-            <p className="eyebrow">Moje služby</p>
             <h1 id="t-h">Od rukopisu k&nbsp;vydané knize. A&nbsp;ke všemu mezi tím.</h1>
-            <p className="lead">
-              Nejčastěji rediguji odborné a&nbsp;právní publikace — komentáře, učebnice, monografie. Pracuji ale i&nbsp;s&nbsp;kratšími profesními texty, AI
-              drafty a&nbsp;s&nbsp;autory, kteří zatím potřebují jen zkušený pohled zvenčí.
-            </p>
+            <p className="lead">Rediguji hlavně odborné a&nbsp;právní publikace, ale i&nbsp;kratší profesní texty.</p>
+            <div className="actions">
+              <Link className="btn btn--fill" to="/kontakt">
+                Chci ukázkovou redakci
+              </Link>
+            </div>
           </div>
         </section>
 

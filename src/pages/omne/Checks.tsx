@@ -37,7 +37,7 @@ const SEG: (string | [number, string])[] = [
 export const CHECKS: { title: string; text: string }[] = [
   {
     title: 'Jednotnost textu a jeho členění',
-    text: 'Jednotný styl celého textu, používání stejných zkratek a terminologie — stejná věc se jmenuje v první kapitole stejně jako v poslední.',
+    text: 'Jednotný styl celého textu, používání stejných zkratek a terminologie – stejná věc se jmenuje v první kapitole stejně jako v poslední.',
   },
   {
     title: 'Logika a návaznost',

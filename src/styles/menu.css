@@ -9,13 +9,13 @@ html.m-lock { overflow: hidden; }
   header.top.m-hid { translate: 0 -101%; }
   header.top nav.main { display: none; }
   .wrap { padding-top: var(--mh); }
-  .m-btn { display: inline-flex; align-items: center; padding: 10px 0 7px; border-bottom: 1px solid var(--ink); font-size: 11.5px; letter-spacing: .2em; text-transform: uppercase; color: var(--ink); transition: color .3s, border-color .3s; }
+  .m-btn { display: inline-flex; align-items: center; padding: 10px 0 7px; border-bottom: 1px solid var(--ink); font-size: 13px; letter-spacing: .01em; color: var(--ink); transition: color .3s, border-color .3s; }
   .m-ov { display: block; position: fixed; z-index: 65; inset: var(--mh) 0 0; padding: 26px var(--gut) 34px; overflow-y: auto; overscroll-behavior: contain; background: #fff; opacity: 0; visibility: hidden; translate: 0 -14px; transition: opacity .35s, translate .35s var(--ease), visibility .35s; }
   .m-ov.open { opacity: 1; visibility: visible; translate: 0 0; }
 }
 @media (hover: hover) { .m-btn:hover { color: var(--mint-ink); border-color: var(--mint); } }
 
-.m-l { display: flex; align-items: center; gap: 14px; font-size: 11px; letter-spacing: .32em; text-transform: uppercase; color: var(--grey); }
+.m-l { display: flex; align-items: center; gap: 14px; font-size: 13px; letter-spacing: .01em; color: var(--grey); }
 .m-l::before, .m-l::after { content: ''; flex: 1; height: 1px; background: var(--line); }
 .m-ol { list-style: none; margin-top: 6px; }
 .m-ol a { display: flex; align-items: flex-end; gap: 10px; padding: 17px 0 15px; text-decoration: none; color: var(--ink); }
