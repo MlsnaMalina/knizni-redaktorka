@@ -12,6 +12,11 @@
   .lay .b3.flat .b3-floor { inset: 0; transform: translate3d(10px, 16px, calc(var(--t) / -2 - 2px)); background: rgba(0, 0, 0, .3); filter: blur(11px); }
   @media (min-width: 1080px) { .art { top: 50%; translate: 0 -50%; } }
 
+  /* hero (5. 11. 2026): text stojí uprostřed mezi grafikou vlevo a čísly vpravo, ne uprostřed stránky. Grafika (list a kniha) je širší
+     než její rámeček, takže vycentrovaný text se jí na šířkách kolem 1500 px lepil na knihu. Posun o 0,34 šířky grafiky vyrovnal
+     mezery vlevo i vpravo (změřeno na 1100 až 2560 px). Nelze použít transform: čísla jsou uvnitř .copy a polohují se vůči části. */
+  @media (min-width: 1080px) { .scene.hero .copy { margin-left: calc(var(--art-w) * .68); } }
+
   /* hero: list rukopisu se při první návštěvě zredaguje (Rukopis, Změny, Čistopis), jinak stojí rovnou čistopis;
      kruhy a značka jako kolem knihkupectví, jen klidné */
   .dial { z-index: 0; overflow: visible; pointer-events: none; }
