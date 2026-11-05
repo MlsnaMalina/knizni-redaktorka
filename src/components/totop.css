@@ -1,0 +1,11 @@
+/* Šipka nahoru (5. 11. 2026): tlačítko Dvojitá linka (mátový obrys s druhou linkou uvnitř, neutrální stín) v kruhu vpravo dole.
+   Objeví se po odscrollování o kus dolů; pod mobilním menu (65) a hlavičkou (70), nad obsahem stránek. */
+/* .btn.totop: base.css se načítá až po této části, vyšší specificita zajistí, že .btn nepřebije polohu */
+.btn.totop { position: fixed; z-index: 40; right: max(16px, env(safe-area-inset-right)); bottom: max(16px, env(safe-area-inset-bottom)); width: 52px; height: 52px; min-height: 0; padding: 0;
+  opacity: 0; visibility: hidden; translate: 0 12px;
+  transition: opacity .35s var(--ease), visibility .35s, translate .35s var(--ease), transform .28s var(--ease), box-shadow .28s var(--ease), background-color .28s var(--ease); }
+.totop.on { opacity: 1; visibility: visible; translate: 0 0; }
+.totop svg { position: relative; width: 22px; height: 22px; fill: none; stroke: var(--ink); stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; transition: translate .28s var(--ease), stroke .28s var(--ease); }
+@media (hover: hover) { .totop:hover svg { translate: 0 -2px; stroke: var(--mint-ink); } }
+@media (min-width: 1100px) { .btn.totop { right: clamp(20px, 2.4vw, 40px); bottom: clamp(20px, 3.5vh, 40px); } }
+@media print { .totop { display: none; } }

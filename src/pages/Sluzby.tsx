@@ -2,7 +2,7 @@ import { useEffect, useRef, useState, type ReactNode } from 'react';
 import { Link } from 'react-router-dom';
 import { SAMPLE_LINK } from '../data/site';
 import { cx, nb } from '../lib/format';
-import { usePageMeta } from '../lib/hooks';
+import { usePageMeta, useRevealOnScroll } from '../lib/hooks';
 import { Ms } from '../components/Manuscript';
 import { SiteHeader } from '../components/SiteHeader';
 import { FAQ, LIMITS, PAGES, PRICE_STEPS, SERVICES, SHEETS, SIDE } from './sluzby/data';
@@ -20,7 +20,17 @@ function Cross() {
   return (
     <svg className="xm" viewBox="0 0 24 24" aria-hidden="true">
       <circle cx="12" cy="12" r="10.5" />
-      <path d="M8.5 8.5l7 7M15.5 8.5l-7 7" />
+      <path className="cr" d="M8.5 8.5l7 7M15.5 8.5l-7 7" />
+    </svg>
+  );
+}
+
+/** Fajfka v kolečku: kdy se spolupráce hodí. Kroužek a značka se při objevení dokreslí. */
+function Tick() {
+  return (
+    <svg className="xm" viewBox="0 0 24 24" aria-hidden="true">
+      <circle cx="12" cy="12" r="10.5" />
+      <path className="ck" d="M7.4 12.5l3.1 3.1 6.2-6.8" />
     </svg>
   );
 }
@@ -55,11 +65,18 @@ const CHAPTERS: Chapter[] = [
     h: s.toc,
     body: (
       <>
-        <p className="cdesc">{nb(s.d)}</p>
-        <p className="wh">Hodí se, když</p>
+        {s.d.split('\n').map((p, i) => (
+          <p key={p} className={cx('cdesc', i > 0 && 'cont')}>
+            {nb(p)}
+          </p>
+        ))}
+        <p className="wh">Hodí se, když:</p>
         <ul className="wl">
           {s.w.map((x) => (
-            <li key={x}>{nb(x)}</li>
+            <li key={x} className="rv">
+              <Tick />
+              <span>{nb(x)}</span>
+            </li>
           ))}
         </ul>
         {s.link && (
@@ -83,7 +100,7 @@ const CHAPTERS: Chapter[] = [
         </p>
         <ol className="sl">
           {PRICE_STEPS.map((t, i) => (
-            <li key={t}>
+            <li key={t} className="rv">
               <b>{i + 1}</b>
               <span>{nb(t)}</span>
             </li>
@@ -94,13 +111,13 @@ const CHAPTERS: Chapter[] = [
   },
   {
     k: 6,
-    toc: 'Moje role a hranice',
-    h: 'Text posunu. Autorem zůstáváte vy.',
+    toc: 'Autorem zůstáváte vy.',
+    h: 'Autorem zůstáváte vy.',
     body: (
       <>
         <ul className="sl">
           {LIMITS.map((t) => (
-            <li key={t}>
+            <li key={t} className="rv">
               <Cross />
               <span>{nb(t)}</span>
             </li>
@@ -145,6 +162,7 @@ export default function Sluzby() {
   const rootRef = useRef<HTMLDivElement>(null);
   const barRef = useRef<HTMLDivElement>(null);
   const [run, setRun] = useState<Running>({ on: false, title: '', num: '' });
+  useRevealOnScroll(rootRef);
 
   // živé záhlaví ukazuje kapitolu uprostřed obrazovky a postup čtením
   useEffect(() => {
@@ -199,8 +217,8 @@ export default function Sluzby() {
       <main>
         <section className="scene mdl" id="top" aria-labelledby="t-h">
           <div className="copy">
-            <h1 id="t-h">Od rukopisu k&nbsp;vydané knize. A&nbsp;ke všemu mezi tím.</h1>
-            <p className="lead">Rediguji hlavně odborné a&nbsp;právní publikace, ale i&nbsp;kratší profesní texty.</p>
+            <h1 id="t-h">{nb('Od konceptu k hotovému textu.')}</h1>
+            <p className="lead">{nb('Rediguji hlavně odborné (a právní) publikace, ale i kratší profesní texty (typu newslettery, e-booky apod.).')}</p>
             <div className="actions">
               <Link className="btn btn--fill" to={SAMPLE_LINK}>
                 Chci ukázkovou redakci
@@ -211,9 +229,8 @@ export default function Sluzby() {
 
         <section className="scene mdl" id="obsah" aria-labelledby="t-o">
           <div className="copy">
-            <p className="eyebrow">Obsah</p>
             <h2 className="ct" id="t-o">
-              Co pro vás mohu udělat
+              Co pro vás mohu udělat:
             </h2>
             <nav className="toc" aria-label="Obsah stránky">
               <p className="toc-g">Služby</p>

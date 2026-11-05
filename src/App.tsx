@@ -1,6 +1,7 @@
 import { Navigate, Route, Routes } from 'react-router-dom';
 import { ScrollToTop } from './components/ScrollToTop';
 import { SiteFooter } from './components/SiteFooter';
+import { ToTop } from './components/ToTop';
 import { COOKIES_PATH, PRIVACY_PATH } from './data/site';
 import Cookies from './pages/Cookies';
 import Zasady from './pages/Zasady';
@@ -28,6 +29,7 @@ export default function App() {
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
       <SiteFooter />
+      <ToTop />
     </>
   );
 }

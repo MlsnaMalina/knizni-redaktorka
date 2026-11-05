@@ -17,14 +17,24 @@
   .big .copy .ct { font-size: clamp(34px, 4.4vw, 60px); }
   .cdesc { margin-top: 20px; max-width: 46ch; font-size: clamp(16px, 1.25vw, 18px); color: var(--graphite); text-wrap: pretty; }
   .cdesc.sm { margin-top: 22px; font-size: 15px; }
+  .cdesc.cont { margin-top: 12px; }
   .wh { margin-top: 30px; font-size: 13px; letter-spacing: .01em; color: var(--grey); }
-  .wl { list-style: none; width: min(100%, 520px); margin-top: 10px; border-top: 1px solid var(--line); }
-  .wl li { padding: 11px 0 12px; border-bottom: 1px solid var(--line); font-size: 15.5px; line-height: 1.5; color: var(--graphite); }
+  .wl { list-style: none; width: min(100%, 520px); margin-top: 10px; text-align: left; border-top: 1px solid var(--line); }
+  .wl li { display: grid; grid-template-columns: 24px 1fr; gap: 14px; align-items: start; padding: 12px 0 13px; border-bottom: 1px solid var(--line); font-size: 15.5px; line-height: 1.5; color: var(--graphite); }
   .lk { margin-top: 28px; }
   .sl { list-style: none; width: min(100%, 520px); margin-top: 26px; text-align: left; border-bottom: 1px solid var(--line); }
   .sl li { display: grid; grid-template-columns: 24px 1fr; gap: 14px; padding: 13px 0 14px; border-top: 1px solid var(--line); font-size: 15.5px; line-height: 1.5; color: var(--graphite); }
-  .sl .xm { width: 24px; height: 24px; fill: none; stroke: var(--blue); stroke-width: 1.5; stroke-linecap: round; }
+  .sl .xm, .wl .xm { width: 24px; height: 24px; fill: none; stroke: var(--blue); stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
   .chap { min-height: 90svh; }
+
+  /* postupné načítání při posunu stránky (useRevealOnScroll): položky seznamů se objevují jedna po druhé, kroužek a značka se dokreslí */
+  .rv { opacity: 0; translate: 0 12px; transition: opacity .6s var(--ease) var(--rd, 0ms), translate .6s var(--ease) var(--rd, 0ms); }
+  .rv[data-in] { opacity: 1; translate: 0 0; }
+  .rv .xm circle { stroke-dasharray: 66; stroke-dashoffset: 66; transition: stroke-dashoffset .7s var(--ease) calc(var(--rd, 0ms) + 100ms); }
+  .rv .xm .ck { stroke-dasharray: 14; stroke-dashoffset: 14; transition: stroke-dashoffset .45s var(--ease) calc(var(--rd, 0ms) + 450ms); }
+  .rv .xm .cr { stroke-dasharray: 10; stroke-dashoffset: 10; transition: stroke-dashoffset .45s var(--ease) calc(var(--rd, 0ms) + 450ms); }
+  .rv[data-in] .xm circle, .rv[data-in] .xm path { stroke-dashoffset: 0; }
+  @media print { .rv { opacity: 1; translate: none; } .rv .xm circle, .rv .xm path { stroke-dashoffset: 0; } }
 
   /* obsah */
   .toc { width: min(100%, 560px); margin-top: 22px; text-align: left; }
@@ -67,6 +77,7 @@
   /* na telefonu je list ořezaný náhled stránky a kapitoly stojí blíž k sobě, aby stránka nebyla zbytečně dlouhá */
   @media (max-width: 720px) {
     .scn .sheet { aspect-ratio: 1 / 1.02; }
+    #k3 .sheet { aspect-ratio: 1 / 1.414; } /* ukázka s chybami AI je delší: poznámka ji nesmí zakrýt */
     #top { min-height: 0; }
     #obsah { min-height: 0; padding-block: 40px 64px; }
     .chap { min-height: 0; padding-block: 52px; }

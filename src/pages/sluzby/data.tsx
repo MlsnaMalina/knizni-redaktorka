@@ -47,16 +47,17 @@ export const SHEETS: Record<number, SheetSample> = {
   3: {
     sheet: (
       <>
-        <p className="run">Koncept · vytvořeno s&nbsp;pomocí AI</p>
+        <p className="run">Koncept · vytvořeno s&nbsp;pomocí&nbsp;AI</p>
         <p>
           <del>V&nbsp;dnešní rychle se měnící době je nesmírně důležité zdůraznit, že podle nejnovějších studií</del> <ins>Podle interního měření</ins> nový
-          postup příjmu zkrátil vyřízení o&nbsp;18&nbsp;%.
+          postup příjmu zkrátil vyřízení o&nbsp;<del>18%</del> <ins>18&nbsp;%</ins>.
         </p>
         <p>
-          Zavedení <del>bylo velmi úspěšné a&nbsp;přineslo řadu pozitivních výsledků</del> <ins>stálo 50&nbsp;000&nbsp;Kč</ins>.
+          Postup nazýváme <del>“rychlý příjem”</del> <ins>„rychlý příjem“</ins> <del>—</del> <ins>–</ins> jeho zavedení{' '}
+          <del>bylo velmi úspěšné a&nbsp;přineslo řadu pozitivních výsledků</del> <ins>stálo 50&nbsp;000&nbsp;Kč</ins>.
         </p>
         <p>
-          Postup odpovídá <del>všem relevantním normám</del> <ins>normě ISO 9001</ins>.
+          <del>Nicméně, postup</del> <ins>Postup</ins> odpovídá <del>všem relevantním normám</del> <ins>normě ISO 9001</ins>.
         </p>
       </>
     ),
@@ -121,13 +122,13 @@ export interface Service {
 export const SERVICES: Service[] = [
   {
     k: 1,
-    toc: 'Redakce odborných publikací',
-    d: 'Kompletní redakce rukopisu: struktura a logika výkladu, terminologická a formální jednotnost, jazyková a stylistická kultivace, typografie, kontrola citací a odkazů, připomínky autorovi. Pracuji v režimu sledování změn – autor má nad každou úpravou kontrolu.',
+    toc: 'Redakce (odborných) publikací',
+    d: 'Kompletní redakce rukopisu zahrnuje: kontrolu a úpravu struktury a logiky výkladu, terminologickou a formální jednotnost, jazykovou a stylistickou kultivaci, dodržování typografických pravidel, kontrolu citací a odkazů + připomínky autorovi.\nVždy pracuji v režimu sledování změn, takže autor má nad každou úpravou plnou kontrolu.',
     w: ['připravujete komentář, učebnici, monografii nebo odborný e-book', 'rukopis vzniká od většího autorského kolektivu a potřebuje sjednotit', 'text má projít nakladatelstvím, recenzním řízením nebo odbornou oponenturou'],
   },
   {
     k: 2,
-    toc: 'Úprava profesních a odborných textů',
+    toc: 'Úprava (profesních a odborných) textů',
     d: 'Odborné články, newslettery, texty na web, profesní medailonky a doprovodné materiály. Cílem je text, který reprezentuje – přesný, kultivovaný a přirozený. Právě u kratších textů rozhoduje každá věta o tom, jak budete působit na čtenáře, klienta nebo odbornou komunitu.',
     w: ['odborné sdělení potřebuje jasnější formulaci', 'text má obstát i před náročným čtenářem', 'výstup reprezentuje vás nebo vaši instituci navenek'],
   },
@@ -141,7 +142,7 @@ export const SERVICES: Service[] = [
   {
     k: 4,
     toc: 'Redakční konzultace k textu',
-    d: 'Posouzení rukopisu nebo textu: silná a slabá místa, nejasnosti, strukturální problémy – a doporučení, co upravit jako první a co už řešit nemusíte. Dostanete jasný plán práce místo vágního pocitu, že „by to chtělo ještě projít“.',
+    d: 'Posouzení rukopisu nebo textu: zhodnotím silná a slabá místa textu, jeho nejasnosti a strukturální problémy a doplním doporučení, co upravit jako první, nebo co už řešit nemusíte. Dostanete jasný plán práce místo nejasného pocitu, že „by to chtělo ještě projít“.',
     w: ['si nejste jistí, v jakém stavu text vlastně je', 'chcete nezávislé posouzení před odevzdáním nebo publikací', 'část práce si uděláte sami a potřebujete jen jasný směr'],
   },
 ];
@@ -149,13 +150,13 @@ export const SERVICES: Service[] = [
 export const PRICE_STEPS = [
   'Pošlete mi text nebo jeho část.',
   'Do 2–3 pracovních dnů dostanete konkrétní nabídku – rozsah práce, termín a cenu.',
-  'Posouzení textu i ukázková redakce několika stran jsou zdarma a k ničemu vás nezavazují.',
+  'Posouzení textu i ukázková redakce několika stran (pokud se na ni domluvíme) jsou zdarma a k ničemu vás nezavazují.',
 ];
 
 export const LIMITS = [
   'Nepíšu text na klíč místo autora.',
   'Nepřebírám odbornou odpovědnost za obsah.',
-  'Nenahrazuji autorskou práci, ale pomáhám text dovést na vyšší úroveň.',
+  'Nenahrazuji autorskou práci, ale pomáhám text sjednotit a doplnit tak, abyste s ním byli spokojeni.',
 ];
 
 export const FAQ: [string, string][] = [
@@ -165,7 +166,7 @@ export const FAQ: [string, string][] = [
   ['Co když s navrženou úpravou nesouhlasím?', 'Pak platí vaše verze. Jsem redaktorka, ne spoluautorka – návrhy zdůvodňuji, ale rozhodnutí je vždy na vás.'],
   ['Jak dlouho redakce trvá?', 'Podle rozsahu a stavu textu – kratší text dny, rozsáhlý rukopis týdny. Termín je vždy součástí nabídky a platí.'],
   ['Kolik to stojí?', 'Cenu stanovuji předem za celý projekt podle rozsahu a stavu textu. První krok – posouzení i ukázková redakce – je zdarma, takže nabídku dostanete dřív, než se k čemukoli zavážete.'],
-  ['Spolupracujete i s nakladatelstvími a institucemi?', 'Ano. Devět let rediguji knihy pro nakladatelství Wolters Kluwer ČR a externí redakce nabízím i dalším nakladatelstvím, profesním organizacím a odborným institucím.'],
+  ['Spolupracujete i s nakladatelstvími a institucemi?', 'Ano. Deset let rediguji knihy pro nakladatelství Wolters Kluwer ČR a externí redakce nabízím i dalším nakladatelstvím, profesním organizacím a odborným institucím.'],
   ['Upravujete i dizertační a jiné kvalifikační práce?', 'Nabízím jazykovou a redakční kultivaci textu v mezích pravidel dané univerzity – strukturu, jednotnost, formulace, citace. Obsah, odborné závěry a autorství zůstávají vždy plně na autorovi.'],
 ];
 
