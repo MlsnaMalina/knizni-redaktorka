@@ -12,13 +12,13 @@
   .cno b, .toc b, .sl b { flex: none; display: grid; place-items: center; width: 24px; height: 24px; border: 1.5px solid var(--blue); border-radius: 50%; font: 500 12.5px/1 var(--display); letter-spacing: 0; color: var(--blue); }
   .pl::before, .pl::after { content: ''; grid-area: 1 / 1; width: 9px; height: 1.5px; background: var(--blue); }
   .pl::after { rotate: 90deg; }
-  .cno { display: flex; align-items: center; justify-content: center; gap: 12px; font-size: 13px; letter-spacing: .01em; color: var(--grey); }
+  .cno { display: flex; align-items: center; justify-content: center; gap: 12px; font-size: 13px; letter-spacing: .01em; color: var(--blue); }
   .copy .ct { margin-top: 20px; font: 400 clamp(28px, 3.4vw, 46px)/1.06 var(--display); letter-spacing: -.02em; max-width: 20ch; text-wrap: balance; }
   .big .copy .ct { font-size: clamp(34px, 4.4vw, 60px); }
   .cdesc { margin-top: 20px; max-width: 46ch; font-size: clamp(16px, 1.25vw, 18px); color: var(--graphite); text-wrap: pretty; }
   .cdesc.sm { margin-top: 22px; font-size: 15px; }
   .cdesc.cont { margin-top: 12px; }
-  .wh { margin-top: 30px; font-size: 13px; letter-spacing: .01em; color: var(--grey); }
+  .wh { margin-top: 30px; font-size: 13px; letter-spacing: .01em; color: var(--blue); }
   .wl { list-style: none; width: min(100%, 520px); margin-top: 10px; text-align: left; border-top: 1px solid var(--line); }
   .wl li { display: grid; grid-template-columns: 24px 1fr; gap: 14px; align-items: start; padding: 12px 0 13px; border-bottom: 1px solid var(--line); font-size: 15.5px; line-height: 1.5; color: var(--graphite); }
   .lk { margin-top: 28px; }

@@ -72,10 +72,13 @@ const CHAPTERS: Chapter[] = [
         ))}
         <p className="wh">Hodí se, když:</p>
         <ul className="wl">
-          {s.w.map((x) => (
+          {s.w.map((x, i) => (
             <li key={x} className="rv">
               <Tick />
-              <span>{nb(x)}</span>
+              <span>
+                {nb(x)}
+                {i < s.w.length - 1 ? ',' : '.'}
+              </span>
             </li>
           ))}
         </ul>
@@ -111,8 +114,8 @@ const CHAPTERS: Chapter[] = [
   },
   {
     k: 6,
-    toc: 'Autorem zůstáváte vy.',
-    h: 'Autorem zůstáváte vy.',
+    toc: 'Autorem zůstáváte vy',
+    h: 'Autorem zůstáváte vy',
     body: (
       <>
         <ul className="sl">
@@ -290,10 +293,10 @@ export default function Sluzby() {
               Příloha
             </p>
             <h2 className="ct" id="t-zaver">
-              Pošlete mi kapitolu. Uvidíte, co s&nbsp;textem udělám.
+              {nb('Pošlete mi svůj text. Podíváme se, jak by se dal zdokonalit.')}
             </h2>
             <p className="cdesc">
-              U&nbsp;nových klientů začínám ukázkovou redakcí několika stran zdarma. Vy uvidíte můj styl práce, já stav vašeho textu.
+              {nb('U nových klientů většinou začínám ukázkovou redakcí několika stran zdarma. Vy uvidíte můj styl práce, já stav vašeho textu.')}
             </p>
             <div className="actions">
               <Link className="btn btn--fill" to={SAMPLE_LINK}>

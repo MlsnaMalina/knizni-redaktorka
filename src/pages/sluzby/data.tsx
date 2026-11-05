@@ -99,7 +99,7 @@ export const SHEETS: Record<number, SheetSample> = {
           <i />
         </p>
         <p>
-          Posouzení textu a&nbsp;ukázková redakce: <ins>zdarma</ins>.
+          Posouzení textu a&nbsp;ukázková redakce (po&nbsp;dohodě) <ins>zdarma</ins>.
         </p>
       </>
     ),
