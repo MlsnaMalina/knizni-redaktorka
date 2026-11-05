@@ -40,11 +40,20 @@ nav.main a:hover { color: var(--mint-ink); }
 h2.eyebrow { font-family: var(--text); font-weight: 400; } /* popisek části, který je zároveň její nadpis */
 h1, h2 { font-family: var(--display); font-weight: 400; letter-spacing: -.02em; text-wrap: balance; }
 h1, h2, .facts b { font-variation-settings: 'opsz' 18 !important; } /* nižší optická velikost: tenké čáry velkých nadpisů zůstávají vidět; !important, protože zkratka font: ve stránkách nastavení vrací */
-.btn { display: inline-flex; align-items: center; justify-content: center; min-height: 50px; padding: 0 26px; border: 1px solid var(--ink); font-size: 13px; letter-spacing: .01em; text-decoration: none; transition: background .4s var(--ease), color .4s var(--ease); }
-.btn--fill { background: var(--mint); border-color: var(--mint); color: var(--ink); }
-.btn--fill:hover { background: var(--ink); border-color: var(--ink); color: #fff; }
-.btn--line:hover { background: var(--mint); border-color: var(--mint); color: var(--ink); }
-.btn:disabled { opacity: .55; cursor: default; }
+/* tlačítko Dvojitá linka (5. 11. 2026): bílá výplň, mátový obrys s druhou tenkou linkou uvnitř, plné zaoblení (konce jako kruhy na webu),
+   stín neutrální a doprava dolů jako u knih; vedlejší tlačítko (.btn--line) jen tenký šedý obrys bez stínu */
+.btn { --sh0: 1px 2px 2px rgba(11, 11, 11, .1), 5px 10px 18px -10px rgba(11, 11, 11, .4); --sh1: 1px 3px 3px rgba(11, 11, 11, .1), 8px 16px 26px -12px rgba(11, 11, 11, .45); --sh2: 0 1px 1px rgba(11, 11, 11, .12), 2px 3px 6px -3px rgba(11, 11, 11, .35);
+  position: relative; display: inline-flex; align-items: center; justify-content: center; min-height: 52px; padding: 0 30px; border: 2px solid var(--mint); border-radius: 999px; background-color: var(--paper); color: var(--ink);
+  font-size: 15px; line-height: 1; letter-spacing: .01em; text-decoration: none; cursor: pointer; box-shadow: var(--sh0); transition: transform .28s var(--ease), box-shadow .28s var(--ease), background-color .28s var(--ease); }
+.btn::before { content: ''; position: absolute; inset: 4px; border: 1px solid rgba(24, 163, 131, .5); border-radius: 999px; pointer-events: none; transition: border-color .28s var(--ease); }
+.btn:active { transform: translateY(1px); background-color: color-mix(in srgb, var(--mint) 14%, var(--paper)); box-shadow: var(--sh2); }
+.btn:focus-visible { outline-color: var(--blue); }
+@media (hover: hover) { .btn--fill:not(:disabled):hover { transform: translateY(-2px); background-color: color-mix(in srgb, var(--mint) 9%, var(--paper)); box-shadow: var(--sh1); } .btn--fill:not(:disabled):hover::before { border-color: rgba(24, 163, 131, .9); } }
+.btn--line { border: 1.5px solid rgba(11, 11, 11, .32); background-color: transparent; box-shadow: none; }
+.btn--line::before { display: none; }
+.btn--line:active { transform: none; background-color: transparent; border-color: var(--ink); box-shadow: none; }
+@media (hover: hover) { .btn--line:hover { border-color: var(--ink); } }
+.btn:disabled { opacity: .55; box-shadow: none; cursor: default; }
 .textlink { font-size: 13px; letter-spacing: .01em; text-decoration: none; padding-bottom: 4px; color: var(--mint-ink); border-bottom: 1px solid var(--mint); transition: border-color .3s; }
 .textlink:hover { border-color: var(--blue); }
 
