@@ -22,9 +22,12 @@
   /* výloha: mřížka obálek, uprostřed stojan s vybranou knihou */
   .vitrine { --n: 15; position: relative; display: grid; grid-template-columns: repeat(var(--n), minmax(0, 1fr)); gap: 18px; grid-auto-flow: dense; margin: 30px 0 clamp(56px, 8vw, 110px); }
   .cv { position: relative; z-index: 2; display: block; aspect-ratio: 7 / 10; box-shadow: 0 1px 2px rgba(0, 0, 0, .12), 0 8px 14px -10px rgba(0, 0, 0, .4); transition: opacity .5s var(--ease), box-shadow .4s var(--ease); }
-  .cv > span { position: absolute; inset: 0; overflow: hidden; display: block; filter: grayscale(1) contrast(.94) brightness(1.05); transition: filter .6s var(--ease); }
+  /* barva (5. 11. 2026): při Vše jsou všechny obálky v plné barvě; při filtru zůstávají vybrané barevné a zvětšené,
+     nevybrané vyblednou do světle šedé; kniha na stojanu a kniha pod myší jsou barevné vždy */
+  .cv > span { position: absolute; inset: 0; overflow: hidden; display: block; transition: filter .6s var(--ease); }
   .cv.big { grid-column: span 2; grid-row: span 2; }
-  .cv.big > span, .cv.sel > span { filter: none; }
+  .cv.dim > span { filter: grayscale(1) contrast(.94) brightness(1.05); }
+  .cv.sel > span { filter: none; }
   .cv.dim { z-index: 0; opacity: .16; box-shadow: none; }
   @media (hover: hover) { .cv:not(.dim):hover { box-shadow: 0 2px 3px rgba(0, 0, 0, .14), 0 16px 22px -12px rgba(0, 0, 0, .5); } .cv:hover > span { filter: none; } }
   .cv.sel { outline: 2px solid var(--blue); outline-offset: 3px; }
