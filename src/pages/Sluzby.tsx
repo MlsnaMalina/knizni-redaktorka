@@ -293,7 +293,7 @@ export default function Sluzby() {
               Příloha
             </p>
             <h2 className="ct" id="t-zaver">
-              {nb('Pošlete mi svůj text. Podíváme se, jak by se dal zdokonalit.')}
+              {nb('Pošlete mi svůj text. Společně zjistíme, kam ho lze posunout.')}
             </h2>
             <p className="cdesc">
               {nb('U nových klientů většinou začínám ukázkovou redakcí několika stran zdarma. Vy uvidíte můj styl práce, já stav vašeho textu.')}

@@ -67,8 +67,14 @@
   .scn .ms.note-right .note { top: auto; bottom: 7%; left: 30%; width: 70%; }
   .scn .ms.note-left .note { top: auto; bottom: 7%; left: auto; right: 30%; width: 70%; }
   @media (min-width: 1080px) {
-    .scn .copy { position: static; }
+    .scn .copy { position: static; width: min(100%, 700px); }
     .scn .art { top: 50%; translate: 0 -50%; }
+    /* text kapitol vedle listu (varianta B, 5. 11. 2026): střed textu se posune do volného místa vedle listu a sloupec je širší,
+       aby se položky seznamů nelámaly po jednom slově; u kapitol bez listu (6, 7, příloha) zůstává text na středu stránky */
+    .scn[data-side="left"] .copy { margin-left: calc(var(--art-w) + 28px - .5vw); }
+    .scn[data-side="right"] .copy { margin-right: calc(var(--art-w) + 28px - .5vw); }
+    .scn .wl, .scn .sl { width: min(100%, 640px); }
+    .scn .cdesc { max-width: 54ch; }
   }
   @media (max-width: 1079px) {
     .scene.scn[data-side] .art { position: relative; order: 0; left: auto; right: auto; justify-self: center; width: min(78vw, 300px); margin: 28px 0 2px; }
