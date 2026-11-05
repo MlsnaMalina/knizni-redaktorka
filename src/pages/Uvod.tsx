@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
-import { BOOKS_ROUND, YEARS_EDITING } from '../data/site';
+import { BOOKS_ROUND, SAMPLE_LINK, YEARS_EDITING } from '../data/site';
 import { createUvodNet, type UvodNet } from '../lib/uvod-net';
 import { useArtWidth, usePageMeta } from '../lib/hooks';
 import { SiteHeader } from '../components/SiteHeader';
@@ -106,7 +106,7 @@ export default function Uvod() {
               U&nbsp;nových klientů začínám ukázkovou redakcí několika stran zdarma. Vy uvidíte můj styl práce, já stav vašeho textu.
             </p>
             <div className="actions">
-              <Link className="btn btn--fill" to="/kontakt">
+              <Link className="btn btn--fill" to={SAMPLE_LINK}>
                 Chci ukázkovou redakci
               </Link>
             </div>

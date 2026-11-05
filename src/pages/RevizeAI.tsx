@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import { SAMPLE_LINK } from '../data/site';
 import { nb } from '../lib/format';
 import { usePageMeta } from '../lib/hooks';
 import { SiteHeader } from '../components/SiteHeader';
@@ -35,7 +36,7 @@ export default function RevizeAI() {
             <h1 id="t-h">AI napíše draft. Já z&nbsp;něj udělám text, za který se podepíšete.</h1>
             <p className="lead">Bez lidské redakce zůstává AI výstup jen základem.</p>
             <div className="actions">
-              <Link className="btn btn--fill" to="/kontakt">
+              <Link className="btn btn--fill" to={SAMPLE_LINK}>
                 Chci ukázkovou revizi
               </Link>
             </div>
@@ -97,7 +98,7 @@ export default function RevizeAI() {
             <h2 id="t-zaver">Máte AI draft? Pošlete mi ho.</h2>
             <p className="lead">Ukázková revize několika stran zdarma – uvidíte rozdíl dřív, než se rozhodnete.</p>
             <div className="actions">
-              <Link className="btn btn--fill" to="/kontakt">
+              <Link className="btn btn--fill" to={SAMPLE_LINK}>
                 Chci ukázkovou revizi
               </Link>
             </div>

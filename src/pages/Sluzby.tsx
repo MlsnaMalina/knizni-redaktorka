@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState, type ReactNode } from 'react';
 import { Link } from 'react-router-dom';
+import { SAMPLE_LINK } from '../data/site';
 import { cx, nb } from '../lib/format';
 import { usePageMeta } from '../lib/hooks';
 import { Ms } from '../components/Manuscript';
@@ -201,7 +202,7 @@ export default function Sluzby() {
             <h1 id="t-h">Od rukopisu k&nbsp;vydané knize. A&nbsp;ke všemu mezi tím.</h1>
             <p className="lead">Rediguji hlavně odborné a&nbsp;právní publikace, ale i&nbsp;kratší profesní texty.</p>
             <div className="actions">
-              <Link className="btn btn--fill" to="/kontakt">
+              <Link className="btn btn--fill" to={SAMPLE_LINK}>
                 Chci ukázkovou redakci
               </Link>
             </div>
@@ -278,7 +279,7 @@ export default function Sluzby() {
               U&nbsp;nových klientů začínám ukázkovou redakcí několika stran zdarma. Vy uvidíte můj styl práce, já stav vašeho textu.
             </p>
             <div className="actions">
-              <Link className="btn btn--fill" to="/kontakt">
+              <Link className="btn btn--fill" to={SAMPLE_LINK}>
                 Chci ukázkovou redakci
               </Link>
             </div>

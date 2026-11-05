@@ -5,6 +5,11 @@ export const MAIL = 'katerina@knizniredaktorka.cz';
 export const LINKEDIN = 'https://www.linkedin.com/in/katerinamlsnova';
 export const ICO = '22031383';
 
+/** Odkaz na Kontakt s předvolenou volbou „Ukázkovou redakci zdarma“ (tlačítka s ukázkovou redakcí na všech stránkách). */
+export const SAMPLE_PARAM = 'zamer';
+export const SAMPLE_VALUE = 'ukazka';
+export const SAMPLE_LINK = `/kontakt?${SAMPLE_PARAM}=${SAMPLE_VALUE}`;
+
 /** Roky praxe; před spuštěním v roce 2027 aktualizovat (plán E4). */
 export const YEARS_EDITING = 10;
 export const YEARS_LAW = 9;

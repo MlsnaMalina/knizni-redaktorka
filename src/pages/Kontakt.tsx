@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState, type ChangeEvent, type KeyboardEvent } from 'react';
-import { ICO, LINKEDIN, MAIL } from '../data/site';
+import { useSearchParams } from 'react-router-dom';
+import { ICO, LINKEDIN, MAIL, SAMPLE_PARAM, SAMPLE_VALUE } from '../data/site';
 import { cx, nb } from '../lib/format';
 import { reducedMotion, usePageMeta } from '../lib/hooks';
 import { SiteHeader } from '../components/SiteHeader';
@@ -14,8 +15,9 @@ const GDPR = 'Odesláním souhlasíte se zpracováním údajů pro účely odpov
 const CLOSING =
   'Pokud si nejste jistí, jestli je váš text pro tento typ spolupráce vhodný, klidně se ozvěte i tak. Společně ujasníme, co dává smysl řešit a co už ne.';
 const SEND_ERROR = 'Zprávu se nepodařilo odeslat. Zkuste to prosím znovu, nebo mi napište přímo na e-mail.';
+const SAMPLE = 'Ukázkovou redakci zdarma';
 // ukázková redakce zdarma je až poslední možnost (přání Kateřiny)
-const INTENTS = ['Nacenit text', 'Redakční konzultaci', 'Jen se zeptat', 'Ukázkovou redakci zdarma'];
+const INTENTS = ['Nacenit text', 'Redakční konzultaci', 'Jen se zeptat', SAMPLE];
 
 type Kind = 'choice' | 'text' | 'area' | 'who' | 'sum';
 
@@ -53,9 +55,12 @@ export default function Kontakt() {
     'Napište mi, o jaký text jde a co od spolupráce čekáte. Odpovídám do 2 pracovních dnů. Posouzení textu i ukázková redakce zdarma.'
   );
 
+  const [params] = useSearchParams();
+
   const [at, setAt] = useState(0);
   const [out, setOut] = useState(false);
-  const [ans, setAns] = useState<Answers>(EMPTY);
+  // tlačítka s ukázkovou redakcí vedou sem s ?zamer=ukazka: první otázka má volbu rovnou zaškrtnutou
+  const [ans, setAns] = useState<Answers>(() => ({ ...EMPTY, intent: params.get(SAMPLE_PARAM) === SAMPLE_VALUE ? SAMPLE : '' }));
   const [err, setErr] = useState('');
   const [status, setStatus] = useState<Status>('idle');
   const [copied, setCopied] = useState(false);

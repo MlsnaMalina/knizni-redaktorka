@@ -1,6 +1,6 @@
 import { useEffect, useRef, type RefObject } from 'react';
 import { Link } from 'react-router-dom';
-import { BOOKS_ROUND, YEARS_EDITING, YEARS_LAW } from '../data/site';
+import { BOOKS_ROUND, SAMPLE_LINK, YEARS_EDITING, YEARS_LAW } from '../data/site';
 import type { CSSVars } from '../lib/css';
 import { reducedMotion, usePageMeta } from '../lib/hooks';
 import { SiteHeader } from '../components/SiteHeader';
@@ -114,7 +114,7 @@ export default function OMne() {
               </li>
             </ul>
             <div className="actions">
-              <Link className="btn btn--fill" to="/kontakt">
+              <Link className="btn btn--fill" to={SAMPLE_LINK}>
                 Chci ukázkovou redakci
               </Link>
             </div>
@@ -196,7 +196,7 @@ export default function OMne() {
             <h2 id="t-zaver">Pošlete mi kapitolu. Uvidíte, co s&nbsp;textem udělám.</h2>
             <p className="lead">U&nbsp;nových klientů začínám ukázkovou redakcí několika stran zdarma. Vy uvidíte můj styl práce, já stav vašeho textu.</p>
             <div className="actions">
-              <Link className="btn btn--fill" to="/kontakt">
+              <Link className="btn btn--fill" to={SAMPLE_LINK}>
                 Chci ukázkovou redakci
               </Link>
             </div>
