@@ -74,11 +74,11 @@ export default function Uvod() {
             <h2 id="t-sluzby">Každý text potřebuje něco trochu jiného.</h2>
             <ul className="services">
               <li>
-                <h3>Redakce odborných publikací</h3>
+                <h3>Redakce (odborných) publikací</h3>
                 <p>Komentáře, učebnice a&nbsp;monografie od rukopisu až k&nbsp;vydání.</p>
               </li>
               <li>
-                <h3>Úprava profesních textů</h3>
+                <h3>Úprava (profesních a odborných) textů</h3>
                 <p>Články, newslettery a&nbsp;texty, které vás reprezentují navenek.</p>
               </li>
               <li>
