@@ -39,6 +39,7 @@ nav.main a:hover { color: var(--mint-ink); }
 .eyebrow::before { content: ''; flex: none; width: 28px; height: 2px; background: var(--blue); }
 h2.eyebrow { font-family: var(--text); font-weight: 400; } /* popisek části, který je zároveň její nadpis */
 h1, h2 { font-family: var(--display); font-weight: 400; letter-spacing: -.02em; text-wrap: balance; }
+h1, h2, .facts b { font-variation-settings: 'opsz' 18 !important; } /* nižší optická velikost: tenké čáry velkých nadpisů zůstávají vidět; !important, protože zkratka font: ve stránkách nastavení vrací */
 .btn { display: inline-flex; align-items: center; justify-content: center; min-height: 50px; padding: 0 26px; border: 1px solid var(--ink); font-size: 13px; letter-spacing: .01em; text-decoration: none; transition: background .4s var(--ease), color .4s var(--ease); }
 .btn--fill { background: var(--mint); border-color: var(--mint); color: var(--ink); }
 .btn--fill:hover { background: var(--ink); border-color: var(--ink); color: #fff; }
