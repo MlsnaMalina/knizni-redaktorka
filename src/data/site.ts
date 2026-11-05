@@ -10,6 +10,12 @@ export const SAMPLE_PARAM = 'zamer';
 export const SAMPLE_VALUE = 'ukazka';
 export const SAMPLE_LINK = `/kontakt?${SAMPLE_PARAM}=${SAMPLE_VALUE}`;
 
+/** Patička: jméno k ©, adresy stránek Cookies a Zásad a datum jejich znění (při každé změně textu aktualizovat). */
+export const OWNER = 'Kateřina Mlsnová';
+export const COOKIES_PATH = '/cookies';
+export const PRIVACY_PATH = '/zasady-osobnich-udaju';
+export const LEGAL_UPDATED = '5. 11. 2026';
+
 /** Roky praxe; před spuštěním v roce 2027 aktualizovat (plán E4). */
 export const YEARS_EDITING = 10;
 export const YEARS_LAW = 9;

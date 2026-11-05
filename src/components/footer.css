@@ -1,0 +1,61 @@
+/* Patička (5. 11. 2026). Pás s tituly knih = návrh B2 Protisměr: dvě řady v protisměru, tituly modře, titul uprostřed zčerná,
+   uprostřed ohnisko s modrou značkou. Pod ním © a IČO, cookies, zásady zpracování osobních údajů.
+   Pohyb je jen CSS: dvě stejné sady za sebou a posun o polovinu dělá bezešvou smyčku; délku (--d) nastaví SiteFooter z naměřené šířky. */
+.ft { position: relative; z-index: 1; background: var(--paper); }
+
+.ft-strip { --rh: 44px; --fs: 20px; --w: 240px; --soft: var(--blue); --hot: var(--ink); --sep: rgba(0, 47, 167, .4); padding-top: 50px; }
+.ft-rows { position: relative; display: grid; gap: 8px; }
+.ft-ring { position: absolute; left: 50%; top: 50%; width: 148px; height: 148px; margin: -74px 0 0 -74px; pointer-events: none; }
+.ft-ring circle { fill: none; }
+.ft-row { position: relative; height: var(--rh); overflow: hidden; touch-action: pan-y; }
+.ft-lay { position: absolute; inset: 0; display: flex; align-items: center; }
+.ft-ink { pointer-events: none; -webkit-mask-image: linear-gradient(90deg, transparent calc(50% - var(--w)), #000 calc(50% - var(--w) * .45), #000 calc(50% + var(--w) * .45), transparent calc(50% + var(--w))); mask-image: linear-gradient(90deg, transparent calc(50% - var(--w)), #000 calc(50% - var(--w) * .45), #000 calc(50% + var(--w) * .45), transparent calc(50% + var(--w))); }
+.ft-trk { display: flex; width: max-content; animation: ft-slide var(--d, 480s) linear infinite; will-change: transform; }
+.ft-row.rev .ft-trk { animation-direction: reverse; }
+.ft-set { display: flex; flex: none; }
+.ft-tt { position: relative; display: block; flex: none; padding: 0 28px; font: 400 var(--fs) / 1.2 var(--display); font-variation-settings: 'opsz' 18; letter-spacing: -.005em; color: var(--soft); text-decoration: none; white-space: nowrap; }
+.ft-ink .ft-tt { color: var(--hot); }
+.ft-tt::after { content: ''; position: absolute; right: -3px; top: 50%; width: 6px; height: 6px; border: 1.5px solid var(--sep); border-radius: 50%; transform: translateY(-50%); }
+.ft-ink .ft-tt::after { border-color: transparent; }
+.ft-tt:focus-visible { outline: 2px solid var(--blue); outline-offset: -2px; }
+.ft-dot { position: absolute; z-index: 2; left: 50%; top: 50%; width: 7px; height: 7px; margin: -3.5px 0 0 -3.5px; border-radius: 50%; background: var(--blue); }
+.ft-more { display: flex; justify-content: center; padding: 44px var(--gut) 0; }
+
+/* pohyb se zastaví při najetí myší, při zaostření klávesnicí, při držení prstu a mimo obrazovku */
+@media (hover: hover) {
+  .ft-lay:not(.ft-ink) .ft-tt:hover { color: var(--hot); }
+  .ft-row:hover .ft-trk { animation-play-state: paused; }
+}
+.ft-strip:focus-within .ft-trk, .ft-strip.is-held .ft-trk, .ft-strip.is-off .ft-trk { animation-play-state: paused; }
+@keyframes ft-slide { to { transform: translateX(-50%); } }
+
+.ft-info { padding: 46px var(--gut) 70px; text-align: center; font: 400 13.5px / 2.1 var(--text); color: var(--grey); }
+.ft--plain .ft-info { border-top: 1px solid var(--line); }
+.ft-fl { display: flex; flex-wrap: wrap; justify-content: center; align-items: baseline; }
+.ft-info i { font-style: normal; color: var(--blue); margin: 0 .75em; }
+.ft-info a { color: var(--graphite); text-decoration: none; padding-bottom: 2px; border-bottom: 1px solid #cfcfcf; transition: color .25s, border-color .25s; }
+.ft-info a:hover { color: var(--mint-ink); border-color: var(--mint); }
+
+@media (max-width: 720px) {
+  .ft-strip { --rh: 38px; --fs: 16px; --w: 130px; padding-top: 44px; }
+  .ft-rows { gap: 6px; }
+  .ft-tt { padding: 0 20px; }
+  .ft-ring { width: 120px; height: 120px; margin: -60px 0 0 -60px; }
+  .ft-more { padding-top: 38px; }
+  .ft-info { padding: 38px 16px 56px; }
+}
+
+/* bez pohybu (omezené animace v systému): tituly se ukážou staticky, vystředěné a zalomené */
+@media (prefers-reduced-motion: reduce) {
+  .ft-trk { width: auto; flex-wrap: wrap; justify-content: center; padding: 0 16px; }
+  .ft-set { flex: 0 1 auto; min-width: 0; flex-wrap: wrap; justify-content: center; }
+  .ft-trk .ft-set + .ft-set, .ft-ink { display: none; }
+  .ft-set .ft-tt:nth-child(n + 6) { display: none; }
+  .ft-row { height: auto; padding: 6px 0; }
+  .ft-lay { position: static; }
+  .ft-tt { flex: 0 1 auto; max-width: 100%; white-space: normal; text-align: center; }
+  .ft-tt::after, .ft-ring, .ft-dot { display: none; }
+}
+@media (prefers-reduced-motion: reduce) and (max-width: 720px) {
+  .ft-set .ft-tt:nth-child(n + 4) { display: none; }
+}

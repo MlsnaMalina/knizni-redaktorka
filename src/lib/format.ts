@@ -24,6 +24,7 @@ export const hash = (n: number): number => ((n * 2654435761) >>> 0) % 1000;
  */
 export const nb = (s: string): string =>
   s
+    .replace(/(e-)(mail)/gi, '$1⁠$2')
     .replace(/(?<=^|[\s(„])([aikosuvz])\s+/gi, '$1 ')
     .replace(/(\d)\s+(?=\p{L})/gu, '$1 ')
     .replace(/e-book/g, 'e-⁠book');
