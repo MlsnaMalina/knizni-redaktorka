@@ -6,6 +6,7 @@ import { useArtWidth, usePageMeta } from '../lib/hooks';
 import { SiteHeader } from '../components/SiteHeader';
 import { HeroArt, SluzbyArt, ZaverArt } from './uvod/Arts';
 import { Prace } from './uvod/Prace';
+import { ProKoho } from './uvod/ProKoho';
 import { Shop } from './uvod/Shop';
 import './uvod/uvod.css';
 
@@ -96,6 +97,8 @@ export default function Uvod() {
         </section>
 
         <Prace />
+
+        <ProKoho />
 
         <section className="scene" id="zaver" data-side="left" aria-labelledby="t-zaver">
           <ZaverArt aw={aw} />

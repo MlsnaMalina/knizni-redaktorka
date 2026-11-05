@@ -1,0 +1,22 @@
+/* Pro koho (návrh A Dvě strany): vlevo kdy spolupráce dává smysl (✓ v modrém kroužku), vpravo kdy ne (× v šedém);
+   mezi sloupci tečkovaná linka jako prošití, řádky s tenkými linkami jako volby na Kontaktu. */
+/* .copy.pk: scene.css zužuje .copy kvůli grafice po stranách; tahle část grafiku nemá, proto vyšší specificita */
+.copy.pk { width: min(100%, 960px); }
+.pk-cols { display: grid; grid-template-columns: 1.35fr 1fr; width: 100%; margin-top: clamp(32px, 5vh, 46px); text-align: left; }
+.pk ul { list-style: none; }
+.pk li { display: flex; gap: 16px; align-items: flex-start; padding: 18px 0; border-top: 1px solid var(--line); font-size: 19px; line-height: 1.5; color: var(--graphite); }
+.pk-yes { padding-right: 44px; }
+.pk-yes li:last-child { border-bottom: 1px solid var(--line); }
+.pk-no { padding-left: 44px; border-left: 1px dashed rgba(11, 11, 11, .3); }
+.pk-nh { padding: 18px 0; font-size: 15px; color: var(--grey); }
+.pk-no li { color: var(--grey); }
+.pk-no li:last-child { border-bottom: 1px solid var(--line); }
+.pk-mk { flex: none; width: 28px; height: 28px; margin-top: 1px; }
+
+@media (max-width: 720px) {
+  .pk-cols { grid-template-columns: 1fr; }
+  .pk-yes { padding-right: 0; }
+  .pk-no { padding: 24px 0 0; margin-top: 26px; border-left: 0; border-top: 1px dashed rgba(11, 11, 11, .3); }
+  .pk-nh { padding-top: 6px; }
+  .pk li { font-size: 17px; padding: 15px 0; }
+}
