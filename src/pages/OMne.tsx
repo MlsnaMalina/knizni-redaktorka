@@ -80,7 +80,7 @@ function useBookReveal(ref: RefObject<HTMLElement | null>) {
   }, [ref]);
 }
 
-/** Modrá tečka jednou oběhne prošitý kruh kolem portrétu: po načtení stránky a pak pokaždé, když na portrét najede myš. */
+/** Modrá tečka jednou oběhne prošitý kruh kolem portrétu: po načtení stránky a pak pokaždé, když na portrét najede myš nebo na něj klepne prst. */
 function useDotOrbit(figure: RefObject<HTMLElement | null>) {
   useEffect(() => {
     const el = figure.current;
@@ -91,14 +91,17 @@ function useDotOrbit(figure: RefObject<HTMLElement | null>) {
       if (run && run.playState === 'running') return;
       run = orb.animate([{ transform: 'rotate(0deg)' }, { transform: 'rotate(360deg)' }], { duration: 2000, easing: 'cubic-bezier(.55, 0, .2, 1)' });
     };
+    // myš: najetí; dotyk: klepnutí (pointerenter se u dotyku spustí už na začátku tahu prstem, i když chce uživatel jen posouvat stránku)
     const onEnter = (e: PointerEvent) => {
       if (e.pointerType === 'mouse') go();
     };
     const start = window.setTimeout(go, 700);
     el.addEventListener('pointerenter', onEnter);
+    el.addEventListener('click', go);
     return () => {
       window.clearTimeout(start);
       el.removeEventListener('pointerenter', onEnter);
+      el.removeEventListener('click', go);
       run?.cancel();
     };
   }, [figure]);
