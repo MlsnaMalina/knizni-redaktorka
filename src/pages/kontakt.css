@@ -61,7 +61,7 @@
 
   /* přímý kontakt */
   .direct { display: grid; justify-items: center; gap: 6px; }
-  .dl { font-size: 13px; letter-spacing: .01em; color: var(--grey); }
+  .dl { font-size: 13px; letter-spacing: .01em; color: var(--blue); }
   .mail { color: var(--ink); text-decoration: none; font: 400 clamp(22px, 5.2vw, 44px)/1.2 var(--display); letter-spacing: -.01em; overflow-wrap: anywhere; }
   @media (hover: hover) { .mail:hover { color: var(--mint-ink); } }
   .dm { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px 24px; margin-top: 8px; }

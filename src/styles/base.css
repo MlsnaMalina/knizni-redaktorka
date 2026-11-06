@@ -35,7 +35,8 @@ nav.main a { white-space: nowrap; text-decoration: none; padding-bottom: 3px; bo
 nav.main a[aria-current] { border-bottom: 2px solid var(--blue); }
 nav.main a:hover { color: var(--mint-ink); }
 
-.eyebrow { display: flex; align-items: center; gap: 12px; font-size: 13px; letter-spacing: .01em; color: var(--grey); }
+/* drobné nadpisy a popisky nad bloky jsou všude modré (6. 11. 2026): .eyebrow, .pk-nh, .m-l, .cno, .wh, .toc-g, .lab, .dl */
+.eyebrow { display: flex; align-items: center; gap: 12px; font-size: 13px; letter-spacing: .01em; color: var(--blue); }
 .eyebrow::before { content: ''; flex: none; width: 28px; height: 2px; background: var(--blue); }
 h2.eyebrow { font-family: var(--text); font-weight: 400; } /* popisek části, který je zároveň její nadpis */
 h1, h2 { font-family: var(--display); font-weight: 400; letter-spacing: -.02em; text-wrap: balance; }

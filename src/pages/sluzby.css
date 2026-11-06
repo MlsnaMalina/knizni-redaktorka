@@ -15,6 +15,7 @@
   .cno { display: flex; align-items: center; justify-content: center; gap: 12px; font-size: 13px; letter-spacing: .01em; color: var(--blue); }
   .copy .ct { margin-top: 20px; font: 400 clamp(28px, 3.4vw, 46px)/1.06 var(--display); letter-spacing: -.02em; max-width: 20ch; text-wrap: balance; }
   .big .copy .ct { font-size: clamp(34px, 4.4vw, 60px); }
+  .csub { margin-top: 14px; max-width: 40ch; font-size: clamp(16px, 1.3vw, 19px); line-height: 1.5; color: var(--ink); text-wrap: balance; }
   .cdesc { margin-top: 20px; max-width: 46ch; font-size: clamp(16px, 1.25vw, 18px); color: var(--graphite); text-wrap: pretty; }
   .cdesc.sm { margin-top: 22px; font-size: 15px; }
   .cdesc.cont { margin-top: 12px; }
@@ -38,7 +39,7 @@
 
   /* obsah */
   .toc { width: min(100%, 560px); margin-top: 22px; text-align: left; }
-  .toc-g { display: flex; align-items: center; gap: 14px; margin-top: 26px; font-size: 13px; letter-spacing: .01em; color: var(--grey); }
+  .toc-g { display: flex; align-items: center; gap: 14px; margin-top: 26px; font-size: 13px; letter-spacing: .01em; color: var(--blue); }
   .toc-g:first-child { margin-top: 0; }
   .toc-g::after { content: ''; flex: 1; height: 1px; background: var(--line); }
   .toc ol { list-style: none; }

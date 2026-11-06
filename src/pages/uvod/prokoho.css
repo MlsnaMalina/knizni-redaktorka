@@ -8,7 +8,7 @@
 .pk-yes { padding-right: 44px; }
 .pk-yes li:last-child { border-bottom: 1px solid var(--line); }
 .pk-no { padding-left: 44px; border-left: 1px dashed rgba(11, 11, 11, .3); }
-.pk-nh { padding: 18px 0; font-size: 15px; color: var(--grey); }
+.pk-nh { padding: 18px 0; font-size: 15px; color: var(--blue); }
 .pk-no li { color: var(--grey); }
 .pk-no li:last-child { border-bottom: 1px solid var(--line); }
 .pk-mk { flex: none; width: 28px; height: 28px; margin-top: 1px; }

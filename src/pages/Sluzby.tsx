@@ -12,6 +12,7 @@ interface Chapter {
   k: number;
   toc: string;
   h: string;
+  sub?: string;
   body: ReactNode;
 }
 
@@ -69,6 +70,7 @@ const CHAPTERS: Chapter[] = [
     k: s.k,
     toc: s.toc,
     h: s.toc,
+    sub: s.sub,
     body: (
       <>
         {s.d.split('\n').map((p, i) => (
@@ -279,6 +281,7 @@ export default function Sluzby() {
                 <h2 className="ct" id={`h-k${c.k}`}>
                   {nb(c.h)}
                 </h2>
+                {c.sub && <p className="csub">{nb(c.sub)}</p>}
                 {sample && side && (
                   <div className="art" aria-hidden="true">
                     <Ms noteSide={side === 'left' ? 'right' : 'left'} note={nb(sample.note)}>

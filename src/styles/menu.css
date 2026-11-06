@@ -15,7 +15,7 @@ html.m-lock { overflow: hidden; }
 }
 @media (hover: hover) { .m-btn:hover { color: var(--mint-ink); border-color: var(--mint); } }
 
-.m-l { display: flex; align-items: center; gap: 14px; font-size: 13px; letter-spacing: .01em; color: var(--grey); }
+.m-l { display: flex; align-items: center; gap: 14px; font-size: 13px; letter-spacing: .01em; color: var(--blue); }
 .m-l::before, .m-l::after { content: ''; flex: 1; height: 1px; background: var(--line); }
 .m-ol { list-style: none; margin-top: 6px; }
 .m-ol a { display: flex; align-items: flex-end; gap: 10px; padding: 17px 0 15px; text-decoration: none; color: var(--ink); }

@@ -16,7 +16,7 @@
   .line { list-style: none; display: grid; width: min(100%, 560px); }
   .stn, .blk { display: grid; justify-items: center; gap: 12px; text-align: center; }
   .far { margin-top: clamp(84px, 14vh, 130px); }
-  .lab { font-size: 13px; letter-spacing: .01em; color: var(--grey); }
+  .lab { font-size: 13px; letter-spacing: .01em; color: var(--blue); }
   .stn h2 { font: 400 clamp(28px, 3.2vw, 42px)/1.05 var(--display); letter-spacing: -.01em; text-wrap: balance; }
   .stp h2 { font-size: clamp(24px, 2.7vw, 34px); line-height: 1.12; }
   .blk h2 { font: 400 clamp(28px, 3.4vw, 46px)/1.06 var(--display); letter-spacing: -.02em; max-width: 20ch; text-wrap: balance; }

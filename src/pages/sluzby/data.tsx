@@ -113,6 +113,8 @@ export const SIDE: Record<number, 'left' | 'right'> = { 1: 'left', 2: 'right', 3
 export interface Service {
   k: number;
   toc: string;
+  /** Řádek pod nadpisem kapitoly: jaké druhy textů služba zahrnuje. */
+  sub?: string;
   d: string;
   w: string[];
   link?: string;
@@ -129,6 +131,7 @@ export const SERVICES: Service[] = [
   {
     k: 2,
     toc: 'Úprava (profesních a odborných) textů',
+    sub: 'Články, dizertační práce, diplomové práce, bakalářské práce, newslettery a další.',
     d: 'Odborné články, newslettery, texty na web, profesní medailonky a doprovodné materiály. Cílem je text, který reprezentuje – přesný, kultivovaný a přirozený. Právě u kratších textů rozhoduje každá věta o tom, jak budete působit na čtenáře, klienta nebo odbornou komunitu.',
     w: ['odborné sdělení potřebuje jasnější formulaci', 'text má obstát i před náročným čtenářem', 'výstup reprezentuje vás nebo vaši instituci navenek'],
   },
