@@ -63,6 +63,7 @@
   .services li { display: grid; gap: 8px; align-content: center; justify-items: center; padding: 26px clamp(14px, 2.4vw, 30px); }
   .services h3 { font: 400 clamp(20px, 1.8vw, 25px)/1.15 var(--display); letter-spacing: -.01em; text-wrap: balance; }
   .services p { max-width: 30ch; font-size: 15px; line-height: 1.6; color: var(--graphite); text-wrap: balance; }
+  .services .kinds { color: var(--ink); } /* druhy textů pod nadpisem služby: inkoustově, popis pod nimi zůstává šedší (jako .csub na Službách) */
 
   /* knihkupectví: 12 nejnovějších knih, vybraná stojí uprostřed */
   .shop-scene .copy .lead { max-width: 46ch; }
