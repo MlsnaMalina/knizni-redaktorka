@@ -57,7 +57,7 @@ export const typeLine = (b: Pick<Book, 'types'>): string =>
 
 /** Oblasti práva ve filtru, v pořadí podle Kateřiny (Ostatní vždy poslední; dostávají je jen knihy bez jiné oblasti). */
 export const TOPICS: readonly { id: BookTopic; label: string }[] = [
-  { id: 'procesni', label: 'Občanské právo procesní' },
+  { id: 'procesni', label: 'Civilní proces' },
   { id: 'financni', label: 'Finanční právo' },
   { id: 'it', label: 'Právo IT' },
   { id: 'mezinarodni', label: 'Mezinárodní právo' },
