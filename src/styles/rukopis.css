@@ -22,7 +22,6 @@
 .ex2 { display: grid; justify-items: center; gap: 18px; width: 100%; margin-top: clamp(28px, 6vh, 56px); }
 .ex2 .paper { width: min(100%, 520px); }
 
-/* portrét: zástupný obrázek, než bude fotografie */
-.photo { position: relative; width: var(--pw, 100%); aspect-ratio: 3 / 4; display: grid; align-content: end; justify-items: start; padding: 14px; background: linear-gradient(165deg, #f4f4f4, #e2e2e2); color: var(--grey); font-size: 13px; line-height: 1.6; letter-spacing: .01em; text-align: left; box-shadow: 0 0 0 1px rgba(0, 0, 0, .05), 0 2px 3px rgba(0, 0, 0, .12), 0 24px 40px -18px rgba(0, 0, 0, .42); }
-.photo::before { content: 'Zde bude portrét'; position: absolute; inset: 0; display: grid; place-items: center; padding: 14px; text-align: center; font-size: 11px; letter-spacing: .22em; color: #b3b3b3; }
-.photo b { display: block; font-weight: 400; color: var(--ink); }
+/* portrét (6. 11. 2026): fotografie 4 : 5 na stránce O mně, stín jako u listů a knih */
+.photo { position: relative; width: var(--pw, 100%); aspect-ratio: 4 / 5; overflow: hidden; background: #ececec; box-shadow: 0 0 0 1px rgba(0, 0, 0, .05), 0 2px 3px rgba(0, 0, 0, .12), 0 24px 40px -18px rgba(0, 0, 0, .42); }
+.photo img { display: block; width: 100%; height: 100%; object-fit: cover; }

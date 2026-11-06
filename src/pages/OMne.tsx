@@ -7,6 +7,9 @@ import { SiteHeader } from '../components/SiteHeader';
 import { Checks } from './omne/Checks';
 import './omne.css';
 
+/** Šířka portrétu v hero v px; stejná hodnota patří do `sizes` obrázku. */
+const PHOTO_W = 170;
+
 /** Šipka mezi částmi cesty: jak se mezera posouvá nahoru, šipka v ní sjíždí dolů (pohyb řídí useRoadArrows). */
 function Gap() {
   return (
@@ -92,9 +95,18 @@ export default function OMne() {
       <main>
         <section className="scene mdl" aria-label="O mně">
           <div className="copy">
-            <div className="photo" style={{ '--pw': '150px' } as CSSVars}>
-              <b>K. Mlsnová</b>knižní redaktorka
-            </div>
+            <figure className="photo" style={{ '--pw': `${PHOTO_W}px` } as CSSVars}>
+              <img
+                src="/portret-640.webp"
+                srcSet="/portret-320.webp 320w, /portret-640.webp 640w"
+                sizes={`${PHOTO_W}px`}
+                width={640}
+                height={800}
+                alt="Kateřina Mlsnová, knižní redaktorka"
+                fetchPriority="high"
+                decoding="async"
+              />
+            </figure>
             <h1>Z&nbsp;advokacie do knižní redakce.</h1>
             <ul className="facts three" aria-label="Stručně řečeno">
               <li>
