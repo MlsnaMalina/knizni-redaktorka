@@ -93,7 +93,7 @@ export default function OMne() {
     <div className="omne" ref={rootRef}>
       <SiteHeader over />
       <main>
-        <section className="scene mdl" aria-label="O mně">
+        <section className="scene mdl quilt-bg" aria-label="O mně">
           <div className="copy">
             <figure className="photo" style={{ '--pw': `${PHOTO_W}px` } as CSSVars}>
               <img

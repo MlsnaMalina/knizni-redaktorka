@@ -184,7 +184,7 @@ export default function Kontakt() {
     <div className="kontakt">
       <SiteHeader over />
       <main>
-        <section className="scene mdl" id="top" aria-labelledby="t-h">
+        <section className="scene mdl quilt-bg" id="top" aria-labelledby="t-h">
           <div className="copy">
             <h1 id="t-h">Pošlete mi svůj text. Nebo jen otázku.</h1>
             <p className="lead">Odpovídám do 2&nbsp;pracovních dnů, první krok je zdarma.</p>

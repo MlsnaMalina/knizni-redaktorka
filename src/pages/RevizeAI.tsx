@@ -31,7 +31,7 @@ export default function RevizeAI() {
     <div className="revize">
       <SiteHeader over />
       <main>
-        <section className="scene hero" aria-labelledby="t-h">
+        <section className="scene hero quilt-bg" aria-labelledby="t-h">
           <div className="copy">
             <h1 id="t-h">AI napíše draft. Já z&nbsp;něj udělám text, za který se podepíšete.</h1>
             <p className="lead">Bez lidské redakce zůstává AI výstup jen základem.</p>
@@ -92,7 +92,7 @@ export default function RevizeAI() {
           </div>
         </section>
 
-        <section className="scene" id="zaver" aria-labelledby="t-zaver">
+        <section className="scene quilt-bg" id="zaver" aria-labelledby="t-zaver">
           <div className="copy">
             <p className="eyebrow">Ukázková revize</p>
             <h2 id="t-zaver">Máte AI draft? Pošlete mi ho.</h2>
