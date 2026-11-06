@@ -103,7 +103,7 @@
   .pr-steps li.on { color: var(--ink); border-color: var(--blue); }
   .pr-hint { margin-top: 12px; font-size: 13px; letter-spacing: .01em; color: var(--grey); }
   @media (max-height: 860px) { .pr-stick .paper p + p { display: none; } }
-  @media (max-height: 700px) { .pr-stick .eyebrow, .pr-hint { display: none; } }
+  @media (max-height: 700px) { .pr-hint { display: none; } }
 
   .pr-two { display: grid; justify-items: center; padding: clamp(64px, 10vh, 128px) var(--gut); }
   .pr-two .ex2 { margin-top: 0; }

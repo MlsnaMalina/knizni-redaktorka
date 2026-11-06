@@ -70,7 +70,6 @@ export default function Uvod() {
         <section className="scene" id="sluzby" data-side="right" aria-labelledby="t-sluzby">
           <SluzbyArt aw={aw} />
           <div className="copy" data-focus>
-            <p className="eyebrow">Služby</p>
             <h2 id="t-sluzby">Každý text potřebuje něco trochu jiného.</h2>
             <ul className="services">
               <li>

@@ -47,8 +47,7 @@ export function Prace() {
       <div className="pr-pin" ref={pinRef}>
         <div className="pr-stick">
           <div className="copy">
-            <p className="eyebrow">Jak vypadá moje práce</p>
-            <h2 id="t-prace">Podívejte se mi přes&nbsp;rameno.</h2>
+            <h2 id="t-prace">Jak může vypadat moje práce</h2>
             <div className="pr-stage">
               <div className="pr-live">
                 <Paper s={s} wc={wc} />

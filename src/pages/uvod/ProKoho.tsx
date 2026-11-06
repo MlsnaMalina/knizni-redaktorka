@@ -32,7 +32,6 @@ export function ProKoho() {
   return (
     <section className="scene" id="prokoho" aria-labelledby="t-prokoho">
       <div className="copy pk">
-        <p className="eyebrow">Pro koho</p>
         <h2 id="t-prokoho">Spolupracujeme dobře, když…</h2>
         <div className="pk-cols">
           <ul className="pk-yes">

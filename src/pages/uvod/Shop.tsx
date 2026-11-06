@@ -62,7 +62,6 @@ export function Shop({ onSelect }: { onSelect: (index: number) => void }) {
   return (
     <section className="scene shop-scene" data-side="center" aria-labelledby="t-shop">
       <div className="copy">
-        <p className="eyebrow">Z knihovny</p>
         <h2 id="t-shop">Nejnovější knihy</h2>
         <p className="lead">
           Dvanáct posledních ze&nbsp;{BOOKS_TOTAL}&nbsp;knih, které jsem redigovala. Klepněte na knihu a&nbsp;postavte ji doprostřed.
