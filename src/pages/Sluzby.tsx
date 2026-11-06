@@ -226,7 +226,7 @@ export default function Sluzby() {
       </div>
 
       <main>
-        <section className="scene mdl" id="top" aria-labelledby="t-h">
+        <section className="scene mdl quilt-bg" id="top" aria-labelledby="t-h">
           <div className="copy">
             <h1 id="t-h">{nb('Od konceptu k hotovému textu.')}</h1>
             <p className="lead">{nb('Rediguji hlavně odborné (a právní) publikace, ale i kratší profesní texty (typu newslettery, e-booky apod.) a závěrečné práce.')}</p>
@@ -295,7 +295,7 @@ export default function Sluzby() {
           );
         })}
 
-        <section className="scene chap" id="zaver" data-k="" data-toc="Ukázková redakce" aria-labelledby="t-zaver">
+        <section className="scene chap quilt-bg" id="zaver" data-k="" data-toc="Ukázková redakce" aria-labelledby="t-zaver">
           <div className="copy">
             <p className="cno">
               <b className="pl" />

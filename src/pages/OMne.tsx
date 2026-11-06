@@ -181,7 +181,7 @@ export default function OMne() {
           </ol>
         </section>
 
-        <section className="scene" id="zaver" aria-labelledby="t-zaver">
+        <section className="scene quilt-bg" id="zaver" aria-labelledby="t-zaver">
           <div className="copy">
             <p className="eyebrow">Ukázková redakce</p>
             <h2 id="t-zaver">Pojďme váš text dotáhnout.</h2>

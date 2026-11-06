@@ -57,3 +57,10 @@
   .scene[data-side="left"] .art { left: auto; justify-self: start; margin-left: calc(-1 * var(--gut) - 8px); }
   .scene[data-side="right"] .art { right: auto; justify-self: end; margin-right: calc(-1 * var(--gut) - 8px); }
 }
+
+/* prošívání jako pozadí části (6. 11. 2026): dlaždice public/quilt.svg, měkké pole kolem textu, k okrajům se ztrácí; stejné jako za závěrečnou výzvou na Úvodu
+   (tam ho kreslí lib/uvod-net.ts). Použití: třída quilt-bg na .scene (třída quilt je už zabraná v síti na Úvodu) (Služby: první obrazovka a závěrečná výzva, O mně: závěrečná výzva) */
+.quilt-bg::before { content: ''; position: absolute; z-index: 0; inset: 0; pointer-events: none; background: url(/quilt.svg) 0 0 / 54px 70px; -webkit-mask-image: radial-gradient(ellipse closest-side at 50% 50%, #000 50%, transparent 100%); mask-image: radial-gradient(ellipse closest-side at 50% 50%, #000 50%, transparent 100%); animation: quilt-in 1.8s var(--ease) backwards; }
+@media (max-width: 699px) { .quilt-bg::before { background-size: 34px 44px; } }
+@media (prefers-reduced-motion: reduce) { .quilt-bg::before { animation: none; } }
+@keyframes quilt-in { from { opacity: 0; } }
