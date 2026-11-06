@@ -172,7 +172,7 @@ export default function OMne() {
                 </div>
                 <div className="pg r">
                   <p className="vq">„V&nbsp;posudcích, ale i&nbsp;při obhajobě mi chválili úpravu a&nbsp;celkovou redakci práce. Umíte to!“</p>
-                  <cite>Autor dizertační práce</cite>
+                  <cite>Autor disertační práce</cite>
                   <span className="fo">115</span>
                 </div>
                 <i className="rib" aria-hidden="true" />

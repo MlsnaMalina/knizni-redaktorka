@@ -131,7 +131,7 @@ export const SERVICES: Service[] = [
   {
     k: 2,
     toc: 'Úprava (profesních a odborných) textů',
-    sub: 'Články, dizertační práce, diplomové práce, bakalářské práce, newslettery a další.',
+    sub: 'Články, disertační práce, diplomové práce, bakalářské práce, newslettery a další.',
     d: 'Odborné články, newslettery, texty na web, profesní medailonky a doprovodné materiály. Cílem je text, který reprezentuje – přesný, kultivovaný a přirozený. Právě u kratších textů rozhoduje každá věta o tom, jak budete působit na čtenáře, klienta nebo odbornou komunitu.',
     w: ['odborné sdělení potřebuje jasnější formulaci', 'text má obstát i před náročným čtenářem', 'výstup reprezentuje vás nebo vaši instituci navenek'],
   },
@@ -170,7 +170,7 @@ export const FAQ: FaqItem[] = [
   [
     'Upravujete i diplomové a disertační práce?',
     'Nabízím jazykovou a redakční kultivaci textu v mezích pravidel dané univerzity – strukturu, jednotnost, formulace, citace. Obsah, odborné závěry a autorství zůstávají vždy plně na autorovi. Pravidla vaší školy, včetně pravidel o používání AI, platí i při redakci.',
-    ['„V posudcích, ale i při obhajobě mi chválili úpravu a celkovou redakci práce. Umíte to!“', 'Autor dizertační práce'],
+    ['„V posudcích, ale i při obhajobě mi chválili úpravu a celkovou redakci práce. Umíte to!“', 'Autor disertační práce'],
   ],
   [
     'Jaký je rozdíl mezi redakcí a korekturou?',
