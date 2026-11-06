@@ -40,7 +40,7 @@ function Faq() {
   const [open, setOpen] = useState<number | null>(null);
   return (
     <div className="faq">
-      {FAQ.map(([q, a], i) => (
+      {FAQ.map(([q, a, quote], i) => (
         <div key={q} className={cx('fq', open === i && 'open')}>
           <button type="button" id={`fq${i}`} aria-expanded={open === i} aria-controls={`fa${i}`} onClick={() => setOpen(open === i ? null : i)}>
             <span>{nb(q)}</span>
@@ -49,6 +49,12 @@ function Faq() {
           <div className="fa" id={`fa${i}`} role="region" aria-labelledby={`fq${i}`}>
             <div>
               <p>{nb(a)}</p>
+              {quote && (
+                <blockquote className="fq-quote">
+                  <p>{nb(quote[0])}</p>
+                  <cite>{quote[1]}</cite>
+                </blockquote>
+              )}
             </div>
           </div>
         </div>
@@ -221,7 +227,7 @@ export default function Sluzby() {
         <section className="scene mdl" id="top" aria-labelledby="t-h">
           <div className="copy">
             <h1 id="t-h">{nb('Od konceptu k hotovému textu.')}</h1>
-            <p className="lead">{nb('Rediguji hlavně odborné (a právní) publikace, ale i kratší profesní texty (typu newslettery, e-booky apod.).')}</p>
+            <p className="lead">{nb('Rediguji hlavně odborné (a právní) publikace, ale i kratší profesní texty (typu newslettery, e-booky apod.) a závěrečné práce.')}</p>
             <div className="actions">
               <Link className="btn btn--fill" to={SAMPLE_LINK}>
                 Chci ukázkovou redakci
@@ -293,7 +299,7 @@ export default function Sluzby() {
               Příloha
             </p>
             <h2 className="ct" id="t-zaver">
-              {nb('Pošlete mi svůj text. Společně zjistíme, kam ho lze posunout.')}
+              {nb('Pojďme váš text dotáhnout.')}
             </h2>
             <p className="cdesc">
               {nb('U nových klientů většinou začínám ukázkovou redakcí několika stran zdarma. Vy uvidíte můj styl práce, já stav vašeho textu.')}

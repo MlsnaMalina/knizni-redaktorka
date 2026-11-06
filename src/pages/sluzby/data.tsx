@@ -156,18 +156,29 @@ export const PRICE_STEPS = [
 export const LIMITS = [
   'Nepíšu text na klíč místo autora.',
   'Nepřebírám odbornou odpovědnost za obsah.',
-  'Nenahrazuji autorskou práci, ale pomáhám text sjednotit a doplnit tak, abyste s ním byli spokojeni.',
+  'Nenahrazuji autorskou práci, ale pomáhám text sjednotit a vyladit tak, abyste s ním byli spokojeni.',
 ];
 
-export const FAQ: [string, string][] = [
+/** Otázka, odpověď a (volitelně) citace autora pod odpovědí: [text, podpis]. */
+export type FaqItem = [question: string, answer: string, quote?: [text: string, cite: string]];
+
+export const FAQ: FaqItem[] = [
   ['Jak je to s důvěrností?', 'S každým textem nakládám jako s důvěrným – bez výjimky. Rukopis nikomu neukazuji, nepoužívám ho jako referenci bez vašeho svolení a na přání podepíšu smlouvu o mlčenlivosti (NDA). U právních a firemních textů to považuji za samozřejmost.'],
+  [
+    'Upravujete i diplomové a disertační práce?',
+    'Nabízím jazykovou a redakční kultivaci textu v mezích pravidel dané univerzity – strukturu, jednotnost, formulace, citace. Obsah, odborné závěry a autorství zůstávají vždy plně na autorovi. Pravidla vaší školy, včetně pravidel o používání AI, platí i při redakci.',
+    ['„V posudcích, ale i při obhajobě mi chválili úpravu a celkovou redakci práce. Umíte to!“', 'Autor dizertační práce'],
+  ],
+  [
+    'Jaký je rozdíl mezi redakcí a korekturou?',
+    'Korektura opravuje překlepy, pravopis a typografii. Redakce jde dál: hlídá stavbu textu, logiku výkladu, jednotnost pojmů, citace a srozumitelnost pro čtenáře.',
+  ],
   ['Jak probíhá ukázková redakce?', 'Pošlete mi 3–5 stran textu. Zrediguji je v režimu sledování změn, přidám okrajové komentáře a pošlu zpět – uvidíte přesně, jak pracuji a co s textem dělám. Pokud se na ní domluvíme, je zdarma a k ničemu vás nezavazuje.'],
   ['V jakém formátu pracujeme?', 'Standardně ve Wordu s režimem sledování změn. Každá úprava je viditelná a můžete ji přijmout, nebo odmítnout. Komentáře a dotazy píšu na okraj – nic se neděje bez vašeho vědomí.'],
   ['Co když s navrženou úpravou nesouhlasím?', 'Pak platí vaše verze. Jsem redaktorka, ne spoluautorka – návrhy zdůvodňuji, ale rozhodnutí je vždy na vás.'],
-  ['Jak dlouho redakce trvá?', 'Podle rozsahu a stavu textu – kratší text dny, rozsáhlý rukopis týdny. Termín je vždy součástí nabídky a platí.'],
+  ['Jak dlouho redakce trvá?', 'Podle rozsahu a stavu textu – kratší text dny, rozsáhlý rukopis týdny. Termín je vždy součástí nabídky a platí. Termín odevzdání napište hned do první zprávy.'],
   ['Kolik to stojí?', 'Cenu stanovuji předem za celý projekt podle rozsahu a stavu textu. První krok – posouzení textu, případně i ukázková redakce po dohodě – je zdarma, takže nabídku dostanete dřív, než se k čemukoli zavážete.'],
   ['Spolupracujete i s nakladatelstvími a institucemi?', 'Ano. Deset let rediguji knihy pro nakladatelství Wolters Kluwer ČR a externí redakce nabízím i dalším nakladatelstvím, profesním organizacím a odborným institucím.'],
-  ['Upravujete i dizertační a jiné kvalifikační práce?', 'Nabízím jazykovou a redakční kultivaci textu v mezích pravidel dané univerzity – strukturu, jednotnost, formulace, citace. Obsah, odborné závěry a autorství zůstávají vždy plně na autorovi.'],
 ];
 
 /** Ozdobná čísla stran v obsahu (strany nejsou skutečné). */

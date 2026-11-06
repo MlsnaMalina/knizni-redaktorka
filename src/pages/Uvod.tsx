@@ -40,7 +40,7 @@ export default function Uvod() {
           <HeroArt aw={aw} />
           <div className="copy" data-focus>
             <h1 id="t-hero">Aby váš (odborný) text obstál.</h1>
-            <p className="lead">Redakce komentářů k&nbsp;zákonům, právních monografií a&nbsp;odborných publikací.</p>
+            <p className="lead">Redakce komentářů k&nbsp;zákonům, právních monografií, odborných publikací i&nbsp;závěrečných prací.</p>
             <ul className="facts" aria-label="Zkušenosti v číslech">
               <li>
                 <b>{YEARS_EDITING}</b>
@@ -104,7 +104,7 @@ export default function Uvod() {
           <ZaverArt aw={aw} />
           <div className="copy" data-focus>
             <p className="eyebrow">Ukázková redakce</p>
-            <h2 id="t-zaver">Pošlete mi svůj text. Společně zjistíme, kam ho lze posunout.</h2>
+            <h2 id="t-zaver">Pojďme váš text dotáhnout.</h2>
             <p className="lead">
               U&nbsp;nových klientů většinou začínám ukázkovou redakcí několika stran zdarma. Vy uvidíte můj styl práce, já stav vašeho textu.
             </p>

@@ -17,7 +17,7 @@ const CLOSING =
 const SEND_ERROR = 'Zprávu se nepodařilo odeslat. Zkuste to prosím znovu, nebo mi napište přímo na e-mail.';
 const SAMPLE = 'Ukázkovou redakci';
 // ukázková redakce je až poslední možnost (přání Kateřiny); slovo zdarma tu být nemá, ukázka je po dohodě (5. 11. 2026)
-const INTENTS = ['Nacenit text', 'Redakční konzultaci', 'Jen se zeptat', SAMPLE];
+const INTENTS = ['Cenovou nabídku', 'Redakční konzultaci', 'Jen se zeptat', SAMPLE];
 
 type Kind = 'choice' | 'text' | 'area' | 'who' | 'sum';
 
@@ -31,7 +31,7 @@ interface Step {
 /** Průvodce: jedna otázka na obrazovku, průběh v pěti kolečkách, na konci shrnutí. */
 const STEPS: Step[] = [
   { kind: 'choice', q: 'Co potřebujete?', msg: 'Vyberte prosím, co potřebujete.' },
-  { kind: 'text', q: 'O jaký text jde?', hint: 'např. komentář, monografie, článek, AI draft, dizertace…', msg: 'Doplňte prosím, o jaký text jde.' },
+  { kind: 'text', q: 'O jaký text jde?', hint: 'např. komentář, monografie, článek, diplomová nebo disertační práce, AI draft…', msg: 'Doplňte prosím, o jaký text jde.' },
   { kind: 'area', q: 'Co od spolupráce očekáváte?', hint: 'V jaké je text fázi? Kdy přibližně potřebujete výstup?', msg: 'Napište prosím, co od spolupráce čekáte.' },
   { kind: 'who', q: 'Jak vás mám oslovit a kam odpovědět?' },
   { kind: 'sum', q: 'Zkontrolujte a odešlete' },

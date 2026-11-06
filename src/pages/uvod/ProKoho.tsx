@@ -9,7 +9,7 @@ const YES = [
   'stojíte o zkušený redakční pohled, nejen o rychlé projetí',
   'jste připraveni na textu dál pracovat a ladit ho',
 ];
-const NO = ['čekáte, že text napíšu nebo dopíšu za vás', 'hledáte jen rychlé formální projetí bez skutečné práce s textem'];
+const NO = ['čekáte, že text napíšu nebo dopíšu za vás', 'hledáte jen kontrolu překlepů bez práce s textem'];
 
 /** Kroužek se zaškrtnutím (modrý) nebo křížkem (šedý). Jen ozdoba: význam nese nadpis a štítek Ne, pokud. */
 function Mark({ no = false }: { no?: boolean }) {
