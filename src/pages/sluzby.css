@@ -7,6 +7,10 @@
   .mdl h1 { margin-top: 22px; font-size: clamp(34px, 4.8vw, 68px); line-height: 1.02; max-width: 16ch; }
   .mdl .lead { max-width: 50ch; }
   #top { min-height: 86svh; padding-top: calc(var(--hd) + clamp(16px, 5vh, 56px)); }
+  /* prošívání za první obrazovkou (6. 11. 2026, návrh A): stejné jako za závěrečnou výzvou na Úvodu, měkké pole kolem textu, k okrajům se ztrácí */
+  #top::before { content: ''; position: absolute; z-index: 0; inset: 0; pointer-events: none; background: url(/quilt.svg) 0 0 / 54px 70px; -webkit-mask-image: radial-gradient(ellipse closest-side at 50% 50%, #000 50%, transparent 100%); mask-image: radial-gradient(ellipse closest-side at 50% 50%, #000 50%, transparent 100%); animation: quilt-in 1.8s var(--ease) backwards; }
+  @media (max-width: 699px) { #top::before { background-size: 34px 44px; } }
+  @media (prefers-reduced-motion: reduce) { #top::before { animation: none; } }
 
   /* společné: číslo v kolečku, štítek, nadpis, výklad, seznamy */
   .cno b, .toc b, .sl b { flex: none; display: grid; place-items: center; width: 24px; height: 24px; border: 1.5px solid var(--blue); border-radius: 50%; font: 500 12.5px/1 var(--display); letter-spacing: 0; color: var(--blue); }
@@ -110,3 +114,5 @@
   .fq-quote cite { display: block; margin-top: 6px; font-style: normal; font-size: 13px; letter-spacing: .01em; color: var(--grey); }
   @media (hover: hover) { .fq button:hover { color: var(--mint-ink); } }
 }
+
+@keyframes quilt-in { from { opacity: 0; } }
