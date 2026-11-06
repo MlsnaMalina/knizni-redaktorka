@@ -2,7 +2,7 @@ import { useLayoutEffect, useMemo, useRef, useState, type CSSProperties } from '
 import { BOOKS, TOPICS, TYPES, TYPE_ORDER, type Book } from '../data/books';
 import { BOOKS_TOTAL, YEAR_FROM, YEAR_TO } from '../data/site';
 import { libraryOrder, stamp } from '../lib/books';
-import { booksText, cx } from '../lib/format';
+import { cx, plural } from '../lib/format';
 import { reducedMotion, usePageMeta } from '../lib/hooks';
 import { createLibraryNet, type LibraryModel, type LibraryNet } from '../lib/library-net';
 import type { CSSVars } from '../lib/css';
@@ -139,7 +139,9 @@ export default function Knihovna() {
       <SiteHeader />
       <main>
         <section className="intro">
-          <h1>{booksText(BOOKS_TOTAL)} pro Wolters Kluwer</h1>
+          <h1>
+            {BOOKS_TOTAL}&nbsp;{plural(BOOKS_TOTAL, 'aktuálně vydaná kniha', 'aktuálně vydané knihy', 'aktuálně vydaných knih')}
+          </h1>
           <p className="lead">Komentáře k&nbsp;zákonům, monografie a&nbsp;učebnice z&nbsp;let {YEAR_FROM} až {YEAR_TO}.</p>
           <div className="filters" role="group" aria-label="Filtr knihovny">
             {FILTERS.map((f) => (

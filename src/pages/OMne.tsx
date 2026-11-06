@@ -110,7 +110,7 @@ export default function OMne() {
               </li>
               <li>
                 <b>{YEARS_LAW}</b>
-                <span>let advokacie</span>
+                <span>let v&nbsp;advokacii</span>
               </li>
             </ul>
             <div className="actions">
@@ -124,7 +124,6 @@ export default function OMne() {
         <section className="path" aria-label="Moje cesta a práce">
           <ol className="line">
             <li className="stn">
-              <p className="lab">Změna</p>
               <h2>Wolters Kluwer ČR</h2>
               <p className="t">
                 Odešla jsem do nakladatelství Wolters Kluwer ČR – a&nbsp;zjistila, že mě víc než psaní podání baví dávat tvar odborným textům.
@@ -138,15 +137,14 @@ export default function OMne() {
               <h2>Dnes</h2>
               <p className="t">
                 Dnes mám za sebou přes {BOOKS_ROUND} vydaných knih: komentáře k&nbsp;zákonům, učebnice, monografie i&nbsp;publikace na klíč. Nejblíž mám
-                k&nbsp;právu, právu IT, technologiím a&nbsp;umělé inteligenci – redigovala jsem mimo jiné komentář k&nbsp;nařízení MiCA nebo monografie
-                o&nbsp;trestní odpovědnosti umělé inteligence.
+                k&nbsp;právu, právu IT, technologiím a&nbsp;umělé inteligenci.
               </p>
             </li>
             <Gap />
             <li className="stn">
               <p className="lab">{YEARS_LAW}&nbsp;let</p>
               <h2>Advokacie</h2>
-              <p className="t">Devět let jsem pracovala v&nbsp;advokacii – rozumím terminologii, citacím i&nbsp;judikatuře.</p>
+              <p className="t">Práva jsem vystudovala a&nbsp;{YEARS_LAW}&nbsp;let v&nbsp;advokacii pracovala, takže rozumím terminologii, citacím i&nbsp;judikatuře.</p>
             </li>
 
             <li className="blk far" id="sleduji">
@@ -163,13 +161,6 @@ export default function OMne() {
             {STEPS.map((s, i) => (
               <StepItem key={s.h} h={s.h} t={s.t} last={i === STEPS.length - 1} />
             ))}
-
-            <li className="blk far">
-              <blockquote className="quote">
-                Baví mě chvíle, kdy se z&nbsp;dobrého základu stane opravdu dobrý výsledek. Když text začne držet pohromadě, je přesnější, klidnější a&nbsp;působí
-                jistěji než na&nbsp;začátku.<cite>Kateřina Mlsnová</cite>
-              </blockquote>
-            </li>
 
             <li className="blk far">
               <p className="lab">Co říkají autoři</p>
