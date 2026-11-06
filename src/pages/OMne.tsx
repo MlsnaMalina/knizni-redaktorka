@@ -174,7 +174,7 @@ export default function OMne() {
             <li className="stn">
               <h2>Wolters Kluwer ČR</h2>
               <p className="t">
-                Odešla jsem do nakladatelství Wolters Kluwer ČR – a&nbsp;zjistila, že mě víc než psaní podání baví dávat tvar odborným textům.
+                Z&nbsp;advokacie jsem odešla do nakladatelství Wolters Kluwer ČR – a&nbsp;zjistila, že mě víc než psaní podání baví dávat tvar odborným textům.
               </p>
             </li>
             <Gap />
@@ -184,7 +184,7 @@ export default function OMne() {
               </p>
               <h2>Dnes</h2>
               <p className="t">
-                Dnes mám za sebou přes {BOOKS_ROUND} vydaných knih: komentáře k&nbsp;zákonům, učebnice, monografie i&nbsp;publikace na klíč. Nejblíž mám
+                Mám za sebou přes {BOOKS_ROUND} vydaných knih: komentáře k&nbsp;zákonům, učebnice, monografie i&nbsp;publikace na klíč. Nejblíž mám
                 k&nbsp;právu, právu IT, technologiím a&nbsp;umělé inteligenci.
               </p>
             </li>
