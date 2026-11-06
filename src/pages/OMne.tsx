@@ -80,6 +80,30 @@ function useBookReveal(ref: RefObject<HTMLElement | null>) {
   }, [ref]);
 }
 
+/** Modrá tečka jednou oběhne prošitý kruh kolem portrétu: po načtení stránky a pak pokaždé, když na portrét najede myš. */
+function useDotOrbit(figure: RefObject<HTMLElement | null>) {
+  useEffect(() => {
+    const el = figure.current;
+    const orb = el?.querySelector<HTMLElement>('.orb');
+    if (!el || !orb || reducedMotion() || typeof orb.animate !== 'function') return undefined;
+    let run: Animation | null = null;
+    const go = () => {
+      if (run && run.playState === 'running') return;
+      run = orb.animate([{ transform: 'rotate(0deg)' }, { transform: 'rotate(360deg)' }], { duration: 2000, easing: 'cubic-bezier(.55, 0, .2, 1)' });
+    };
+    const onEnter = (e: PointerEvent) => {
+      if (e.pointerType === 'mouse') go();
+    };
+    const start = window.setTimeout(go, 700);
+    el.addEventListener('pointerenter', onEnter);
+    return () => {
+      window.clearTimeout(start);
+      el.removeEventListener('pointerenter', onEnter);
+      run?.cancel();
+    };
+  }, [figure]);
+}
+
 export default function OMne() {
   usePageMeta(
     'O mně – z advokacie do knižní redakce | Kateřina Mlsnová',
@@ -87,8 +111,10 @@ export default function OMne() {
   );
   const rootRef = useRef<HTMLDivElement>(null);
   const bookRef = useRef<HTMLDivElement>(null);
+  const portraitRef = useRef<HTMLElement>(null);
   useRoadArrows(rootRef);
   useBookReveal(bookRef);
+  useDotOrbit(portraitRef);
 
   return (
     <div className="omne" ref={rootRef}>
@@ -96,7 +122,7 @@ export default function OMne() {
       <main>
         <section className="scene mdl quilt-bg" aria-label="O mně">
           <div className="copy">
-            <figure className="portrait" style={{ '--pw': `${PHOTO_W}px`, '--pw-s': `${PHOTO_W_SMALL}px` } as CSSVars}>
+            <figure className="portrait" ref={portraitRef} style={{ '--pw': `${PHOTO_W}px`, '--pw-s': `${PHOTO_W_SMALL}px` } as CSSVars}>
               <img
                 src="/portret-640.webp"
                 srcSet="/portret-320.webp 320w, /portret-640.webp 640w"
@@ -110,7 +136,9 @@ export default function OMne() {
               <svg viewBox="0 0 226 226" aria-hidden="true" focusable="false">
                 <circle cx="113" cy="113" r="112" />
               </svg>
-              <i aria-hidden="true" />
+              <span className="orb" aria-hidden="true">
+                <i />
+              </span>
             </figure>
             <h1>Z&nbsp;advokacie do knižní redakce.</h1>
             <ul className="facts three" aria-label="Stručně řečeno">
