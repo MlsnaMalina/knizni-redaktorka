@@ -85,6 +85,23 @@
   .out { opacity: .12; }
   .more { position: relative; z-index: 2; margin-top: 44px; }
 
+  /* kolotoč na telefonu (6. 11. 2026): vybraná kniha uprostřed, sousedé vykukují šedí a natočení, dole dílky ciferníku;
+     obrázek ohniska (kruhy) kreslí uvod-net kolem .fl, dílky a značku v tomto případě vynechá (data-flow na části) */
+  .shop-scene { grid-template-columns: minmax(0, 1fr); }
+  .fl { position: relative; z-index: 2; min-width: 0; margin-inline: calc(var(--gut) * -1); }
+  .fl-track { --fw: clamp(146px, 37vw, 172px); display: flex; gap: 6px; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; -webkit-overflow-scrolling: touch; padding: 26px calc(50% - var(--fw) / 2) 30px; }
+  .fl-track::-webkit-scrollbar { display: none; }
+  .fl-slide { position: relative; flex: none; width: var(--fw); aspect-ratio: 7 / 10; padding: 0; scroll-snap-align: center; }
+  /* natáčí se karta uvnitř knoflíku (ShopFlow), knoflík drží polohu pro scroll-snap */
+  .fl-card { position: absolute; inset: 0; display: block; box-shadow: 0 2px 3px rgba(0, 0, 0, .18), 8px 14px 22px -10px rgba(0, 0, 0, .45); }
+  .fl-card::after { content: ''; position: absolute; inset: 0; pointer-events: none; background: linear-gradient(90deg, rgba(0, 0, 0, .28) 0, rgba(0, 0, 0, 0) 4%, rgba(255, 255, 255, .1) 5.5%, rgba(255, 255, 255, 0) 22%), linear-gradient(155deg, rgba(255, 255, 255, .16), rgba(255, 255, 255, 0) 42%); }
+  .fl-cv { position: absolute; inset: 0; display: block; overflow: hidden; border-radius: 1px 3px 3px 1px; transition: filter .5s var(--ease); }
+  .fl-slide[data-mute] .fl-cv { filter: grayscale(1) contrast(.94) brightness(1.05); }
+  .fl-ticks { position: relative; z-index: 2; display: flex; justify-content: center; gap: 2px; margin-top: -8px; }
+  .fl-ticks button { display: grid; place-items: end center; width: 20px; height: 34px; }
+  .fl-ticks i { display: block; width: 1px; height: 10px; border-radius: 2px; background: var(--ink); opacity: .35; transition: height .3s, opacity .3s, background .3s, width .3s; }
+  .fl-ticks button[data-on] i { width: 2.4px; height: 22px; background: var(--blue); opacity: 1; }
+
   /* Jak vypadá moje práce: list rukopisu stojí na místě a podle posunu stránky přechází Rukopis, Sledování změn, Čistopis */
   .pr { position: relative; z-index: 1; }
   .pr .copy { width: min(100%, 760px); }
@@ -120,14 +137,11 @@
     .side.right { grid-row: 4; margin-top: 22px; }
   }
   @media (max-width: 720px) {
-    .shop { grid-template-columns: minmax(0, 1fr); }
-    .shop-book { grid-column: 1; grid-row: 1; min-height: 250px; }
-    .shop-info { grid-column: 1; grid-row: 2; }
-    .side.left, .side.right { grid-column: 1; justify-content: center; min-height: 160px; padding: 0 6px; gap: 3px; }
-    .side.left { grid-row: 3; margin-top: 40px; }
-    .side.right { grid-row: 4; margin-top: 22px; }
-    .face { width: 56px; }
-    .spine span { font-size: 8.5px; }
+    /* telefon: místo polic kolotoč (ShopFlow), pod ním dílky a údaje o vybrané knize */
+    .shop { grid-template-columns: minmax(0, 1fr); margin-top: 4px; }
+    .fl { grid-column: 1; grid-row: 1; }
+    .fl-ticks { grid-column: 1; grid-row: 2; }
+    .shop-info { grid-column: 1; grid-row: 3; margin-top: 12px; }
   }
   @media (max-width: 640px) {
     .services { grid-template-columns: 1fr; grid-auto-rows: auto; }

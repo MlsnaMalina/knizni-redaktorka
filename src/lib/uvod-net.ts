@@ -84,15 +84,19 @@ export function createUvodNet(main: HTMLElement, svg: SVGSVGElement): UvodNet {
     const o = `--o:${cx}px ${cy}px`;
     const P = polar(cx, cy);
     const fg = c.el('g', { class: 'focus', style: o }, g);
-    dial = c.el('g', { class: 'dial', style: `${o};transform:rotate(${dialA}deg)` }, fg);
+    // kolotoč na telefonu (data-flow): jen kruhy; dílky a značku nahrazují dílky pod kolotočem, takže se nic neotáčí
+    const flow = s.el.dataset.flow !== undefined;
+    const rings = c.el('g', { class: 'dial', style: `${o};transform:rotate(${dialA}deg)` }, fg);
+    if (!flow) dial = rings;
     const half = Math.min(s.focus.width, s.focus.height) / 2;
     const step = mobile ? 22 : 32;
     const r0 = Math.round(half * 0.6);
     const reach = Math.min(mobile ? W * 0.75 : 600, s.h * 0.48);
     for (let r = r0; r < reach; r += step) {
       const t = (r - r0) / (reach - r0);
-      c.el('circle', { class: 'ln ring', cx, cy, r, style: `--a:${(0.1 * (1 - t) ** 1.6).toFixed(3)}` }, dial);
+      c.el('circle', { class: 'ln ring', cx, cy, r, style: `--a:${(0.1 * (1 - t) ** 1.6).toFixed(3)}` }, rings);
     }
+    if (flow) return;
     const rt = Math.round(half + (mobile ? 14 : 22));
     let d = '';
     let dh = '';
@@ -100,8 +104,8 @@ export function createUvodNet(main: HTMLElement, svg: SVGSVGElement): UvodNet {
       if (a % 30 === 0) dh += `M${P(a, rt)}L${P(a, rt + 10)}`;
       else d += `M${P(a, rt)}L${P(a, rt + 4)}`;
     }
-    c.el('path', { class: 'ln tick', d }, dial);
-    c.el('path', { class: 'ln tick h', d: dh }, dial);
+    c.el('path', { class: 'ln tick', d }, rings);
+    c.el('path', { class: 'ln tick h', d: dh }, rings);
     hand = c.el('g', { class: 'hand', style: `${o};transform:rotate(${markA}deg)` }, fg);
     const ra = rt + 18;
     c.el('path', { class: 'ln mark', d: `M${P(-7, ra)}A${ra} ${ra} 0 0 1 ${P(7, ra)}` }, hand);
