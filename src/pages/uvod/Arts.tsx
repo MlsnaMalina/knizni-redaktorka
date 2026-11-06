@@ -105,10 +105,8 @@ function HeroSheet({ step }: { step: Step }) {
         <del>Mým cílem je pomoci vám, aby</del> <ins>Aby</ins> váš text <del>byl schopen obstát</del> <ins>obstál</ins> před recenzenty i&nbsp;čtenáři, <del>a&nbsp;proto</del> musí být přesný,
         srozumitelný a&nbsp;jednotný v&nbsp;celém rozsahu.
       </p>
-      <p>
-        Čtenář nemá hádat, co autor myslel, ani se vracet o&nbsp;stránku zpět, aby pochopil odkaz. Každá kapitola se proto čte dvakrát: nejdřív kvůli obsahu, potom kvůli jazyku a&nbsp;stavbě.
-      </p>
-      <p>Zkratky se sjednocují, pojmy se v&nbsp;celém textu jmenují stejně a&nbsp;odkazy vedou tam, kam mají.</p>
+      <p>Čtenář nemá hádat, co autor myslel, ani se vracet o&nbsp;stránku zpět, aby pochopil odkaz.</p>
+      <p>Zkratky a&nbsp;pojmy sjednotím, zhod&shy;notím návaznost textu, zkontroluji odkazy, posoudím strukturu.</p>
       <svg className="ok" viewBox="0 0 34 34">
         <circle cx="17" cy="17" r="15" />
         <path d="M10 17.5l5 5 9-11" />

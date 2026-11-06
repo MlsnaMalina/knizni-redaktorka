@@ -40,7 +40,7 @@ export default function Uvod() {
           <HeroArt aw={aw} />
           <div className="copy" data-focus>
             <h1 id="t-hero">Aby váš (odborný) text obstál.</h1>
-            <p className="lead">Redakce komentářů k&nbsp;zákonům, právních monografií, odborných publikací i&nbsp;závěrečných prací.</p>
+            <p className="lead">Redakce odborných publikací, závěrečných prací, právních monografií i&nbsp;komentářů k&nbsp;zákonům.</p>
             <ul className="facts" aria-label="Zkušenosti v číslech">
               <li>
                 <b>{YEARS_EDITING}</b>

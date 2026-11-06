@@ -7,8 +7,9 @@ import { SiteHeader } from '../components/SiteHeader';
 import { Checks } from './omne/Checks';
 import './omne.css';
 
-/** Šířka portrétu v hero v px; stejná hodnota patří do `sizes` obrázku. */
-const PHOTO_W = 170;
+/** Šířka portrétu v hero v px (na telefonu menší); stejné hodnoty patří do `sizes` obrázku. */
+const PHOTO_W = 184;
+const PHOTO_W_SMALL = 170;
 
 /** Šipka mezi částmi cesty: jak se mezera posouvá nahoru, šipka v ní sjíždí dolů (pohyb řídí useRoadArrows). */
 function Gap() {
@@ -95,17 +96,21 @@ export default function OMne() {
       <main>
         <section className="scene mdl quilt-bg" aria-label="O mně">
           <div className="copy">
-            <figure className="photo" style={{ '--pw': `${PHOTO_W}px` } as CSSVars}>
+            <figure className="portrait" style={{ '--pw': `${PHOTO_W}px`, '--pw-s': `${PHOTO_W_SMALL}px` } as CSSVars}>
               <img
                 src="/portret-640.webp"
                 srcSet="/portret-320.webp 320w, /portret-640.webp 640w"
-                sizes={`${PHOTO_W}px`}
+                sizes={`(max-width: 720px) ${PHOTO_W_SMALL}px, ${PHOTO_W}px`}
                 width={640}
                 height={800}
                 alt="Kateřina Mlsnová, knižní redaktorka"
                 fetchPriority="high"
                 decoding="async"
               />
+              <svg viewBox="0 0 226 226" aria-hidden="true" focusable="false">
+                <circle cx="113" cy="113" r="112" />
+              </svg>
+              <i aria-hidden="true" />
             </figure>
             <h1>Z&nbsp;advokacie do knižní redakce.</h1>
             <ul className="facts three" aria-label="Stručně řečeno">
@@ -175,7 +180,7 @@ export default function OMne() {
             ))}
 
             <li className="blk far">
-              <p className="lab">Co říkají autoři</p>
+              <p className="lab">Co o&nbsp;spolupráci se mnou říkají autoři</p>
               <div className="obook" ref={bookRef}>
                 <div className="pg l">
                   <p className="vq">„Mimořádná spokojenost s&nbsp;paní Kateřinou, velice lehká spolupráce, odpovídá okamžitě a&nbsp;vždy se snaží hodně pomoct.“</p>
