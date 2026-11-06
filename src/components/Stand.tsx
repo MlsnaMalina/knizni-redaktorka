@@ -1,4 +1,4 @@
-import { TYPES, type Book } from '../data/books';
+import { typeLine, type Book } from '../data/books';
 import { cx, pagesText } from '../lib/format';
 import { Book3D } from './Book3D';
 
@@ -15,13 +15,15 @@ function StandCard({ book, on }: { book: Book; on: boolean }) {
   const when = book.estYear ? '1. vydání' : (book.edition === 2 ? '2. vydání, ' : '') + (book.month ? `${book.month}/` : '') + book.year;
   return (
     <div className={cx('stand-card', on && 'on')} aria-hidden={on ? undefined : true}>
-      <p className="stand-meta">{[TYPES[book.type].one, when, pagesText(book.pages)].join(' · ')}</p>
+      <p className="stand-meta">{[typeLine(book), when, pagesText(book.pages)].join(' · ')}</p>
       <h2>{book.title}</h2>
       <p className="stand-authors">{book.authors ?? ''}</p>
       {book.isNew && <p className="stand-new">Novinka</p>}
-      <a className="textlink" href={book.url || 'https://obchod.wolterskluwer.cz/'} target="_blank" rel="noopener noreferrer" tabIndex={on ? undefined : -1}>
-        Detail v e-shopu Wolters Kluwer
-      </a>
+      {book.url && (
+        <a className="textlink" href={book.url} target="_blank" rel="noopener noreferrer" tabIndex={on ? undefined : -1}>
+          Detail v e-shopu Wolters Kluwer
+        </a>
+      )}
     </div>
   );
 }

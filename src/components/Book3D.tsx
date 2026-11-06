@@ -37,7 +37,7 @@ export function Book3D({ book, w = 180, ry = 28, rx = -5, rz = 0, flat, muted, e
     '--ry': `${ry}deg`,
     '--rx': `${rx}deg`,
     '--rz': `${rz}deg`,
-    '--sp': SPINE[book.type],
+    '--sp': SPINE[book.types[0]],
     ...style,
   };
   return (

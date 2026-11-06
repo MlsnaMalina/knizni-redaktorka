@@ -16,6 +16,6 @@ export const libraryOrder = (): Book[] =>
   [...BOOKS].sort(
     (a, b) =>
       Number(b.flagship) - Number(a.flagship) ||
-      TYPE_ORDER.indexOf(a.type) - TYPE_ORDER.indexOf(b.type) ||
+      TYPE_ORDER.indexOf(a.types[0]) - TYPE_ORDER.indexOf(b.types[0]) ||
       stamp(b, true) - stamp(a, true)
   );

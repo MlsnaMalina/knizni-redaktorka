@@ -10,8 +10,8 @@ export const COVERS_ENABLED = true;
 /** Obálka bez obrázku: barva podle druhu, název a rok. */
 export function TypographicCover({ book }: { book: Book }) {
   return (
-    <div className={`tcover tcover--${book.type}`}>
-      <span className="tcover-type">{TYPES[book.type].one}</span>
+    <div className={`tcover tcover--${book.types[0]}`}>
+      <span className="tcover-type">{TYPES[book.types[0]].one}</span>
       <span className="tcover-title">{book.label}</span>
       <span className="tcover-meta">
         {book.edition === 2 ? '2. vydání · ' : ''}
@@ -28,7 +28,7 @@ export function Cover({ book, eager = false }: { book: Book; eager?: boolean }) 
   return (
     <>
       {state !== 'ok' && <TypographicCover book={book} />}
-      {COVERS_ENABLED && state !== 'fail' && (
+      {COVERS_ENABLED && book.cover && state !== 'fail' && (
         <img
           className="cover-img"
           src={book.cover}

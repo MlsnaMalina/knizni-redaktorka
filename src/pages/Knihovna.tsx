@@ -18,7 +18,7 @@ const FILTERS: readonly { id: string; label: string }[] = [
   ...TOPICS.map((t) => ({ id: t.id, label: t.label })),
 ];
 
-const matches = (b: Book, f: string): boolean => f === 'all' || b.type === f || b.topic === f;
+const matches = (b: Book, f: string): boolean => f === 'all' || (b.types as readonly string[]).includes(f) || (b.topics as readonly string[]).includes(f);
 const COUNTS = new Map(FILTERS.map((f) => [f.id, BOOKS.filter((b) => matches(b, f.id)).length]));
 
 /** Odhad šířky výlohy před prvním měřením (šířka okna bez okrajů). */

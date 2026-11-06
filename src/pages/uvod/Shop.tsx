@@ -36,10 +36,10 @@ function ShelfItem({ book, face, small, selected, onPick }: ItemProps) {
   const k = small ? 0.78 : 1;
   const vars: CSSVars = {
     '--w': `${Math.round((10 + book.pages * 0.026) * k)}px`,
-    '--h': `${Math.round(((book.type === 'komentar' ? 186 : 166) + (hash(book.id) % 12)) * k)}px`,
+    '--h': `${Math.round(((book.types[0] === 'komentar' ? 186 : 166) + (hash(book.id) % 12)) * k)}px`,
   };
   return (
-    <button type="button" className={cx('spine', book.type, selected && 'out')} style={vars} aria-label={label} aria-current={current} onClick={onPick}>
+    <button type="button" className={cx('spine', book.types[0], selected && 'out')} style={vars} aria-label={label} aria-current={current} onClick={onPick}>
       <span>{book.label}</span>
     </button>
   );
