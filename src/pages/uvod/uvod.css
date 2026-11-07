@@ -168,7 +168,8 @@
 
   /* lupa na prošívání (úvod na telefonu, Kateřina 7. 11. 2026): úprava věty ve skleněném kruhu s černým okrajem, rukojetí s modrým kroužkem
      (Kateřina vybrala Skutečnou lupu ze tří směrů bohatší grafiky) a modrým stínem, kolem modrá nit a kruhy ohniska (dílky s modrou značkou
-     a tečky), které se pomalu točí proti sobě; kolem žádný text. Jen dekorace (aria-hidden), nadpis stojí pod ní. */
+     za 24 s po směru hodin, tečky za 16 s proti; 7. 11. odpoledne zrychleno ze 150 a 120 s, „točí se velmi pomalu“); kolem žádný text.
+     Úprava věty v lupě běží pořád dokola (HeroLens.tsx). Jen dekorace (aria-hidden), nadpis stojí pod ní. */
   .hl { --lens: clamp(210px, min(67vw, calc(100svh - 520px)), 284px); position: relative; z-index: 1; width: 100%; height: var(--lens); flex: none; }
   .hl > * { position: absolute; }
   .hl-field { z-index: 0; left: -12%; right: -12%; top: -96px; height: calc(var(--lens) + 230px); pointer-events: none;
@@ -177,22 +178,29 @@
   .hl-nit { z-index: 1; left: 50%; top: 50%; width: calc(var(--lens) + 42px); height: calc(var(--lens) + 42px); translate: -50% -50%; border-radius: 50%; border: 1.6px dashed var(--blue); }
   .hl-ring { z-index: 1; left: 50%; top: 50%; translate: -50% -50%; overflow: visible; pointer-events: none; will-change: rotate; }
   .hl-ring circle { fill: none; }
-  .hl-dial { width: calc(var(--lens) + 84px); height: calc(var(--lens) + 84px); animation: hl-spin 150s linear infinite; }
-  .hl-dots { width: calc(var(--lens) + 128px); height: calc(var(--lens) + 128px); animation: hl-spin-r 120s linear infinite; }
+  .hl-dial { width: calc(var(--lens) + 84px); height: calc(var(--lens) + 84px); animation: hl-spin 24s linear infinite; }
+  .hl-dots { width: calc(var(--lens) + 128px); height: calc(var(--lens) + 128px); animation: hl-spin-r 16s linear infinite; }
   .hl-lens { z-index: 4; top: 0; left: 50%; width: var(--lens); height: var(--lens); margin-left: calc(var(--lens) / -2); border-radius: 50%; display: grid; place-items: center;
     background: radial-gradient(circle at 30% 24%, #fff 0, #fff 36%, rgba(0, 47, 167, .085) 100%);
     box-shadow: 0 0 0 5px #0b0b0b, 0 0 0 6px rgba(255, 255, 255, .95), 0 0 0 7.5px rgba(0, 47, 167, .4), 12px 24px 32px -12px rgba(0, 47, 167, .58), 3px 8px 14px -6px rgba(0, 47, 167, .3), inset 0 0 24px rgba(0, 47, 167, .12); }
-  /* lesk skla: světlý oblouk při horním levém okraji, pod textem */
-  .hl-lens::before { content: ''; position: absolute; left: 9%; top: 6%; width: 40%; height: 40%; border-radius: 50%; border: 3px solid transparent; border-top-color: rgba(255, 255, 255, .96); border-left-color: rgba(255, 255, 255, .85); transform: rotate(-12deg); pointer-events: none; }
   /* rukojeť: otáčí se kolem středu lupy, začíná pod okrajem; černá s modrým kroužkem, stín dopadá modře jako u lupy */
   .hl-handle { z-index: 3; left: 50%; top: calc(var(--lens) / 2); width: 0; height: 0; rotate: 50deg; }
   .hl-handle i { position: absolute; left: calc(var(--lens) / 2 + 3px); top: -12px; width: 122px; height: 24px; border-radius: 2px 14px 14px 2px; background: linear-gradient(180deg, #505050 0, #0b0b0b 46%, #000 100%); box-shadow: 10px 16px 20px -8px rgba(0, 47, 167, .5); }
   .hl-handle i::before { content: ''; position: absolute; left: 12px; top: 0; bottom: 0; width: 12px; background: linear-gradient(180deg, #4a73e8 0, #002fa7 45%, #001a66 100%); }
-  .hl-text { position: relative; z-index: 1; padding: 0 12%; font: 400 calc(var(--lens) * .05) / 1.55 var(--text); color: #3a3a3a; text-align: center; }
+  .hl-text { padding: 0 12%; font: 400 calc(var(--lens) * .05) / 1.55 var(--text); color: #3a3a3a; text-align: center; }
   .hl-text .run { margin-bottom: .6em; font: 400 1.55em/1.1 var(--display); font-variation-settings: 'opsz' 18; color: var(--blue); }
-  .hl-text del { color: #8d8d8d; text-decoration: line-through; text-decoration-color: var(--blue); }
+  .hl-text del { text-decoration: none; background: linear-gradient(var(--blue), var(--blue)) no-repeat 0 56% / 0 1.5px; }
   .hl-text ins { color: var(--blue); text-decoration: underline; text-underline-offset: 2px; }
+  /* oprava před očima: škrtnutí se táhne přes smazané místo, hned za ním naskočí nové slovo (každé další o kousek později),
+     pak zbyde čistopis; po pauze se vše začne znovu (stavy st-0 až st-2 přepíná HeroLens.tsx) */
+  .hero-ms.st-0 .hl-text { animation: hl-fade .9s var(--ease) both; }
+  .hero-ms.st-1 .hl-text del { color: #8d8d8d; animation: hl-strike .8s var(--ease) both; animation-delay: calc(var(--k) * .45s); }
+  .hero-ms.st-1 .hl-text ins { animation: ms-in .7s var(--ease) both; animation-delay: calc(var(--k) * .45s + .6s); }
+  .hero-ms.st-2 .hl-text > p { animation: ms-settle .8s var(--ease) both; }
 }
+
+@keyframes hl-strike { from { background-size: 0 1.5px; color: #3a3a3a; } to { background-size: 100% 1.5px; color: #8d8d8d; } }
+@keyframes hl-fade { from { opacity: .3; } to { opacity: 1; } }
 
 @keyframes hl-spin { to { rotate: 360deg; } }
 @keyframes hl-spin-r { to { rotate: -360deg; } }

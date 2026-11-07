@@ -45,7 +45,7 @@ const markHeroSeen = (): void => {
 };
 
 /** Rukopis, Změny, Čistopis: při první návštěvě se list zredaguje, jakmile je vidět; jinak stojí rovnou čistopis. */
-export function useHeroSteps(): { step: Step; played: boolean; ref: RefObject<HTMLDivElement | null> } {
+function useHeroSteps(): { step: Step; played: boolean; ref: RefObject<HTMLDivElement | null> } {
   const [first] = useState(() => !reducedMotion() && !heroSeen());
   const [step, setStep] = useState<Step>(first ? 0 : 2);
   const ref = useRef<HTMLDivElement>(null);
