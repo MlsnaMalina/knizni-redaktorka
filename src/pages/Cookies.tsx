@@ -1,26 +1,24 @@
 import { Link } from 'react-router-dom';
 import { COVERS_ENABLED } from '../components/Cover';
-import { PRIVACY_PATH } from '../data/site';
+import { COOKIES_UPDATED, PRIVACY_PATH } from '../data/site';
 import { nb } from '../lib/format';
 import { usePageMeta } from '../lib/hooks';
 import { LegalPage, LegalSection } from './Legal';
 
-/* Text vychází z ověřeného stavu webu (5. 11. 2026): žádné cookies, žádná analytika, jediný záznam v localStorage
-   (klíč kr-hero-redakce v pages/uvod/Arts.tsx), písma hostovaná na webu. Odstavec o obálkách se ukáže jen při COVERS_ENABLED. */
+/* Text vychází z ověřeného stavu webu (7. 11. 2026): žádné cookies, žádná analytika, nic v localStorage ani jiném úložišti prohlížeče
+   (záznam „už viděno“ u úvodní animace, klíč kr-hero-redakce, se 7. 11. zrušil: animace se přehrává při každém načtení, viz pages/uvod/editLoop.ts),
+   písma hostovaná na webu. Odstavec o obálkách se ukáže jen při COVERS_ENABLED. Kdyby web začal cokoli ukládat, tento text přepsat. */
 export default function Cookies() {
   usePageMeta(
     'Cookies | Kateřina Mlsnová',
-    'Web nepoužívá cookies ani měření návštěvnosti. Co se ukládá v prohlížeči a odkud se načítají obálky knih.'
+    'Web nepoužívá cookies ani měření návštěvnosti a nic neukládá ve vašem prohlížeči. Odkud se načítají obálky knih.'
   );
 
   return (
-    <LegalPage title="Cookies" lead={nb('Tento web nepoužívá cookies ani žádné nástroje na měření návštěvnosti nebo reklamu.')}>
+    <LegalPage title="Cookies" updated={COOKIES_UPDATED} lead={nb('Tento web nepoužívá cookies ani žádné nástroje na měření návštěvnosti nebo reklamu.')}>
       <LegalSection title="Co se ukládá ve vašem prohlížeči">
         <p>
-          {nb('Web si v úložišti prohlížeče (localStorage) ukládá jediný záznam s názvem')} <span className="nw">kr-hero-redakce</span>
-          {nb(
-            '. Pamatuje si v něm, že jste už viděli úvodní animaci, aby se vám nepřehrávala při každé návštěvě. Záznam neobsahuje žádné osobní údaje, nesleduje vás a nikam se neodesílá. Smazat ho můžete kdykoli v nastavení prohlížeče.'
-          )}
+          {nb('Web si ve vašem prohlížeči neukládá žádné záznamy: ani cookies, ani údaje v úložišti prohlížeče (localStorage, sessionStorage).')}
         </p>
       </LegalSection>
       <LegalSection title="Měření návštěvnosti a reklama">

@@ -3,8 +3,8 @@ import { SiteHeader } from '../components/SiteHeader';
 import { LEGAL_UPDATED } from '../data/site';
 import './legal.css';
 
-/** Společná kostra stránek Cookies a Zásady: prostý vystředěný text, bez rušivých prvků. */
-export function LegalPage({ title, lead, children }: { title: string; lead: string; children: ReactNode }) {
+/** Společná kostra stránek Cookies a Zásady: prostý vystředěný text, bez rušivých prvků; updated = datum znění dané stránky. */
+export function LegalPage({ title, lead, updated = LEGAL_UPDATED, children }: { title: string; lead: string; updated?: string; children: ReactNode }) {
   return (
     <div className="legal">
       <SiteHeader />
@@ -13,7 +13,7 @@ export function LegalPage({ title, lead, children }: { title: string; lead: stri
           <h1>{title}</h1>
           <p className="lead">{lead}</p>
           {children}
-          <p className="upd">Platné od {LEGAL_UPDATED}.</p>
+          <p className="upd">Platné od {updated}.</p>
         </article>
       </main>
     </div>

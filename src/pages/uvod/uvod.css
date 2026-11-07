@@ -17,8 +17,8 @@
      mezery vlevo i vpravo (změřeno na 1100 až 2560 px). Nelze použít transform: čísla jsou uvnitř .copy a polohují se vůči části. */
   @media (min-width: 1080px) { .scene.hero .copy { margin-left: calc(var(--art-w) * .68); } }
 
-  /* hero: list rukopisu se při první návštěvě zredaguje (Rukopis, Změny, Čistopis), jinak stojí rovnou čistopis;
-     kruhy a značka jako kolem knihkupectví, jen klidné */
+  /* hero: úprava věty (list rukopisu na počítači a tabletu, lupa na telefonu) se přehrává při každém načtení a pak dokola: Rukopis, Změny,
+     Čistopis (stavy st-0 až st-2 přepíná editLoop.ts, nic se neukládá do prohlížeče); kruhy a značka jako kolem knihkupectví, jen klidné */
   .dial { z-index: 0; overflow: visible; pointer-events: none; }
   .dial circle { fill: none; stroke: var(--ink); stroke-width: 1; stroke-opacity: .07; }
   .dial circle:nth-of-type(even) { stroke-opacity: .1; }
@@ -28,9 +28,13 @@
   @media (max-width: 1079px) { .dial .r4, .dial .ticks { display: none; } }
   .hero-ms.st-0 del { color: inherit; text-decoration: none; }
   .hero-ms.st-0 ins, .hero-ms.st-2 del { display: none; }
-  .hero-ms.st-1 ins { animation: ms-in .8s var(--ease) both; }
   .hero-ms.st-2 ins { color: inherit; text-decoration: none; }
-  .hero-ms.play.st-2 .sheet > p { animation: ms-settle .8s var(--ease) both; }
+  /* oprava před očima: škrtnutí se táhne přes smazané místo, hned za ním naskočí nové slovo (každé další o kousek později, pořadí v --k),
+     pak zbyde čistopis; začátek smyčky a čistopis se krátce rozsvítí */
+  .hero-ms .sheet del, .hl-text del { text-decoration: none; background: linear-gradient(var(--blue), var(--blue)) no-repeat 0 56% / 0 1.5px; }
+  .hero-ms.st-1 del { color: #8d8d8d; animation: hl-strike .8s var(--ease) both; animation-delay: calc(var(--k, 0) * .45s); }
+  .hero-ms.st-1 ins { animation: ms-in .7s var(--ease) both; animation-delay: calc(var(--k, 0) * .45s + .6s); }
+  .hero-ms.st-0 .sheet > p, .hero-ms.st-0 .hl-text > p, .hero-ms.st-2 .hl-text > p, .hero-ms.play.st-2 .sheet > p { animation: ms-settle .8s var(--ease) both; }
   .hero-ms .ok { position: absolute; right: 9%; bottom: 7%; width: 11%; aspect-ratio: 1; opacity: 0; }
   .hero-ms.st-2 .ok { opacity: 1; }
   .hero-ms.play.st-2 .ok { animation: ms-in .6s .5s var(--ease) both; }
@@ -169,7 +173,7 @@
   /* lupa na prošívání (úvod na telefonu, Kateřina 7. 11. 2026): úprava věty ve skleněném kruhu s černým okrajem, rukojetí s modrým kroužkem
      (Kateřina vybrala Skutečnou lupu ze tří směrů bohatší grafiky) a modrým stínem, kolem modrá nit a kruhy ohniska (dílky s modrou značkou
      za 24 s po směru hodin, tečky za 16 s proti; 7. 11. odpoledne zrychleno ze 150 a 120 s, „točí se velmi pomalu“); kolem žádný text.
-     Úprava věty v lupě běží pořád dokola (HeroLens.tsx). Jen dekorace (aria-hidden), nadpis stojí pod ní. */
+     Úprava věty v lupě běží pořád dokola (editLoop.ts, pravidla oprav jsou výše u .hero-ms). Jen dekorace (aria-hidden), nadpis stojí pod ní. */
   .hl { --lens: clamp(210px, min(67vw, calc(100svh - 520px)), 284px); position: relative; z-index: 1; width: 100%; height: var(--lens); flex: none; }
   .hl > * { position: absolute; }
   .hl-field { z-index: 0; left: -12%; right: -12%; top: -96px; height: calc(var(--lens) + 230px); pointer-events: none;
@@ -189,18 +193,10 @@
   .hl-handle i::before { content: ''; position: absolute; left: 12px; top: 0; bottom: 0; width: 12px; background: linear-gradient(180deg, #4a73e8 0, #002fa7 45%, #001a66 100%); }
   .hl-text { padding: 0 12%; font: 400 calc(var(--lens) * .05) / 1.55 var(--text); color: #3a3a3a; text-align: center; }
   .hl-text .run { margin-bottom: .6em; font: 400 1.55em/1.1 var(--display); font-variation-settings: 'opsz' 18; color: var(--blue); }
-  .hl-text del { text-decoration: none; background: linear-gradient(var(--blue), var(--blue)) no-repeat 0 56% / 0 1.5px; }
   .hl-text ins { color: var(--blue); text-decoration: underline; text-underline-offset: 2px; }
-  /* oprava před očima: škrtnutí se táhne přes smazané místo, hned za ním naskočí nové slovo (každé další o kousek později),
-     pak zbyde čistopis; po pauze se vše začne znovu (stavy st-0 až st-2 přepíná HeroLens.tsx) */
-  .hero-ms.st-0 .hl-text { animation: hl-fade .9s var(--ease) both; }
-  .hero-ms.st-1 .hl-text del { color: #8d8d8d; animation: hl-strike .8s var(--ease) both; animation-delay: calc(var(--k) * .45s); }
-  .hero-ms.st-1 .hl-text ins { animation: ms-in .7s var(--ease) both; animation-delay: calc(var(--k) * .45s + .6s); }
-  .hero-ms.st-2 .hl-text > p { animation: ms-settle .8s var(--ease) both; }
 }
 
 @keyframes hl-strike { from { background-size: 0 1.5px; color: #3a3a3a; } to { background-size: 100% 1.5px; color: #8d8d8d; } }
-@keyframes hl-fade { from { opacity: .3; } to { opacity: 1; } }
 
 @keyframes hl-spin { to { rotate: 360deg; } }
 @keyframes hl-spin-r { to { rotate: -360deg; } }
