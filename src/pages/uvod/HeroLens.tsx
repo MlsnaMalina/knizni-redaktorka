@@ -3,9 +3,10 @@ import { useHeroSteps } from './Arts';
 const RUN = ['Rukopis', 'Změny', 'Čistopis'] as const;
 
 /**
- * Úvodní obrazovka na telefonu (Kateřina vybrala 7. 11. 2026 Lupu na prošívání): úprava věty v kruhu, který se při první návštěvě
- * přehraje (Rukopis, Změny, Čistopis, stejně jako list v hero na počítači), kolem modrá nit a kruhy ohniska, které se pomalu točí
- * proti sobě. Kolem lupy žádný text. Jen dekorace, nadpis a čísla stojí pod ní.
+ * Úvodní obrazovka na telefonu (Kateřina vybrala 7. 11. 2026 Lupu na prošívání a ze tří směrů bohatší grafiky Skutečnou lupu): úprava věty
+ * ve skleněném kruhu s černým okrajem a rukojetí, který se při první návštěvě přehraje (Rukopis, Změny, Čistopis, stejně jako list v hero
+ * na počítači), kolem modrá nit a kruhy ohniska, které se pomalu točí proti sobě. Kolem lupy žádný text. Jen dekorace, nadpis a čísla
+ * stojí pod ní.
  */
 export function HeroLens() {
   const { step, played, ref } = useHeroSteps();
@@ -23,6 +24,10 @@ export function HeroLens() {
       <svg className="hl-ring hl-dots" viewBox="-4 -4 108 108">
         <circle cx="50" cy="50" r="50" pathLength="600" strokeDasharray="0.01 5.99" strokeWidth=".7" stroke="#6e6e6e" strokeOpacity=".7" strokeLinecap="round" />
       </svg>
+      {/* rukojeť lupy: leží pod okrajem skla, vychází doprava dolů */}
+      <div className="hl-handle">
+        <i />
+      </div>
       <div className={`hl-lens hero-ms st-${step}${played ? ' play' : ''}`}>
         <div className="hl-text">
           <p className="run">{RUN[step]}</p>
