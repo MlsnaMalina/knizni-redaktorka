@@ -61,7 +61,7 @@
   .services::before { left: 50%; top: 0; bottom: 0; width: 1px; background: linear-gradient(transparent, var(--line) 20%, var(--line) 80%, transparent); }
   .services::after { top: 50%; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, var(--line) 20%, var(--line) 80%, transparent); }
   .services li { display: grid; gap: 8px; align-content: center; justify-items: center; padding: 26px clamp(14px, 2.4vw, 30px); }
-  .services h3 { font: 400 clamp(20px, 1.8vw, 25px)/1.15 var(--display); letter-spacing: -.01em; text-wrap: balance; }
+  .services h3 { font: 400 clamp(20px, 1.8vw, 25px)/1.15 var(--display); letter-spacing: -.01em; text-wrap: balance; color: var(--blue); } /* názvy služeb modře (Kateřina 7. 11. 2026) */
   .services p { max-width: 30ch; font-size: 15px; line-height: 1.6; color: var(--graphite); text-wrap: balance; }
 
   /* knihkupectví: 12 nejnovějších knih, vybraná stojí uprostřed */
@@ -143,13 +143,51 @@
     .fl-ticks { grid-column: 1; grid-row: 2; }
     .shop-info { grid-column: 1; grid-row: 3; margin-top: 12px; }
   }
-  @media (max-width: 640px) {
-    .services { grid-template-columns: 1fr; grid-auto-rows: auto; }
-    .services::before, .services::after { display: none; }
-    .services li { padding: 20px 4px; }
-    .services li + li { border-top: 1px solid var(--line); }
+  @media (max-width: 720px) {
+    /* telefon: čtyři služby zůstávají ve dvou sloupcích s jemným křížem jako na počítači, jen těsněji (Kateřina vybrala 7. 11. 2026 návrh Kříž);
+       drobná grafika pod nimi na telefonu pryč */
+    .services { width: min(100%, 400px); margin-top: 30px; }
+    .services li { gap: 10px; padding: 28px 12px; }
+    .services h3 { font-size: 20px; line-height: 1.14; }
+    .services p { max-width: 21ch; font-size: 13.5px; line-height: 1.55; }
+    #sluzby .art { display: none; }
+
+    /* úvodní obrazovka: lupa na prošívání nahoře, pod ní nadpis a čísla; vše se vejde na první obrazovku */
+    .scene.hero { align-content: start; padding-top: calc(var(--mh) + 28px); padding-bottom: 40px; }
+    .scene.hero .copy { margin-top: 58px; }
+    .scene.hero .copy h1 { margin-top: 0; font-size: 42px; }
+    .scene.hero .lead { margin-top: 12px; font-size: 15.5px; }
+    .scene.hero .facts { margin-top: 16px; }
+    .scene.hero .facts b { font-size: 34px; }
+    .scene.hero .actions { margin-top: 20px; }
   }
+  @media (max-width: 400px) {
+    .scene.hero .actions { gap: 10px; }
+    .scene.hero .actions .btn { padding: 0 22px; }
+  }
+
+  /* lupa na prošívání (úvod na telefonu, Kateřina 7. 11. 2026): úprava věty v bílém kruhu s modrým stínem, kolem modrá nit a kruhy ohniska
+     (dílky s modrou značkou a tečky), které se pomalu točí proti sobě; kolem žádný text. Jen dekorace (aria-hidden), nadpis stojí pod ní. */
+  .hl { --lens: clamp(210px, min(67vw, calc(100svh - 520px)), 284px); position: relative; z-index: 1; width: 100%; height: var(--lens); flex: none; }
+  .hl > * { position: absolute; }
+  .hl-field { z-index: 0; left: -12%; right: -12%; top: -96px; height: calc(var(--lens) + 230px); pointer-events: none;
+    background: url(/quilt.svg) 0 0 / 34px 44px, url(/quilt.svg) 0 0 / 34px 44px;
+    -webkit-mask-image: radial-gradient(ellipse closest-side at 50% 44%, #000 50%, transparent 100%); mask-image: radial-gradient(ellipse closest-side at 50% 44%, #000 50%, transparent 100%); }
+  .hl-nit { z-index: 1; left: 50%; top: 50%; width: calc(var(--lens) + 30px); height: calc(var(--lens) + 30px); translate: -50% -50%; border-radius: 50%; border: 1.6px dashed var(--blue); }
+  .hl-ring { z-index: 1; left: 50%; top: 50%; translate: -50% -50%; overflow: visible; pointer-events: none; will-change: rotate; }
+  .hl-ring circle { fill: none; }
+  .hl-dial { width: calc(var(--lens) + 84px); height: calc(var(--lens) + 84px); animation: hl-spin 150s linear infinite; }
+  .hl-dots { width: calc(var(--lens) + 128px); height: calc(var(--lens) + 128px); animation: hl-spin-r 120s linear infinite; }
+  .hl-lens { z-index: 4; top: 0; left: 50%; width: var(--lens); height: var(--lens); margin-left: calc(var(--lens) / -2); border-radius: 50%; background: #fff; display: grid; place-items: center;
+    box-shadow: 0 0 0 1px rgba(11, 11, 11, .88), 0 0 0 7px #fff, 0 0 0 8px rgba(0, 47, 167, .3), 12px 24px 32px -12px rgba(0, 47, 167, .55), 3px 8px 14px -6px rgba(0, 47, 167, .3); }
+  .hl-text { padding: 0 12%; font: 400 calc(var(--lens) * .05) / 1.55 var(--text); color: #3a3a3a; text-align: center; }
+  .hl-text .run { margin-bottom: .6em; font: 400 1.55em/1.1 var(--display); font-variation-settings: 'opsz' 18; color: var(--blue); }
+  .hl-text del { color: #8d8d8d; text-decoration: line-through; text-decoration-color: var(--blue); }
+  .hl-text ins { color: var(--blue); text-decoration: underline; text-underline-offset: 2px; }
 }
+
+@keyframes hl-spin { to { rotate: 360deg; } }
+@keyframes hl-spin-r { to { rotate: -360deg; } }
 
 @keyframes ms-in { from { opacity: 0; } to { opacity: 1; } }
 @keyframes ms-settle { from { opacity: .45; } to { opacity: 1; } }

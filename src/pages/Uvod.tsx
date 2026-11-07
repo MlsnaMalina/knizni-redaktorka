@@ -2,9 +2,10 @@ import { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { BOOKS_ROUND, SAMPLE_LINK, YEARS_EDITING } from '../data/site';
 import { createUvodNet, type UvodNet } from '../lib/uvod-net';
-import { useArtWidth, usePageMeta } from '../lib/hooks';
+import { useArtWidth, useMedia, usePageMeta } from '../lib/hooks';
 import { SiteHeader } from '../components/SiteHeader';
 import { HeroArt, SluzbyArt, ZaverArt } from './uvod/Arts';
+import { HeroLens } from './uvod/HeroLens';
 import { Prace } from './uvod/Prace';
 import { ProKoho } from './uvod/ProKoho';
 import { Shop } from './uvod/Shop';
@@ -19,6 +20,7 @@ export default function Uvod() {
   const svgRef = useRef<SVGSVGElement>(null);
   const netRef = useRef<UvodNet | null>(null);
   const aw = useArtWidth();
+  const phone = useMedia('(max-width: 720px)');
 
   useEffect(() => {
     if (!mainRef.current || !svgRef.current) return undefined;
@@ -37,7 +39,7 @@ export default function Uvod() {
         <svg ref={svgRef} className="net" aria-hidden="true" />
 
         <section className="scene hero" data-side="left" aria-labelledby="t-hero">
-          <HeroArt aw={aw} />
+          {phone ? <HeroLens /> : <HeroArt aw={aw} />}
           <div className="copy" data-focus>
             <h1 id="t-hero">Aby váš (odborný) text obstál.</h1>
             <p className="lead">Redakce odborných publikací, závěrečných prací, právních monografií i&nbsp;komentářů k&nbsp;zákonům.</p>
