@@ -22,7 +22,10 @@ const matches = (b: Book, f: string): boolean => f === 'all' || (b.types as read
 const COUNTS = new Map(FILTERS.map((f) => [f.id, BOOKS.filter((b) => matches(b, f.id)).length]));
 
 /** Odhad šířky výlohy před prvním měřením (šířka okna bez okrajů). */
-const estimateWidth = (): number => Math.round(Math.min(1280, window.innerWidth) - 2 * Math.max(16, window.innerWidth * 0.05));
+const estimateWidth = (): number => {
+  const w = typeof window === 'undefined' ? 1240 : window.innerWidth; // při předgenerování stránek není okno
+  return Math.round(Math.min(1280, w) - 2 * Math.max(16, w * 0.05));
+};
 
 interface Last {
   filter: string;

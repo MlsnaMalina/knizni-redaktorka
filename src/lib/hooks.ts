@@ -15,7 +15,7 @@ export function useMedia(query: string): boolean {
   );
 }
 
-export const reducedMotion = (): boolean => window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+export const reducedMotion = (): boolean => typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 /** Šířka grafiky po stranách úvodních částí; mění se jen při znatelné změně šířky okna. */
 export const FLOW = 1080;
@@ -23,7 +23,10 @@ export const artWidthFor = (w: number): number =>
   Math.round(w < FLOW ? Math.min(w * 0.66, 280) : Math.min(Math.max(w * 0.22, 180), 360));
 
 export function useArtWidth(): number {
-  const [state, setState] = useState(() => ({ at: window.innerWidth, aw: artWidthFor(window.innerWidth) }));
+  const [state, setState] = useState(() => {
+    const w = typeof window === 'undefined' ? 1240 : window.innerWidth; // při předgenerování stránek není okno
+    return { at: w, aw: artWidthFor(w) };
+  });
   useEffect(() => {
     const onResize = () => {
       setState((s) => (Math.abs(window.innerWidth - s.at) >= 40 ? { at: window.innerWidth, aw: artWidthFor(window.innerWidth) } : s));
