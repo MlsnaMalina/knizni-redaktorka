@@ -58,4 +58,7 @@ h1, h2, .facts b { font-variation-settings: 'opsz' 18 !important; } /* nižší 
 .textlink { font-size: 13px; letter-spacing: .01em; text-decoration: none; padding-bottom: 4px; color: var(--mint-ink); border-bottom: 1px solid var(--mint); transition: border-color .3s; }
 .textlink:hover { border-color: var(--blue); }
 
+/* e-book, e-mail: slovo se nezlomí za pomlčkou (obaluje ho nb() v lib/format.ts, v textu není žádný skrytý znak) */
+.nw { white-space: nowrap; }
+
 @media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }

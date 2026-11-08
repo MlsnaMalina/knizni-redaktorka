@@ -4,7 +4,7 @@ import { LEGAL_UPDATED } from '../data/site';
 import './legal.css';
 
 /** Společná kostra stránek Cookies a Zásady: prostý vystředěný text, bez rušivých prvků; updated = datum znění dané stránky. */
-export function LegalPage({ title, lead, updated = LEGAL_UPDATED, children }: { title: string; lead: string; updated?: string; children: ReactNode }) {
+export function LegalPage({ title, lead, updated = LEGAL_UPDATED, children }: { title: string; lead: ReactNode; updated?: string; children: ReactNode }) {
   return (
     <div className="legal">
       <SiteHeader />
