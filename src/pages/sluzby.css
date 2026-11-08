@@ -23,6 +23,12 @@
   h3.wh { font-family: inherit; font-weight: 400; }
   .wl { list-style: none; width: min(100%, 520px); margin-top: 10px; text-align: left; border-top: 1px solid var(--line); }
   .wl li { display: grid; grid-template-columns: 24px 1fr; gap: 14px; align-items: start; padding: 12px 0 13px; border-bottom: 1px solid var(--line); font-size: 15.5px; line-height: 1.5; color: var(--graphite); }
+  /* poznámka o korektuře (Kateřina vybrala 8. 11. 2026 variantu Řádky): popsané řádky mezi tenkými čarami; všechny řádky stejným písmem a barvou, nic nevyniká */
+  .nr { width: min(100%, 520px); margin-top: 16px; text-align: left; border-top: 1px solid var(--line); }
+  .nr > div { display: grid; grid-template-columns: 138px minmax(0, 1fr); align-items: baseline; gap: 4px 20px; padding: 13px 0 14px; border-bottom: 1px solid var(--line); }
+  .nr dt { font-size: 13px; letter-spacing: .01em; color: var(--blue); }
+  .nr dd { font-size: 15px; line-height: 1.5; color: var(--graphite); text-wrap: pretty; }
+  @media (max-width: 560px) { .nr > div { grid-template-columns: minmax(0, 1fr); } }
   .lk { margin-top: 28px; }
   .sl { list-style: none; width: min(100%, 520px); margin-top: 26px; text-align: left; border-bottom: 1px solid var(--line); }
   .sl li { display: grid; grid-template-columns: 24px 1fr; gap: 14px; padding: 13px 0 14px; border-top: 1px solid var(--line); font-size: 15.5px; line-height: 1.5; color: var(--graphite); }
@@ -75,7 +81,7 @@
        aby se položky seznamů nelámaly po jednom slově; u kapitol bez listu (6, 7, příloha) zůstává text na středu stránky */
     .scn[data-side="left"] .copy { margin-left: calc(var(--art-w) + 28px - .5vw); }
     .scn[data-side="right"] .copy { margin-right: calc(var(--art-w) + 28px - .5vw); }
-    .scn .wl, .scn .sl { width: min(100%, 640px); }
+    .scn .wl, .scn .sl, .scn .nr { width: min(100%, 640px); }
     .scn .cdesc { max-width: 54ch; }
   }
   @media (max-width: 1079px) {

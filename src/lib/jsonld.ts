@@ -74,7 +74,7 @@ const service = (anchor: string, name: string, description: string): Json => ({
 const services = (): Json[] =>
   SERVICES.flatMap((s) => [
     service(`k${s.k}`, s.toc, s.d.split('\n')[0]),
-    ...(s.note ? [service(s.note.id, s.note.name, s.note.p[0])] : []),
+    ...(s.note ? [service(s.note.id, s.note.name, [s.note.lead, ...s.note.rows.map(([label, text]) => `${label}: ${text}`)].join(' '))] : []),
   ]);
 
 const faq = (): Json => ({

@@ -110,6 +110,9 @@ export const SHEETS: Record<number, SheetSample> = {
 /** Na které straně obrazovky stojí list rukopisu u kapitoly (střídavě vlevo a vpravo). */
 export const SIDE: Record<number, 'left' | 'right'> = { 1: 'left', 2: 'right', 3: 'left', 4: 'right', 5: 'left' };
 
+/** Popsaný řádek poznámky: štítek a text. */
+export type NoteRow = [label: string, text: string];
+
 export interface Service {
   k: number;
   toc: string;
@@ -118,8 +121,8 @@ export interface Service {
   d: string;
   w: string[];
   link?: string;
-  /** Poznámka pod seznamem „Hodí se, když“: otázka jako nadpis (q), název služby pro stroje (name) a odstavce (p). */
-  note?: { id: string; q: string; name: string; p: string[] };
+  /** Poznámka pod seznamem „Hodí se, když“: otázka jako nadpis (q), název služby pro stroje (name), úvodní věta (lead) a popsané řádky (rows). */
+  note?: { id: string; q: string; name: string; lead: string; rows: NoteRow[] };
 }
 
 /** Čtyři služby jejími slovy (z původního webu). Vlajková služba je první. */
@@ -140,9 +143,12 @@ export const SERVICES: Service[] = [
       id: 'korektura',
       q: 'Stačí vám jen korektura?',
       name: 'Jazyková korektura',
-      p: [
-        'Pokud je text po obsahové stránce hotový, zajistím klasickou jazykovou korekturu. Dělá ji profesionální korektorka, se kterou spolupracuji: má praxi v několika nakladatelstvích a mimo jiné dělala korektury všech knih Bohumila Hrabala. Opraví překlepy, pravopis, interpunkci a typografii (uvozovky, pomlčky, mezery, zápis čísel a dat). Obsah, členění ani odborné závěry nemění; nejasnosti označí komentářem na okraji.',
-        'Veškerá komunikace probíhá přese mě a text zůstává důvěrný.',
+      lead: 'Pokud je text po obsahové stránce hotový, zajistím klasickou jazykovou korekturu.',
+      rows: [
+        ['Kdo ji dělá', 'Profesionální korektorka, se kterou spolupracuji. Má praxi v několika nakladatelstvích a mimo jiné dělala korektury všech knih Bohumila Hrabala.'],
+        ['Co opraví', 'Překlepy, pravopis, interpunkci a typografii (uvozovky, pomlčky, mezery, zápis čísel a dat).'],
+        ['Co nemění', 'Obsah, členění ani odborné závěry. Nejasnosti označí komentářem na okraji.'],
+        ['Komunikace', 'Veškerá komunikace probíhá přese mě a text zůstává důvěrný.'],
       ],
     },
   },

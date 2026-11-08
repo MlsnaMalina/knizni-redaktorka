@@ -95,11 +95,15 @@ const CHAPTERS: Chapter[] = [
             <h3 className="wh" id={s.note.id}>
               {nb(s.note.q)}
             </h3>
-            {s.note.p.map((p) => (
-              <p key={p} className="cdesc sm cont">
-                {nb(p)}
-              </p>
-            ))}
+            <p className="cdesc sm cont">{nb(s.note.lead)}</p>
+            <dl className="nr">
+              {s.note.rows.map(([label, text]) => (
+                <div key={label} className="rv">
+                  <dt>{label}</dt>
+                  <dd>{nb(text)}</dd>
+                </div>
+              ))}
+            </dl>
           </>
         )}
         {s.link && (
