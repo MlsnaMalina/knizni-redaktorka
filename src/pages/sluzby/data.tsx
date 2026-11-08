@@ -180,7 +180,7 @@ export const FAQ: FaqItem[] = [
   ['Jak je to s důvěrností?', 'S každým textem nakládám jako s důvěrným – bez výjimky. Rukopis nikomu neukazuji, nepoužívám ho jako referenci bez vašeho svolení a na přání podepíšu smlouvu o mlčenlivosti (NDA). U právních a firemních textů to považuji za samozřejmost.'],
   [
     'Redigujete i diplomové, rigorózní a disertační práce?',
-    'Ano, včetně právnických. Nabízím jazykovou a redakční kultivaci textu v mezích pravidel dané univerzity – strukturu, jednotnost, formulace a citace podle pravidel vaší fakulty (například ČSN ISO 690 nebo fakultní směrnice), aby práce obstála před vedoucím i oponentem. Obsah, odborné závěry a autorství zůstávají vždy plně na autorovi. Pravidla vaší školy, včetně pravidel o používání AI, platí i při redakci.',
+    'Ano, včetně právnických. Nabízím jazykovou a redakční kultivaci textu v mezích pravidel dané univerzity – strukturu, jednotnost, formulace a citace (včetně předpisů a judikatury) podle pravidel vaší fakulty (například ČSN ISO 690 nebo fakultní směrnice), aby práce obstála před vedoucím i oponentem. Obsah, odborné závěry a autorství zůstávají vždy plně na autorovi. Pravidla vaší školy, včetně pravidel o používání AI, platí i při redakci.',
     ['„V posudcích, ale i při obhajobě mi chválili úpravu a celkovou redakci práce. Umíte to!“', 'Autor disertační práce'],
   ],
   [
