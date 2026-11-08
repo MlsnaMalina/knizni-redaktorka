@@ -31,7 +31,7 @@ interface Step {
 /** Průvodce: jedna otázka na obrazovku, průběh v pěti kolečkách, na konci shrnutí. */
 const STEPS: Step[] = [
   { kind: 'choice', q: 'Co potřebujete?', msg: 'Vyberte prosím, co potřebujete.' },
-  { kind: 'text', q: 'O jaký text jde?', hint: 'např. komentář, monografie, článek, diplomová nebo disertační práce, AI draft…', msg: 'Doplňte prosím, o jaký text jde.' },
+  { kind: 'text', q: 'O jaký text jde?', hint: 'např. komentář, monografie, článek, diplomová, rigorózní nebo disertační práce, e-book, newsletter, AI draft…', msg: 'Doplňte prosím, o jaký text jde.' },
   { kind: 'area', q: 'Co od spolupráce očekáváte?', hint: 'V jaké je text fázi? Kdy přibližně potřebujete výstup?', msg: 'Napište prosím, co od spolupráce čekáte.' },
   { kind: 'who', q: 'Jak vás mám oslovit a kam odpovědět?' },
   { kind: 'sum', q: 'Zkontrolujte a odešlete' },
@@ -241,7 +241,7 @@ export default function Kontakt() {
                           onChange={(e) => setAnswer('text', e.target.value)}
                         />
                         <p className="wh2" id="w-h">
-                          {step.hint}
+                          {step.hint && nb(step.hint)}
                         </p>
                       </>
                     )}
@@ -249,7 +249,7 @@ export default function Kontakt() {
                       <>
                         <textarea className="wi" id="w-msg" maxLength={5000} value={ans.msg} aria-describedby="w-h" onChange={(e) => setAnswer('msg', e.target.value)} />
                         <p className="wh2" id="w-h">
-                          {step.hint}
+                          {step.hint && nb(step.hint)}
                         </p>
                       </>
                     )}

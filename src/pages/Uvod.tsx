@@ -77,7 +77,9 @@ export default function Uvod() {
               </li>
               <li>
                 <h3>Úprava (profesních a odborných) textů</h3>
-                <p>Články, disertační práce, diplomové práce, bakalářské práce, newslettery a&nbsp;další.</p>
+                <p>
+                  Články, disertační, rigorózní, diplomové a&nbsp;bakalářské práce, <span className="nw">e-booky</span>, newslettery a&nbsp;další.
+                </p>
               </li>
               <li>
                 <h3>Revize textů z&nbsp;AI</h3>

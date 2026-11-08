@@ -83,7 +83,7 @@ export default function RevizeAI() {
               Pro koho
             </h2>
             <p className="lead">
-              Pro právníky, konzultanty, marketéry a&nbsp;firmy, které AI používají na první verze článků, newsletterů, dokumentací nebo e-booků – a&nbsp;potřebují,
+              Pro právníky a&nbsp;advokátní kanceláře, konzultanty, marketéry a&nbsp;firmy, které AI (ChatGPT, Claude, Gemini apod.) používají na první verze článků, newsletterů, dokumentací nebo e-booků – a&nbsp;potřebují,
               aby finální výstup byl přesný a&nbsp;důvěryhodný.
             </p>
           </div>

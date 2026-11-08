@@ -60,16 +60,22 @@ const pageNode = (key: PageKey): Json => {
   return node;
 };
 
+const service = (anchor: string, name: string, description: string): Json => ({
+  '@type': 'Service',
+  '@id': `${pageUrl('sluzby')}#${anchor}`,
+  url: `${pageUrl('sluzby')}#${anchor}`,
+  name,
+  description,
+  provider: { '@id': PERSON_ID },
+  areaServed: { '@type': 'Country', name: 'Česko' },
+});
+
+/** Čtyři služby a poznámka o samostatné korektuře (je-li u služby). */
 const services = (): Json[] =>
-  SERVICES.map((s) => ({
-    '@type': 'Service',
-    '@id': `${pageUrl('sluzby')}#k${s.k}`,
-    url: `${pageUrl('sluzby')}#k${s.k}`,
-    name: s.toc,
-    description: s.d.split('\n')[0],
-    provider: { '@id': PERSON_ID },
-    areaServed: { '@type': 'Country', name: 'Česko' },
-  }));
+  SERVICES.flatMap((s) => [
+    service(`k${s.k}`, s.toc, s.d.split('\n')[0]),
+    ...(s.note ? [service(s.note.id, s.note.name, s.note.p[0])] : []),
+  ]);
 
 const faq = (): Json => ({
   '@type': 'FAQPage',

@@ -90,6 +90,18 @@ const CHAPTERS: Chapter[] = [
             </li>
           ))}
         </ul>
+        {s.note && (
+          <>
+            <h3 className="wh" id={s.note.id}>
+              {nb(s.note.q)}
+            </h3>
+            {s.note.p.map((p) => (
+              <p key={p} className="cdesc sm cont">
+                {nb(p)}
+              </p>
+            ))}
+          </>
+        )}
         {s.link && (
           <Link className="textlink lk" to="/revize-ai-textu">
             {s.link}
