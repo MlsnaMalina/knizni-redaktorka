@@ -15,7 +15,7 @@ export const OWNER = 'Kateřina Mlsnová';
 export const COOKIES_PATH = '/cookies';
 export const PRIVACY_PATH = '/zasady-osobnich-udaju';
 /** Zásady zpracování osobních údajů: znění z 5. 11. 2026 (7. 11. se nezměnily). */
-export const LEGAL_UPDATED = '5. 11. 2026';
+export const LEGAL_UPDATED = '8. 11. 2026';
 /** Cookies: 7. 11. 2026 přepsáno, web už nic neukládá do prohlížeče (zrušen záznam „už viděno“ u úvodní animace). */
 export const COOKIES_UPDATED = '7. 11. 2026';
 

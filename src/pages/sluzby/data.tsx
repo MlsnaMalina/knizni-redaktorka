@@ -141,8 +141,8 @@ export const SERVICES: Service[] = [
       q: 'Stačí vám jen korektura?',
       name: 'Jazyková korektura',
       p: [
-        'Pokud je text po obsahové stránce hotový, nabízím i klasickou jazykovou korekturu: opravím překlepy, pravopis, interpunkci a typografii (uvozovky, pomlčky, mezery, zápis čísel a dat). Obsah, členění ani odborné závěry neměním; kde narazím na nejasnost, připíšu komentář na okraj.',
-        'Opravy dostanete ve Wordu v režimu sledování změn a zároveň jako čistou verzi. Pokud text ještě čeká na redakci, doporučuji korekturu až po ní, aby se neopravovalo to, co se ještě změní.',
+        'Pokud je text po obsahové stránce hotový, zajistím klasickou jazykovou korekturu: profesionální korektorka, se kterou spolupracuji, opraví překlepy, pravopis, interpunkci a typografii (uvozovky, pomlčky, mezery, zápis čísel a dat). Obsah, členění ani odborné závěry nemění; nejasnosti označí komentářem na okraji.',
+        'Veškerá komunikace probíhá přese mě a text zůstává důvěrný; na přání podepíšu smlouvu o mlčenlivosti, která platí i pro korektorku. Opravy dostanete ve Wordu v režimu sledování změn a zároveň jako čistou verzi. Korekturu doporučuji až po redakci, aby se neopravovalo to, co se ještě změní.',
       ],
     },
   },
@@ -177,7 +177,7 @@ export const LIMITS = [
 export type FaqItem = [question: string, answer: string, quote?: [text: string, cite: string]];
 
 export const FAQ: FaqItem[] = [
-  ['Jak je to s důvěrností?', 'S každým textem nakládám jako s důvěrným – bez výjimky. Rukopis nikomu neukazuji, nepoužívám ho jako referenci bez vašeho svolení a na přání podepíšu smlouvu o mlčenlivosti (NDA). U právních a firemních textů to považuji za samozřejmost.'],
+  ['Jak je to s důvěrností?', 'S každým textem nakládám jako s důvěrným – bez výjimky. Rukopis nikomu neukazuji, jen případně jazykové korektorce, pokud si korekturu objednáte; i ta je vázána mlčenlivostí. Nepoužívám ho jako referenci bez vašeho svolení a na přání podepíšu smlouvu o mlčenlivosti (NDA), která platí i pro korektorku. U právních a firemních textů to považuji za samozřejmost.'],
   [
     'Redigujete i diplomové, rigorózní a disertační práce?',
     'Ano, včetně právnických. Nabízím jazykovou a redakční kultivaci textu v mezích pravidel dané univerzity – strukturu, jednotnost, formulace a citace (včetně předpisů a judikatury) podle pravidel vaší fakulty (například ČSN ISO 690 nebo fakultní směrnice), aby práce obstála před vedoucím i oponentem. Obsah, odborné závěry a autorství zůstávají vždy plně na autorovi. Pravidla vaší školy, včetně pravidel o používání AI, platí i při redakci.',
@@ -192,8 +192,8 @@ export const FAQ: FaqItem[] = [
     'Korektura opravuje překlepy, pravopis, interpunkci a typografii. Redakce jde dál: hlídá stavbu textu, logiku výkladu, jednotnost pojmů, citace a srozumitelnost pro čtenáře. Nabízím obojí; co váš text potřebuje, poznáme po přečtení několika stran.',
   ],
   [
-    'Děláte i samotnou jazykovou korekturu, například diplomové práce?',
-    'Ano, pokud je text po obsahové stránce hotový, třeba diplomová práce těsně před odevzdáním. Opravím překlepy, pravopis, interpunkci a typografii a opravy dostanete ve Wordu v režimu sledování změn i jako čistou verzi. Obsah, členění ani odborné závěry neměním; nejasnosti označím komentářem na okraji.',
+    'Nabízíte i samotnou jazykovou korekturu, například diplomové práce?',
+    'Ano, pokud je text po obsahové stránce hotový, třeba diplomová práce těsně před odevzdáním. Korekturu dělá profesionální jazyková korektorka, se kterou spolupracuji; komunikujete jen se mnou. Opraví překlepy, pravopis, interpunkci a typografii a opravy dostanete ve Wordu v režimu sledování změn i jako čistou verzi. Obsah, členění ani odborné závěry nemění; nejasnosti označí komentářem na okraji.',
   ],
   [
     'Pomůžete s e-bookem nebo newsletterem advokátní kanceláře?',

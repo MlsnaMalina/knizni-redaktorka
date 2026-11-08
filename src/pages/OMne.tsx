@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { BOOKS_ROUND, SAMPLE_LINK, YEARS_EDITING, YEARS_LAW } from '../data/site';
 import type { CSSVars } from '../lib/css';
 import { reducedMotion, usePageMeta } from '../lib/hooks';
+import { nb } from '../lib/format';
 import { SiteHeader } from '../components/SiteHeader';
 import { Checks } from './omne/Checks';
 import './omne.css';
@@ -140,6 +141,7 @@ export default function OMne() {
                 <i />
               </span>
             </figure>
+            <p className="pcap">{nb('Portrét vznikl úpravou mé fotografie pomocí AI.')}</p>
             <h1>Z&nbsp;advokacie do knižní redakce.</h1>
             <ul className="facts three" aria-label="Stručně řečeno">
               <li>
