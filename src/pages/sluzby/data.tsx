@@ -105,7 +105,7 @@ export const SHEETS: Record<number, SheetSample> = {
         </p>
       </>
     ),
-    note: 'Nabídku dostanete do 1–2 pracovních dnů.',
+    note: 'Nabídku dostanete do 1 až 2 pracovních dnů.',
   },
 };
 
@@ -171,7 +171,7 @@ export const SERVICES: Service[] = [
 
 export const PRICE_STEPS = [
   'Pošlete mi text nebo jeho část.',
-  'Do 1–2 pracovních dnů dostanete konkrétní nabídku – rozsah práce, termín a cenu.',
+  'Do 1 až 2 pracovních dnů dostanete konkrétní nabídku – rozsah práce, termín a cenu.',
   'Posouzení textu i ukázková redakce několika stran (pokud se na ni domluvíme) jsou zdarma a k ničemu vás nezavazují.',
 ];
 

@@ -184,7 +184,7 @@ export default function Kontakt() {
         <section className="scene mdl quilt-bg" id="top" aria-labelledby="t-h">
           <div className="copy">
             <h1 id="t-h">Pošlete mi svůj text. Nebo jen otázku.</h1>
-            <p className="lead">Odpovídám do 1–2&nbsp;pracovních dnů, první krok je zdarma.</p>
+            <p className="lead">Odpovídám do 1&nbsp;až&nbsp;2&nbsp;pracovních dnů, první krok je zdarma.</p>
             <div className="actions">
               <a className="btn btn--fill" href="#pruvodce">
                 Napsat zprávu
@@ -211,7 +211,7 @@ export default function Kontakt() {
                       <path d="M19 33l9 9 17-20" />
                     </svg>
                     <h2 className="wq">Zpráva odeslána.</h2>
-                    <p className="wh2">{nb('Děkuji, ozvu se vám do 1–2 pracovních dnů. Domluvíme si posouzení textu a případně i ukázkovou redakci 3–5 stran zdarma.')}</p>
+                    <p className="wh2">{nb('Děkuji, ozvu se vám do 1 až 2 pracovních dnů. Domluvíme si posouzení textu a případně i ukázkovou redakci 3–5 stran zdarma.')}</p>
                   </div>
                 ) : (
                   <div className="wst" role="group" aria-labelledby="wq">

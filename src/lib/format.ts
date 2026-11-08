@@ -32,13 +32,13 @@ export const hash = (n: number): number => ((n * 2654435761) >>> 0) % 1000;
 const KEEP_TOGETHER = /e-(?:book|mail)\p{L}*/giu;
 
 /**
- * Pevná mezera za jednopísmennými předložkami a spojkami a za číslem před slovem, aby nezůstaly na konci řádku.
+ * Pevná mezera za jednopísmennými předložkami a spojkami, za číslem před slovem a kolem „až“ mezi čísly (1 až 2), aby nezůstaly na konci řádku.
  * Slova e-book a e-mail se zabalí do prvku, který se za pomlčkou nezlomí. Přímo v textu nezůstane žádný skrytý znak,
  * takže vyhledávače, čtečky obrazovky i kopírování vidí obyčejné „e-book“.
  * Vrací text pro vložení do JSX; do atributů (aria-label, title) patří obyčejný řetězec.
  */
 export function nb(s: string): ReactNode {
-  const t = s.replace(/(?<=^|[\s(„])([aikosuvz])\s+/gi, '$1 ').replace(/(\d)\s+(?=\p{L})/gu, '$1 ');
+  const t = s.replace(/(\d)\s+až\s+(?=\d)/gu, '$1 až ').replace(/(?<=^|[\s(„])([aikosuvz])\s+/gi, '$1 ').replace(/(\d)\s+(?=\p{L})/gu, '$1 ');
   const parts: ReactNode[] = [];
   let last = 0;
   for (const m of t.matchAll(KEEP_TOGETHER)) {

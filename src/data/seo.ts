@@ -50,7 +50,7 @@ export const SEO = {
   kontakt: {
     path: '/kontakt',
     title: 'Kontakt – pošlete mi svůj text | Kateřina Mlsnová',
-    description: 'Napište mi, o jaký text jde (kniha, závěrečná práce, e-book, newsletter). Odpovídám do 1–2 pracovních dnů. Posouzení textu zdarma, ukázková redakce po dohodě.',
+    description: 'Napište mi, o jaký text jde (kniha, závěrečná práce, e-book, newsletter). Odpovídám do 1 až 2 pracovních dnů. Posouzení textu zdarma, ukázková redakce po dohodě.',
     sitemap: true,
   },
   revizeai: {
