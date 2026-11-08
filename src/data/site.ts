@@ -19,7 +19,7 @@ export const LEGAL_UPDATED = '8. 11. 2026';
 /** Cookies: 7. 11. 2026 přepsáno, web už nic neukládá do prohlížeče (zrušen záznam „už viděno“ u úvodní animace). */
 export const COOKIES_UPDATED = '7. 11. 2026';
 
-/** Roky praxe; před spuštěním v roce 2027 aktualizovat (plán E4). */
+/** Roky praxe; před spuštěním v roce 2027 aktualizovat (plán E4). Z `YEARS_EDITING` se slovy skládá i věta ve FAQ „Spolupracujete i s nakladatelstvími…“ (`yearsText` v `lib/format.ts`). */
 export const YEARS_EDITING = 10;
 export const YEARS_LAW = 9;
 

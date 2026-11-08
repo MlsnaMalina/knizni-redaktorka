@@ -1,4 +1,6 @@
 import type { ReactNode } from 'react';
+import { YEARS_EDITING } from '../../data/site';
+import { cap, yearsText } from '../../lib/format';
 
 /** Texty Služeb: čtyři služby jejími slovy, listy rukopisu v kapitolách a časté otázky. */
 
@@ -103,7 +105,7 @@ export const SHEETS: Record<number, SheetSample> = {
         </p>
       </>
     ),
-    note: 'Nabídku dostanete do 2–3 pracovních dnů.',
+    note: 'Nabídku dostanete do 1–2 pracovních dnů.',
   },
 };
 
@@ -169,7 +171,7 @@ export const SERVICES: Service[] = [
 
 export const PRICE_STEPS = [
   'Pošlete mi text nebo jeho část.',
-  'Do 2–3 pracovních dnů dostanete konkrétní nabídku – rozsah práce, termín a cenu.',
+  'Do 1–2 pracovních dnů dostanete konkrétní nabídku – rozsah práce, termín a cenu.',
   'Posouzení textu i ukázková redakce několika stran (pokud se na ni domluvíme) jsou zdarma a k ničemu vás nezavazují.',
 ];
 
@@ -210,7 +212,7 @@ export const FAQ: FaqItem[] = [
   ['Co když s navrženou úpravou nesouhlasím?', 'Pak platí vaše verze. Jsem redaktorka, ne spoluautorka – návrhy zdůvodňuji, ale rozhodnutí je vždy na vás.'],
   ['Jak dlouho redakce trvá?', 'Podle rozsahu a stavu textu – kratší text dny, rozsáhlý rukopis týdny. Termín je vždy součástí nabídky a platí. Termín odevzdání napište hned do první zprávy.'],
   ['Kolik to stojí?', 'Cenu stanovuji předem za celý projekt podle rozsahu a stavu textu. První krok – posouzení textu, případně i ukázková redakce po dohodě – je zdarma, takže nabídku dostanete dřív, než se k čemukoli zavážete.'],
-  ['Spolupracujete i s nakladatelstvími, kancelářemi a institucemi?', 'Ano. Deset let rediguji knihy pro nakladatelství Wolters Kluwer ČR a externí redakce nabízím i dalším nakladatelstvím, advokátním a poradenským kancelářím, profesním organizacím a odborným institucím.'],
+  ['Spolupracujete i s nakladatelstvími, kancelářemi a institucemi?', `Ano. ${cap(yearsText(YEARS_EDITING))} rediguji knihy pro nakladatelství Wolters Kluwer ČR a externí redakce nabízím i dalším nakladatelstvím, advokátním a poradenským kancelářím, profesním organizacím a odborným institucím.`],
 ];
 
 /** Ozdobná čísla stran v obsahu (strany nejsou skutečné). */

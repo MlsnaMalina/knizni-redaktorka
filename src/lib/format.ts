@@ -17,6 +17,14 @@ export function plural(n: number, one: string, few: string, many: string): strin
 export const pagesText = (n: number): string => `${num(n)} ${plural(n, 'strana', 'strany', 'stran')}`;
 export const booksText = (n: number): string => `${n} ${plural(n, 'kniha', 'knihy', 'knih')}`;
 
+const NUM_WORDS = ['nula', 'jeden', 'dva', 'tři', 'čtyři', 'pět', 'šest', 'sedm', 'osm', 'devět', 'deset', 'jedenáct', 'dvanáct', 'třináct', 'čtrnáct', 'patnáct', 'šestnáct', 'sedmnáct', 'osmnáct', 'devatenáct', 'dvacet'];
+
+/** Roky slovy do dvaceti („deset let“, „jedenáct let“), výš číslicemi („25 let“): pro věty, které se s přibývajícími roky mají měnit samy. */
+export const yearsText = (n: number): string => `${NUM_WORDS[n] ?? n} ${plural(n, 'rok', 'roky', 'let')}`;
+
+/** První písmeno velké (začátek věty). */
+export const cap = (s: string): string => s.charAt(0).toLocaleUpperCase('cs') + s.slice(1);
+
 /** Pseudonáhodné, ale stále stejné číslo 0 až 999 podle čísla knihy (výšky hřbetů). */
 export const hash = (n: number): number => ((n * 2654435761) >>> 0) % 1000;
 
