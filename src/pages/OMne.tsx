@@ -130,7 +130,7 @@ export default function OMne() {
                 sizes={`(max-width: 720px) ${PHOTO_W_SMALL}px, ${PHOTO_W}px`}
                 width={640}
                 height={800}
-                alt="Kateřina Mlsnová, knižní redaktorka"
+                alt="Kateřina Mlsnová, knižní redaktorka (fotografie upravená pomocí AI)"
                 fetchPriority="high"
                 decoding="async"
               />
@@ -141,7 +141,7 @@ export default function OMne() {
                 <i />
               </span>
             </figure>
-            <p className="pcap">{nb('Portrét vznikl úpravou mé fotografie pomocí AI.')}</p>
+            <p className="pcap">{nb('Fotografie upravená pomocí AI')}</p>
             <h1>Z&nbsp;advokacie do knižní redakce.</h1>
             <ul className="facts three" aria-label="Stručně řečeno">
               <li>

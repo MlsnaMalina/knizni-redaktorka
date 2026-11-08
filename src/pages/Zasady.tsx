@@ -42,6 +42,7 @@ export default function Zasady() {
               nb('Při zobrazení obálek knih se váš prohlížeč připojí k serveru nakladatelství Wolters Kluwer (static.wolterskluwer.cz), který vidí vaši IP adresu.')}
         </p>
         <p>{nb('Pokud si objednáte jazykovou korekturu, dostane text i profesionální jazyková korektorka, se kterou spolupracuji. Je vázána mlčenlivostí a veškerá komunikace probíhá přese mě.')}</p>
+        <p>{nb('Texty, které mi pošlete, nevkládám do obecných jazykových modelů AI, pokud o to sami nestojíte.')}</p>
         <p>{nb('Dalším příjemcům údaje nepředávám.')}</p>
       </LegalSection>
       <LegalSection title="Jak dlouho údaje uchovávám">
