@@ -50,10 +50,7 @@ const EMPTY: Answers = { intent: '', text: '', msg: '', name: '', mail: '' };
 type Status = 'idle' | 'sending' | 'done';
 
 export default function Kontakt() {
-  usePageMeta(
-    'Kontakt – pošlete mi svůj text | Kateřina Mlsnová',
-    'Napište mi, o jaký text jde a co od spolupráce čekáte. Odpovídám do 2 pracovních dnů. Posouzení textu zdarma, ukázková redakce po dohodě.'
-  );
+  usePageMeta('kontakt');
 
   const [params] = useSearchParams();
 

@@ -108,10 +108,7 @@ function useDotOrbit(figure: RefObject<HTMLElement | null>) {
 }
 
 export default function OMne() {
-  usePageMeta(
-    'O mně – z advokacie do knižní redakce | Kateřina Mlsnová',
-    `Právní vzdělání, ${YEARS_LAW} let advokacie, ${YEARS_EDITING} let knižní redakce a přes ${BOOKS_ROUND} vydaných odborných knih. Specializace na právo, právo IT, technologie a umělou inteligenci.`
-  );
+  usePageMeta('omne');
   const rootRef = useRef<HTMLDivElement>(null);
   const bookRef = useRef<HTMLDivElement>(null);
   const portraitRef = useRef<HTMLElement>(null);

@@ -9,10 +9,7 @@ import { LegalPage, LegalSection } from './Legal';
    (záznam „už viděno“ u úvodní animace, klíč kr-hero-redakce, se 7. 11. zrušil: animace se přehrává při každém načtení, viz pages/uvod/editLoop.ts),
    písma hostovaná na webu. Odstavec o obálkách se ukáže jen při COVERS_ENABLED. Kdyby web začal cokoli ukládat, tento text přepsat. */
 export default function Cookies() {
-  usePageMeta(
-    'Cookies | Kateřina Mlsnová',
-    'Web nepoužívá cookies ani měření návštěvnosti a nic neukládá ve vašem prohlížeči. Odkud se načítají obálky knih.'
-  );
+  usePageMeta('cookies');
 
   return (
     <LegalPage title="Cookies" updated={COOKIES_UPDATED} lead={nb('Tento web nepoužívá cookies ani žádné nástroje na měření návštěvnosti nebo reklamu.')}>

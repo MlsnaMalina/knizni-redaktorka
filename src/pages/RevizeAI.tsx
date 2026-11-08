@@ -22,10 +22,7 @@ const STEPS = [
 ];
 
 export default function RevizeAI() {
-  usePageMeta(
-    'Revize AI textů – redakce textů vytvořených s pomocí AI | Kateřina Mlsnová',
-    'AI napíše draft – já z něj udělám text, za který se podepíšete. Kontrola faktů a citací, sjednocení terminologie, lidský tón. Ukázková revize po dohodě zdarma.'
-  );
+  usePageMeta('revizeai');
 
   return (
     <div className="revize">

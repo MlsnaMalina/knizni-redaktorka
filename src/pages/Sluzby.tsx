@@ -166,10 +166,7 @@ interface Running {
 }
 
 export default function Sluzby() {
-  usePageMeta(
-    'Služby – redakce textů | Kateřina Mlsnová',
-    'Redakce odborných publikací, úprava profesních textů, revize AI textů a redakční konzultace. Ukázková redakce po dohodě zdarma, cena předem za celý projekt.'
-  );
+  usePageMeta('sluzby');
   const rootRef = useRef<HTMLDivElement>(null);
   const barRef = useRef<HTMLDivElement>(null);
   const [run, setRun] = useState<Running>({ on: false, title: '', num: '' });

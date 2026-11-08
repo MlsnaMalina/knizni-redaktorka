@@ -1,4 +1,6 @@
 import { useEffect, useState, useSyncExternalStore, type RefObject } from 'react';
+import type { PageKey } from '../data/seo';
+import { applyHead, headFor } from './head';
 
 /** Sleduje media query (šířka okna, dotyk, omezený pohyb). */
 export function useMedia(query: string): boolean {
@@ -62,11 +64,9 @@ export function useRevealOnScroll(ref: RefObject<HTMLElement | null>): void {
   }, [ref]);
 }
 
-/** Nastaví title a popis stránky. */
-export function usePageMeta(title: string, description: string): void {
+/** Nastaví hlavičku stránky (titulek, popis, kanonickou adresu, sdílení, vizitku pro stroje) podle data/seo.ts. */
+export function usePageMeta(key: PageKey): void {
   useEffect(() => {
-    document.title = title;
-    const meta = document.querySelector<HTMLMetaElement>('meta[name="description"]');
-    if (meta) meta.content = description;
-  }, [title, description]);
+    applyHead(headFor(key));
+  }, [key]);
 }

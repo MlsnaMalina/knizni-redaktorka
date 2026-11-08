@@ -32,10 +32,7 @@ interface Last {
 }
 
 export default function Knihovna() {
-  usePageMeta(
-    'Knihovna – vydané knihy | Kateřina Mlsnová',
-    'Komentáře k zákonům, monografie a učebnice, které jsem redigovala pro nakladatelství Wolters Kluwer ČR. Filtrujte podle druhu a oblasti práva.'
-  );
+  usePageMeta('knihovna');
   const order = useMemo(libraryOrder, []);
   const byDate = (f: string): Book[] => order.filter((b) => matches(b, f)).sort((a, b) => stamp(b, true) - stamp(a, true));
 

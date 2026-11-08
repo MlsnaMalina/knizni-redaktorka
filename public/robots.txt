@@ -1,0 +1,26 @@
+# robots.txt pro knizniredaktorka.cz
+# NAVRH k posouzeni Katerinou, zatim nenasazeno.
+#
+# Vsichni roboti (vyhledavace i AI asistenti, kteri web hledaji a cituji) maji pristup na cely web.
+User-agent: *
+Allow: /
+
+# VOLITELNE: zakaz pouziti textu webu k TRENOVANI modelu. Web z vyhledavani ani z odpovedi AI asistentu nevyradi:
+# vyhledavaci a citujici roboty (Googlebot, Bingbot, SeznamBot, OAI-SearchBot, Claude-SearchBot, PerplexityBot) zustanou povoleni.
+# Odkomentovat jen na Katerinin pokyn.
+# User-agent: GPTBot
+# Disallow: /
+#
+# User-agent: ClaudeBot
+# Disallow: /
+#
+# User-agent: Google-Extended
+# Disallow: /
+#
+# User-agent: Applebot-Extended
+# Disallow: /
+#
+# User-agent: CCBot
+# Disallow: /
+
+Sitemap: https://www.knizniredaktorka.cz/sitemap.xml

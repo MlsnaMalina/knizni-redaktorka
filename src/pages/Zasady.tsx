@@ -9,10 +9,7 @@ import { LegalPage, LegalSection } from './Legal';
    web běží na Vercelu, žádné cookies ani analytika. Doba uchování a právní základ jsou obecná znění; sídlo a zpracování
    u FormSubmit nejsou ověřeny, proto se o nich v textu nic netvrdí. Odstavec o obálkách se ukáže jen při COVERS_ENABLED. */
 export default function Zasady() {
-  usePageMeta(
-    'Zásady zpracování osobních údajů | Kateřina Mlsnová',
-    'Jak nakládám s osobními údaji, které mi pošlete přes formulář nebo e-mailem: správce, účel, příjemci, doba uchování a vaše práva.'
-  );
+  usePageMeta('zasady');
 
   return (
     <LegalPage title="Zásady zpracování osobních údajů" lead={nb('Jak nakládám s údaji, které mi pošlete přes formulář nebo e-mailem.')}>

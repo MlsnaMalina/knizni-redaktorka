@@ -12,10 +12,7 @@ import { Shop } from './uvod/Shop';
 import './uvod/uvod.css';
 
 export default function Uvod() {
-  usePageMeta(
-    'Kateřina Mlsnová – knižní redaktorka',
-    `Knižní redaktorka: redakce knih a dalších textů, revize textů s pomocí AI, redakční konzultace. Přes ${BOOKS_ROUND} vydaných knih, ukázková redakce po dohodě zdarma.`
-  );
+  usePageMeta('uvod');
   const mainRef = useRef<HTMLElement>(null);
   const svgRef = useRef<SVGSVGElement>(null);
   const netRef = useRef<UvodNet | null>(null);
